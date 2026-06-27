@@ -1,68 +1,1664 @@
 <!doctype html>
-<html lang="da">
+<html lang="en" data-current-lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mikael Wendt</title>
-  <meta name="description" content="Portfolio for Mikael Wendt">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Mikael Wendt - software developer, structural engineer, game developer, AI systems, Unity and C# portfolio." />
+  <meta name="theme-color" content="#050b14" />
+  <title>Mikael Wendt - Developer Portfolio</title>
+
   <style>
     :root {
-      color-scheme: dark;
-      --bg: #10151f;
-      --panel: #172131;
-      --text: #eef3fb;
-      --muted: #aab7c8;
-      --accent: #8fd0ff;
+      --bg: #050b14;
+      --panel: #0a1628;
+      --panel-2: #0d1b31;
+      --panel-3: #12243e;
+      --ink: #eef6ff;
+      --muted: #aebbd0;
+      --muted-2: #7f90a9;
+      --line: rgba(118, 179, 255, 0.18);
+      --line-strong: rgba(118, 179, 255, 0.34);
+      --blue: #2f7df6;
+      --blue-2: #76b3ff;
+      --cyan: #49d8ff;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+      --radius: 24px;
+      --max: 1180px;
+      --sidebar: 286px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
-      min-height: 100vh;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% -8%, rgba(47, 125, 246, 0.28), transparent 34rem),
+        radial-gradient(circle at 92% 18%, rgba(73, 216, 255, 0.12), transparent 28rem),
+        linear-gradient(180deg, #050b14 0%, #07111f 42rem, #050b14 100%);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    figure { margin: 0; }
+
+    [data-lang] { display: none; }
+    html[data-current-lang="da"] [data-lang="da"] { display: inline; }
+    html[data-current-lang="en"] [data-lang="en"] { display: inline; }
+    html[data-current-lang="da"] p[data-lang="da"],
+    html[data-current-lang="en"] p[data-lang="en"],
+    html[data-current-lang="da"] div[data-lang="da"],
+    html[data-current-lang="en"] div[data-lang="en"] { display: block; }
+
+    .shell {
+      width: min(var(--max), calc(100% - 36px));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 12px;
+      left: 12px;
+      z-index: 999;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: var(--panel-2);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      transform: translateY(-200%);
+    }
+
+    .skip-link:focus { transform: translateY(0); }
+
+    .side-nav {
+      position: fixed;
+      z-index: 30;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: var(--sidebar);
+      padding: 28px 24px;
+      background:
+        radial-gradient(circle at 40% 0%, rgba(47, 125, 246, 0.20), transparent 15rem),
+        linear-gradient(180deg, #0d172a, #070d18 82%);
+      border-right: 1px solid rgba(118, 179, 255, 0.16);
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .side-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+    }
+
+    .side-brand img {
+      width: 44px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .side-profile {
       display: grid;
-      place-items: center;
-      background: radial-gradient(circle at top left, #24374f, var(--bg) 55%);
-      color: var(--text);
-      font-family: Arial, Helvetica, sans-serif;
+      gap: 12px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, .12);
     }
 
-    main {
-      width: min(860px, calc(100% - 32px));
-      padding: 48px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 28px;
-      background: rgba(23, 33, 49, 0.86);
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
-    }
-
-    h1 {
-      margin: 0 0 12px;
-      font-size: clamp(42px, 7vw, 76px);
-      letter-spacing: -0.06em;
-      line-height: 0.95;
-    }
-
-    p {
-      margin: 0;
-      max-width: 640px;
+    .side-profile small {
       color: var(--muted);
-      font-size: clamp(18px, 2.5vw, 24px);
       line-height: 1.45;
     }
 
-    strong {
-      color: var(--accent);
-      font-weight: 700;
+    .side-title {
+      margin: 0 0 10px;
+      color: #dceaff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .side-links {
+      display: grid;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .side-links a {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 30px;
+      color: #9eb1cd;
+      font-size: 13px;
+      font-weight: 760;
+    }
+
+    .side-links a::before {
+      content: "";
+      flex: 0 0 auto;
+      width: 7px;
+      height: 7px;
+      border-radius: 99px;
+      border: 1px solid rgba(118, 179, 255, .55);
+      background: transparent;
+    }
+
+    .side-links .nav-label {
+      display: inline-block;
+      transition: transform .18s ease, color .18s ease;
+    }
+
+    .side-links a.active .nav-label,
+    .side-links a:hover .nav-label {
+      transform: translateX(6px);
+      color: #fff;
+    }
+
+    .side-links a.active::before {
+      background: var(--blue);
+      border-color: var(--blue-2);
+      box-shadow: 0 0 0 4px rgba(47, 125, 246, .12);
+    }
+
+    .side-links a.sub {
+      margin-left: 17px;
+      font-size: 12px;
+      color: #8295b1;
+    }
+
+    .page {
+      min-height: 100vh;
+      margin-left: var(--sidebar);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      background:
+        radial-gradient(circle at 80% 36%, rgba(47, 125, 246, 0.28), transparent 24rem),
+        radial-gradient(circle at 96% 8%, rgba(73, 216, 255, 0.12), transparent 16rem),
+        linear-gradient(135deg, #050b14 0%, #0b1627 100%);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.22;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 64px 64px;
+      transform: perspective(900px) rotateX(55deg) scale(1.6) translateY(-20%);
+      transform-origin: center top;
+      pointer-events: none;
+    }
+
+    .nav {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-width: max-content;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(16px, 3vw, 44px);
+      color: #d8e2f0;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .nav-links a:hover { color: #fff; }
+
+    .lang-toggle {
+      display: inline-flex;
+      gap: 8px;
+      padding: 4px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.11);
+    }
+
+    .lang-toggle button {
+      border: 0;
+      cursor: pointer;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: transparent;
+      color: #b9c7da;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .lang-toggle button.active {
+      color: #fff;
+      background: var(--blue);
+      box-shadow: 0 8px 20px rgba(47, 125, 246, 0.34);
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 34px;
+      align-items: stretch;
+      padding: 42px 0 82px;
+    }
+
+    .hero-copy {
+      max-width: 980px;
+    }
+
+    .eyebrow {
+      color: var(--blue-2);
+      font-size: 14px;
+      font-weight: 850;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 720px;
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: .96;
+      letter-spacing: -0.045em;
+      font-weight: 560;
+    }
+
+    .typewriter-heading {
+      min-height: 2.05em;
+    }
+
+    .caret {
+      color: var(--blue-2);
+      letter-spacing: -0.08em;
+      font-weight: 300;
+      animation: caretBlink 0.85s steps(1) infinite;
+    }
+
+    @keyframes caretBlink {
+      0%, 48% { opacity: 1; }
+      49%, 100% { opacity: 0; }
+    }
+
+    .pixel-writer-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+      gap: 34px;
+      align-items: center;
+      min-height: 340px;
+      padding: clamp(26px, 4vw, 42px);
+      border: 1px solid rgba(118, 179, 255, .22);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(73,216,255,.14), transparent 15rem),
+        radial-gradient(circle at 90% 82%, rgba(47,125,246,.22), transparent 18rem),
+        linear-gradient(180deg, rgba(13, 24, 42, .96), rgba(5, 11, 20, .96));
+    }
+
+    .pixel-writer-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .16;
+      background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 18px 18px;
+      pointer-events: none;
+    }
+
+    .pixel-writer-frame,
+    .pixel-typewriter {
+      position: relative;
+      z-index: 1;
+    }
+
+    .pixel-writer-frame {
+      display: grid;
+      gap: 14px;
+      justify-items: center;
+      text-align: center;
+    }
+
+    .pixel-writer-avatar {
+      width: min(220px, 100%);
+      aspect-ratio: 1;
+      object-fit: cover;
+      image-rendering: pixelated;
+      border-radius: 22px;
+      border: 1px solid rgba(118,179,255,.32);
+      background: #07111f;
+      box-shadow: 0 18px 42px rgba(0,0,0,.34);
+    }
+
+    .pixel-writer-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(5, 11, 20, .72);
+      border: 1px solid rgba(118,179,255,.22);
+      color: #bddbff;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .pixel-writer-status::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: var(--cyan);
+      box-shadow: 0 0 18px rgba(73, 216, 255, .85);
+    }
+
+    .pixel-typewriter {
+      min-width: 0;
+      padding: clamp(22px, 3vw, 34px);
+      border-radius: 22px;
+      border: 1px solid rgba(118,179,255,.22);
+      background: rgba(5, 11, 20, .58);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .pixel-typewriter-topbar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-bottom: 16px;
+      color: var(--muted-2);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+    }
+
+    .pixel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 99px;
+      background: rgba(118,179,255,.48);
+    }
+
+    .pixel-typewriter .typewriter-heading {
+      margin: 0;
+      min-height: 1.25em;
+      max-width: none;
+      font-size: clamp(34px, 4.8vw, 62px);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      font-weight: 650;
+    }
+
+    .lead {
+      max-width: 880px;
+      margin: 24px 0 0;
+      color: #c6d2df;
+      font-size: clamp(17px, 2vw, 21px);
+    }
+
+    .lead .muted-line {
+      display: block;
+      margin-top: 7px;
+      color: #9eabbc;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 45px;
+      padding: 0 18px;
+      border-radius: 12px;
+      font-weight: 850;
+      font-size: 14px;
+      border: 1px solid transparent;
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 12px 28px rgba(47, 125, 246, .26);
+    }
+
+    .button.ghost {
+      background: rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.17);
+      box-shadow: none;
+    }
+
+    .hero-visual {
+      border: 1px solid rgba(118, 179, 255, .18);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      background: rgba(0,0,0,.16);
+    }
+
+    .hero-visual img {
+      width: 100%;
+      height: 440px;
+      object-fit: cover;
+    }
+
+    .pixel-writer-card img {
+      height: auto;
+    }
+
+    section {
+      padding: 60px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 24px;
+      margin-bottom: 22px;
+    }
+
+    .section-title {
+      margin: 0;
+      color: #fff;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+      font-weight: 850;
+    }
+
+    .kicker {
+      margin: 12px 0 0;
+      max-width: 980px;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .panel,
+    .project-panel,
+    .cv-panel,
+    .about-panel,
+    .contact-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(47,125,246,.16), transparent 22rem),
+        linear-gradient(180deg, rgba(18,36,62,.88), rgba(8,18,32,.92));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .project-panel {
+      padding: clamp(28px, 4.5vw, 46px);
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(13,24,42,.86);
+      box-shadow: 0 16px 44px rgba(0,0,0,.22);
+    }
+
+    .card:hover { border-color: var(--line-strong); }
+
+    .project-art {
+      position: relative;
+      height: 152px;
+      overflow: hidden;
+      background: #091426;
+    }
+
+    .project-art img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.02);
+    }
+
+    .badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 900;
+      background: rgba(5, 11, 20, .72);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(8px);
+    }
+
+    .card-body {
+      padding: 18px;
+    }
+
+    .card-body h3 {
+      margin: 0 0 7px;
+      font-size: 19px;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .card-body p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .read-more,
+    .external-note {
+      color: var(--blue-2);
+      font-weight: 850;
+      font-size: 14px;
+    }
+
+    .cv-panel,
+    .contact-card {
+      padding: clamp(28px, 4.5vw, 46px);
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 24px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tab {
+      border: 0;
+      border-bottom: 3px solid transparent;
+      background: transparent;
+      cursor: pointer;
+      padding: 0 10px 12px;
+      color: var(--muted);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .tab.active {
+      color: var(--blue-2);
+      border-color: var(--blue);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 22px;
+      padding-left: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 122px 1fr;
+      gap: 18px;
+      position: relative;
+    }
+
+    .time {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .timeline-card {
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .timeline-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 6px;
+      width: 9px;
+      height: 9px;
+      border-radius: 99px;
+      background: var(--blue);
+      box-shadow: 0 0 0 5px rgba(47,125,246,.12);
+    }
+
+    .timeline-card h3 {
+      margin: 0 0 3px;
+      font-size: 17px;
+      line-height: 1.22;
+      letter-spacing: -0.02em;
+    }
+
+    .timeline-card .where {
+      color: #d7e5f7;
+      font-weight: 850;
+      font-size: 14px;
+    }
+
+    .timeline-card p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .skill-group-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .skill-group-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(13, 24, 42, .76);
+      padding: 18px;
+    }
+
+    .skill-group-card h3 {
+      margin: 0 0 6px;
+      font-size: 17px;
+    }
+
+    .skill-group-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .skill,
+    .interest-tag {
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line-strong);
+      background: rgba(47, 125, 246, .13);
+      color: #bddbff;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .about-panel {
+      padding: clamp(28px, 4.5vw, 46px);
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(330px, .92fr) minmax(0, 1.25fr);
+      gap: 34px;
+      align-items: stretch;
+      margin-top: 28px;
+    }
+
+    .about-photo {
+      min-height: 620px;
+      min-width: 450px;
+      border-radius: 5px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #07111f;
+      box-shadow: 0 18px 48px rgba(0,0,0,.32);
+      transform: translateX(-50px);
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .about-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      width: max-content;
+      align-items: center;
+      padding: 5px 11px;
+      border-radius: 999px;
+      background: rgba(47, 125, 246, .18);
+      color: #a9d0ff;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .about-copy p,
+    .about-subsection p {
+      color: var(--muted);
+      margin: 0 0 16px;
+      font-size: 16px;
+    }
+
+    .about-subsection {
+      margin-top: 22px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .about-subsection h3 {
+      margin: 0 0 12px;
+      font-size: 21px;
+      letter-spacing: -0.02em;
+    }
+
+    .interest-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .contact {
+      padding-bottom: 70px;
+    }
+
+    .contact-card {
+      width: 100%;
+    }
+
+    .contact-links {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      min-width: 0;
+      padding: 15px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.11);
+      color: #edf5ff;
+      font-weight: 780;
+    }
+
+    .contact-icon {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+      padding: 7px;
+      border-radius: 13px;
+      background: rgba(47, 125, 246, .18);
+      border: 1px solid rgba(118, 179, 255, .16);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+    }
+
+    .contact-link-text {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      margin-left: var(--sidebar);
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+      background: #050b14;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .to-top {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(47,125,246,.16);
+      border: 1px solid var(--line);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    @media (max-width: 1180px) {
+      .side-nav { display: none; }
+      .page, footer { margin-left: 0; }
+    }
+
+    @media (max-width: 980px) {
+      .nav { flex-wrap: wrap; }
+      .about-layout {
+        grid-template-columns: 1fr;
+      }
+      .hero-visual img { height: 320px; }
+      .pixel-writer-card {
+        grid-template-columns: 160px 1fr;
+        min-height: 300px;
+        gap: 24px;
+      }
+      .pixel-writer-avatar { width: 160px; }
+      .pixel-typewriter .typewriter-heading { font-size: clamp(30px, 5.8vw, 54px); }
+      .about-photo {
+        min-height: 520px;
+        min-width: 0;
+        transform: none;
+      }
+      .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .skill-group-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { width: min(100% - 24px, var(--max)); }
+      .nav-links { width: 100%; justify-content: space-between; gap: 12px; font-size: 13px; }
+      .hero-grid { padding: 28px 0 56px; }
+      .pixel-writer-card {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        padding: 20px;
+      }
+      .pixel-writer-avatar { width: 132px; }
+      .pixel-typewriter .typewriter-heading { font-size: clamp(26px, 9vw, 38px); min-height: 2.05em; }
+      section { padding: 42px 0; }
+      .project-grid { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; gap: 7px; }
+      .timeline-card { padding-left: 18px; }
+      .about-photo { min-height: 420px; }
+      .project-panel, .cv-panel, .about-panel, .contact-card { padding: 22px; }
     }
   </style>
 </head>
+
 <body>
-  <main>
-    <h1>Mikael Wendt</h1>
-    <p><strong>GitHub Pages er klar.</strong> Erstat denne fil med din rigtige portfolio, og læg billeder, CSS og JavaScript i samme repo.</p>
-  </main>
+  <a class="skip-link" href="#main"><span data-lang="da">Spring til indhold</span><span data-lang="en">Skip to content</span></a>
+
+  <aside class="side-nav" aria-label="Page timeline">
+    <a class="side-brand" href="#top">
+      <span>Mikael Wendt</span>
+    </a>
+
+
+    <nav class="side-section">
+      <p class="side-title"><span data-lang="da">Indhold</span><span data-lang="en">Contents</span></p>
+      <div class="side-links">
+        <a href="#top" data-section-link="top"><span class="nav-label"><span data-lang="da">Intro</span><span data-lang="en">Intro</span></span></a>
+        <a href="#projects" data-section-link="projects"><span class="nav-label"><span data-lang="da">Projekter</span><span data-lang="en">Projects</span></span></a>
+        <a href="#cv" data-section-link="cv"><span class="nav-label">CV</span></a>
+        <a href="#cv" class="sub" data-tab-jump="structural"><span class="nav-label"><span data-lang="da">Bygningsingeniør</span><span data-lang="en">Structural Engineering</span></span></a>
+        <a href="#cv" class="sub" data-tab-jump="software"><span class="nav-label"><span data-lang="da">Softwareudvikling</span><span data-lang="en">Software Development</span></span></a>
+        <a href="#cv" class="sub" data-tab-jump="education"><span class="nav-label"><span data-lang="da">Uddannelse</span><span data-lang="en">Education</span></span></a>
+        <a href="#cv" class="sub" data-tab-jump="skills"><span class="nav-label"><span data-lang="da">Færdigheder</span><span data-lang="en">Skills</span></span></a>
+        <a href="#about" data-section-link="about"><span class="nav-label"><span data-lang="da">Om mig</span><span data-lang="en">About me</span></span></a>
+        <a href="#contact" data-section-link="contact"><span class="nav-label"><span data-lang="da">Kontakt</span><span data-lang="en">Contact</span></span></a>
+      </div>
+    </nav>
+  </aside>
+
+  <div class="page">
+    <header class="hero" id="top">
+      <div class="shell">
+        <nav class="nav" aria-label="Main navigation">
+          <a class="brand" href="#top"></a>
+
+          <div class="lang-toggle" aria-label="Language selector">
+            <button type="button" data-set-lang="da">DA</button>
+            <button type="button" data-set-lang="en" class="active">EN</button>
+          </div>
+        </nav>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <div class="eyebrow"><span data-lang="da">Software · Spil · AI</span><span data-lang="en">Software · Games · AI</span></div>
+            <h1><span data-lang="da">Mikael Wendt</span><span data-lang="en">Mikael Wendt</span></h1>
+            <p class="lead">
+              <span data-lang="da">Udvikler med fokus på Unity, C#, AI og værktøjer, der løser rigtige problemer.</span>
+              <span data-lang="en">Developer focused on Unity, C#, AI and tools that solve real problems.</span>
+              <span class="muted-line"><span data-lang="da">Civilingeniørbaggrund, stærk systemforståelse og praktisk udviklingserfaring.</span><span data-lang="en">Civil engineering background, strong systems thinking and practical development experience.</span></span>
+            </p>
+          </div>
+
+          <div class="pixel-writer-card" aria-label="Pixel portrait typewriter intro">
+            <div class="pixel-writer-frame">
+              <img class="pixel-writer-avatar" id="pixel-writer-avatar" src="assets/images/mikael-wendt-portrait.png" data-open-src="assets/images/mikael-wendt-portrait.png" data-blink-src="assets/images/mikael-wendt-portrait-blink.png" data-alt-da="Pixeleret portræt af Mikael Wendt." data-alt-en="Pixelated portrait of Mikael Wendt." alt="Pixelated portrait of Mikael Wendt." />
+            </div>
+
+            <div class="pixel-typewriter">
+              <div class="pixel-typewriter-topbar" aria-hidden="true">
+                <span class="pixel-dot"></span>
+                <span class="pixel-dot"></span>
+                <span class="pixel-dot"></span>
+              </div>
+              <h2 class="typewriter-heading" aria-live="polite">
+                <span id="typewriter-text"></span><span class="caret" aria-hidden="true">_</span>
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <section id="projects" aria-labelledby="projects-title">
+        <div class="shell">
+          <div class="project-panel">
+            <div class="section-head">
+              <div>
+                <h2 class="section-title" id="projects-title"><span data-lang="da">Projekter</span><span data-lang="en">Projects</span></h2>
+                <p class="kicker"><span data-lang="da">Udvalgte projekter inden for spil, AI, machine learning og kreative softwareprodukter.</span><span data-lang="en">Selected projects in games, AI, machine learning and creative software products.</span></p>
+              </div>
+            </div>
+
+            <div class="project-grid">
+            <a class="card" href="https://fromscratchgame.com" target="_blank" rel="noreferrer">
+              <div class="project-art">
+                <img src="assets/images/project-from-scratch-cover.png" data-alt-da="Coverbillede til From Scratch-spillet." data-alt-en="Cover image for the From Scratch game." alt="Cover image for the From Scratch game." />
+                <div class="badge">↗</div>
+              </div>
+              <div class="card-body">
+                <h3>From Scratch</h3>
+                <p class="external-note"><span data-lang="da">Gå direkte til spillets hjemmeside</span><span data-lang="en">Go directly to the game website</span> →</p>
+              </div>
+            </a>
+
+            <a class="card" href="#contact">
+              <div class="project-art">
+                <img src="assets/images/project-clown-wars.png" data-alt-da="Coverbillede til Clown Wars-projektet." data-alt-en="Cover image for the Clown Wars project." alt="Cover image for the Clown Wars project." />
+                <div class="badge">↗</div>
+              </div>
+              <div class="card-body">
+                <h3>Clown Wars</h3>
+                <p data-lang="da">VR-spilprojekt med turbaseret klovnekaos, halv cartoony / halv horror stil og stærk low-poly identitet.</p>
+                <p data-lang="en">VR game project with turn-based clown chaos, half cartoony / half horror style and a strong low-poly identity.</p>
+                <span class="read-more"><span data-lang="da">Læs mere</span><span data-lang="en">Read more</span> →</span>
+              </div>
+            </a>
+
+            <a class="card" href="#contact">
+              <div class="project-art">
+                <img src="assets/images/project-super-godnathistorie.png" data-alt-da="Coverbillede til Super Godnathistorie-projektet." data-alt-en="Cover image for the Super Godnathistorie project." alt="Cover image for the Super Godnathistorie project." />
+                <div class="badge">↗</div>
+              </div>
+              <div class="card-body">
+                <h3>Super Godnathistorie</h3>
+                <p data-lang="da">Kreativt AI-projekt til personlige godnathistorier, fortællinger og billedbaseret børnebogsproduktion.</p>
+                <p data-lang="en">Creative AI project for personalized bedtime stories, storytelling and image-based children’s book production.</p>
+                <span class="read-more"><span data-lang="da">Læs mere</span><span data-lang="en">Read more</span> →</span>
+              </div>
+            </a>
+
+            <a class="card" href="#contact">
+              <div class="project-art">
+                <img src="assets/images/project-machine-learning.png" data-alt-da="Visualisering af CNN-baseret machine learning til stressforhold i 2D-strukturer." data-alt-en="Visualization of CNN-based machine learning for stress fields in 2D structures." alt="Visualization of CNN-based machine learning for stress fields in 2D structures." />
+                <div class="badge">↗</div>
+              </div>
+              <div class="card-body">
+                <h3><span data-lang="da">Maskinlæring</span><span data-lang="en">Machine Learning</span></h3>
+                <p data-lang="da">CNN-baseret topologioptimering, dataanalyse, Python, TensorFlow/Keras og tekniske ML-eksperimenter.</p>
+                <p data-lang="en">CNN-based topology optimization, data analysis, Python, TensorFlow/Keras and technical ML experiments.</p>
+                <span class="read-more"><span data-lang="da">Læs mere</span><span data-lang="en">Read more</span> →</span>
+              </div>
+            </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cv" aria-labelledby="cv-title">
+        <div class="shell">
+          <div class="cv-panel">
+            <h2 class="section-title" id="cv-title">CV</h2>
+
+            <div class="tabs" role="tablist" aria-label="CV sections">
+              <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="panel-structural" data-tab="structural"><span data-lang="da">Bygningsingeniør</span><span data-lang="en">Structural Engineering</span></button>
+              <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="panel-software" data-tab="software"><span data-lang="da">Softwareudvikling</span><span data-lang="en">Software Development</span></button>
+              <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="panel-education" data-tab="education"><span data-lang="da">Uddannelse</span><span data-lang="en">Education</span></button>
+              <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="panel-skills" data-tab="skills"><span data-lang="da">Færdigheder</span><span data-lang="en">Skills</span></button>
+            </div>
+
+            <div class="tab-panel active" id="panel-structural" role="tabpanel" data-panel="structural">
+              <ol class="timeline">
+                <li class="timeline-item">
+                  <div class="time"><span data-lang="da">1 år</span><span data-lang="en">1 year</span></div>
+                  <div class="timeline-card">
+                    <h3><span data-lang="da">Rådgivende ingeniør</span><span data-lang="en">Consulting Engineer</span></h3>
+                    <div class="where">MOE / Artelia</div>
+                    <p data-lang="da">Rådgivning, projektering og teknisk problemløsning i byggebranchen. Arbejde med konstruktioner, analyse, modellering, dokumentation og kvalitetssikring.</p>
+                    <p data-lang="en">Consulting, project design and technical problem solving in the construction sector. Work with structures, analysis, modelling, documentation and quality assurance.</p>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <div class="time"><span data-lang="da">2 år</span><span data-lang="en">2 years</span></div>
+                  <div class="timeline-card">
+                    <h3><span data-lang="da">Rådgiver / ingeniør</span><span data-lang="en">Engineer / Consultant</span></h3>
+                    <div class="where"><span data-lang="da">Tækker Rådgivende Ingeniør</span><span data-lang="en">Tækker Consulting Engineers</span></div>
+                    <p data-lang="da">Konstruktion, FEM-relateret analyse, MATLAB, Revit, AutoCAD og teknisk dokumentation. Stærk praktisk erfaring med beregning, projektering og strukturel forståelse.</p>
+                    <p data-lang="en">Structural design, FEM-related analysis, MATLAB, Revit, AutoCAD and technical documentation. Strong practical experience with calculations, design work and structural understanding.</p>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <div class="time"><span data-lang="da">7 mdr</span><span data-lang="en">7 months</span></div>
+                  <div class="timeline-card">
+                    <h3><span data-lang="da">Ingeniørpraktikant</span><span data-lang="en">Engineering Intern</span></h3>
+                    <div class="where">Per Aarsleff</div>
+                    <p data-lang="da">Praktisk projektering, byggeprocesser og teknisk koordinering. Gav erfaring med sammenhængen mellem beregning, udførelse og dokumentation i virkelige projekter.</p>
+                    <p data-lang="en">Practical design work, construction processes and technical coordination. Built experience with the connection between calculations, execution and documentation in real projects.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
+            <div class="tab-panel" id="panel-software" role="tabpanel" data-panel="software">
+              <ol class="timeline">
+                <li class="timeline-item">
+                  <div class="time">2019 - <span data-lang="da">nu</span><span data-lang="en">now</span></div>
+                  <div class="timeline-card">
+                    <h3><span data-lang="da">Indie udvikler / game developer</span><span data-lang="en">Indie Developer / Game Developer</span></h3>
+                    <div class="where"><span data-lang="da">Selvstændig · ca. 7 år</span><span data-lang="en">Independent · approx. 7 years</span></div>
+                    <p data-lang="da">C#, Unity, gameplay-arkitektur, NPC-adfærd, AI-dialog, save/load, netværk, procedural generation, editor tools, dataflow, debugging og større systemarkitektur.</p>
+                    <p data-lang="en">C#, Unity, gameplay architecture, NPC behavior, AI dialogue, save/load, networking, procedural generation, editor tools, data flow, debugging and larger system architecture.</p>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <div class="time"><span data-lang="da">6 mdr</span><span data-lang="en">6 months</span></div>
+                  <div class="timeline-card">
+                    <h3><span data-lang="da">Backend-udvikler</span><span data-lang="en">Backend Developer</span></h3>
+                    <div class="where">iPaper</div>
+                    <p data-lang="da">C#, MVC-arkitektur og MS-SQL i et professionelt backend-miljø. Fokus på datamodeller, databasestrukturer, vedligeholdelige løsninger og klassisk softwareudvikling.</p>
+                    <p data-lang="en">C#, MVC architecture and MS-SQL in a professional backend environment. Focus on data models, database structures, maintainable solutions and classical software development.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
+            <div class="tab-panel" id="panel-education" role="tabpanel" data-panel="education">
+              <ol class="timeline">
+                <li class="timeline-item">
+                  <div class="time">2019</div>
+                  <div class="timeline-card">
+                    <h3><span data-lang="da">Civilingeniør - Civil and Architectural Engineering</span><span data-lang="en">MSc - Civil and Architectural Engineering</span></h3>
+                    <div class="where"><span data-lang="da">Aarhus Universitet</span><span data-lang="en">Aarhus University</span></div>
+                    <p data-lang="da">Speciale i computational engineering med fokus på numeriske metoder, optimering, matematik og teknisk modellering. Thesis om convolutional neural networks til topologioptimering af strukturer.</p>
+                    <p data-lang="en">Specialized in computational engineering with focus on numerical methods, optimization, mathematics and technical modelling. Thesis on convolutional neural networks for topology optimization of structures.</p>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <div class="time">Bachelor</div>
+                  <div class="timeline-card">
+                    <h3><span data-lang="da">Diplomingeniør Byggeteknik - Bærende konstruktioner</span><span data-lang="en">BEng Civil Engineering - Structural Design</span></h3>
+                    <div class="where"><span data-lang="da">Aarhus Ingeniørhøjskole</span><span data-lang="en">Aarhus School of Engineering</span></div>
+                    <p data-lang="da">Uddannelse med fokus på konstruktioner, beregninger, statik, projektering og teknisk dokumentation.</p>
+                    <p data-lang="en">Education focused on structures, calculations, statics, design work and technical documentation.</p>
+                  </div>
+                </li>
+                <li class="timeline-item">
+                  <div class="time"><span data-lang="da">Certifikater</span><span data-lang="en">Certificates</span></div>
+                  <div class="timeline-card">
+                    <h3><span data-lang="da">Efteruddannelse og certificeringer</span><span data-lang="en">Further training and certifications</span></h3>
+                    <div class="where">AI / ML / Python / C#</div>
+                    <p data-lang="da">AI-900 Microsoft Azure AI Fundamentals · Coursera / Stanford University Machine Learning · Itucation Python Programming, Advanced · Erhvervsakademi Dania Videregående programmering i C# med karakteren 12 · Mensa Danmark IQ-testscore 135+.</p>
+                    <p data-lang="en">AI-900 Microsoft Azure AI Fundamentals · Coursera / Stanford University Machine Learning · Itucation Python Programming, Advanced · Erhvervsakademi Dania Advanced Programming in C# with grade 12 · Mensa Denmark IQ test score 135+.</p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+
+            <div class="tab-panel" id="panel-skills" role="tabpanel" data-panel="skills">
+              <div class="skill-group-grid">
+                <div class="skill-group-card"><h3>C# / .NET</h3><p><span data-lang="da">C#, .NET, MVC, MS-SQL, backend-logik, datamodeller og vedligeholdelige systemer.</span><span data-lang="en">C#, .NET, MVC, MS-SQL, backend logic, data models and maintainable systems.</span></p></div>
+                <div class="skill-group-card"><h3>Unity</h3><p><span data-lang="da">Gameplay-systemer, editor tools, Netcode, object pooling, save/load og performance-optimering.</span><span data-lang="en">Gameplay systems, editor tools, Netcode, object pooling, save/load and performance optimization.</span></p></div>
+                <div class="skill-group-card"><h3>Python / ML</h3><p><span data-lang="da">Python, TensorFlow/Keras, CNN, dataanalyse, numeriske metoder og tekniske ML-eksperimenter.</span><span data-lang="en">Python, TensorFlow/Keras, CNN, data analysis, numerical methods and technical ML experiments.</span></p></div>
+                <div class="skill-group-card"><h3>AI / NPC / RAG</h3><p><span data-lang="da">AI-pipelines, NPC-adfærd, semantisk søgning, RAG, memory-systemer, dialog og LLM-integration.</span><span data-lang="en">AI pipelines, NPC behavior, semantic search, RAG, memory systems, dialogue and LLM integration.</span></p></div>
+                <div class="skill-group-card"><h3><span data-lang="da">Parametrisk programmering</span><span data-lang="en">Parametric Programming</span></h3><p><span data-lang="da">Visual scripting, Grasshopper, parametriske modeller og systemer hvor geometri, regler og data kobles sammen.</span><span data-lang="en">Visual scripting, Grasshopper, parametric models and systems where geometry, rules and data are connected.</span></p></div>
+                <div class="skill-group-card"><h3><span data-lang="da">Procedural Terrain</span><span data-lang="en">Procedural Terrain</span></h3><p><span data-lang="da">Terrain generation med lagdelte noise-funktioner, chunks, variation, biome-logik og systematisk verdenbygning.</span><span data-lang="en">Terrain generation with layered noise functions, chunks, variation, biome logic and systematic world building.</span></p></div>
+              </div>
+
+              <div class="skills-grid" aria-label="Skill keywords">
+                <span class="skill">C#</span><span class="skill">.NET</span><span class="skill">Unity</span><span class="skill">Python</span><span class="skill">SQL</span><span class="skill">RAG</span><span class="skill">Object Pooling</span><span class="skill">Grasshopper</span><span class="skill">MATLAB</span><span class="skill">Revit</span><span class="skill">AutoCAD</span><span class="skill">Blender</span><span class="skill">Photoshop</span><span class="skill">Terrain Generation</span><span class="skill">Layered Noise</span><span class="skill">System Architecture</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" aria-labelledby="about-title">
+        <div class="shell">
+          <div class="about-panel">
+            <h2 class="section-title" id="about-title"><span data-lang="da">Om mig</span><span data-lang="en">About me</span></h2>
+            <p class="kicker"><span data-lang="da">Udvikler, ingeniør og kreativ problemløser med fokus på software, spil, AI, visuelle systemer og idéer der kan bygges videre på.</span><span data-lang="en">Developer, engineer and creative problem-solver focused on software, games, AI, visual systems and ideas that can be expanded into real products.</span></p>
+
+            <div class="about-layout">
+              <figure class="about-photo">
+                <img src="assets/images/mikael-full-body.png" data-alt-da="Mikael Wendt siddende afslappet i et professionelt IT-miljø." data-alt-en="Mikael Wendt seated casually in a professional IT workspace." alt="Mikael Wendt seated casually in a professional IT workspace." />
+              </figure>
+
+              <div class="about-content">
+                <div class="about-copy" data-lang="da">
+                  <p>Jeg hedder Mikael Wendt. Jeg er civilingeniør og softwareudvikler med fokus på C#, Unity, backend-udvikling, AI-pipelines, tekniske værktøjer og komplekse systemer. Jeg arbejder bedst, når der er et svært problem, mange bevægelige dele og behov for både struktur, analyse og praktisk implementering.</p>
+                  <p>Min tekniske baggrund kommer fra computational engineering, strukturel analyse, matematik, machine learning og softwareudvikling. Den bruger jeg i dag til at bygge systemer, der skal kunne mere end bare fungere i en prototype: de skal kunne udvides, debugges, forstås og udvikles videre uden at falde fra hinanden.</p>
+                  <p>Jeg har arbejdet med backend-systemer, spilarkitektur, NPC-adfærd, save/load, netværk, editor tools, dataflow, procedural generation og AI-baserede systemer. Jeg er særligt interesseret i software, hvor teknik, simulation, design og menneskelig adfærd mødes.</p>
+                  <p>Ved siden af udvikling laver jeg også musik, billeder, visuelle koncepter og videoredigering. Det kreative arbejde hænger tæt sammen med mit tekniske arbejde: jeg kan lide at tage en idé, give den form, teste den, justere den og bygge den op til noget konkret.</p>
+                </div>
+
+                <div class="about-copy" data-lang="en">
+                  <p>My name is Mikael Wendt. I am a civil engineer and software developer focused on C#, Unity, backend development, AI pipelines, technical tools and complex systems. I work best when a problem has many moving parts and requires structure, analysis and practical implementation.</p>
+                  <p>My technical background comes from computational engineering, structural analysis, mathematics, machine learning and software development. I use that background to build systems that need to do more than work as prototypes: they need to be extensible, debuggable, understandable and able to grow without collapsing under their own complexity.</p>
+                  <p>I have worked with backend systems, game architecture, NPC behavior, save/load systems, networking, editor tools, data flow, procedural generation and AI-based systems. I am especially interested in software where technology, simulation, design and human behavior meet.</p>
+                  <p>Outside pure development, I also make music, images, visual concepts and video editing. The creative work connects directly to my technical work: I like taking an idea, giving it form, testing it, adjusting it and building it into something concrete.</p>
+                </div>
+
+                <div class="about-subsection">
+                  <h3><span data-lang="da">Interesseområder</span><span data-lang="en">Areas of interest</span></h3>
+                  <p data-lang="da">Mine interesser spænder bredt, men de samler sig omkring samme kerne: systemer, menneskelig adfærd, fysisk disciplin, teknisk forståelse og kreativ produktion.</p>
+                  <p data-lang="en">My interests are broad, but they cluster around the same core: systems, human behavior, physical discipline, technical understanding and creative production.</p>
+                  <div class="interest-tags" aria-label="Interests">
+                    <span class="interest-tag"><span data-lang="da">Musik</span><span data-lang="en">Music</span></span>
+                    <span class="interest-tag"><span data-lang="da">Billeder</span><span data-lang="en">Image creation</span></span>
+                    <span class="interest-tag"><span data-lang="da">Videoredigering</span><span data-lang="en">Video editing</span></span>
+                    <span class="interest-tag">World building</span>
+                    <span class="interest-tag"><span data-lang="da">Cykling</span><span data-lang="en">Cycling</span></span>
+                    <span class="interest-tag"><span data-lang="da">Træning</span><span data-lang="en">Training</span></span>
+                    <span class="interest-tag"><span data-lang="da">Kost</span><span data-lang="en">Nutrition</span></span>
+                    <span class="interest-tag"><span data-lang="da">Filosofi</span><span data-lang="en">Philosophy</span></span>
+                    <span class="interest-tag"><span data-lang="da">Fysik</span><span data-lang="en">Physics</span></span>
+                    <span class="interest-tag"><span data-lang="da">Teknologi</span><span data-lang="en">Technology</span></span>
+                    <span class="interest-tag"><span data-lang="da">Samfund</span><span data-lang="en">Society</span></span>
+                    <span class="interest-tag"><span data-lang="da">Politik</span><span data-lang="en">Politics</span></span>
+                    <span class="interest-tag"><span data-lang="da">Geopolitik</span><span data-lang="en">Geopolitics</span></span>
+                    <span class="interest-tag"><span data-lang="da">Historie</span><span data-lang="en">History</span></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="shell">
+          <div class="contact-card">
+            <h2 class="section-title" id="contact-title"><span data-lang="da">Kontakt</span><span data-lang="en">Contact</span></h2>
+            <p class="kicker"><span data-lang="da">Kontakt mig om udvikling, spil, AI-systemer, Unity-værktøjer eller teknisk samarbejde.</span><span data-lang="en">Contact me about development, games, AI systems, Unity tools or technical collaboration.</span></p>
+
+            <div class="contact-links">
+              <a class="contact-link" href="mailto:mikawendt@gmail.com">
+                <img class="contact-icon" src="assets/images/contact-email.png" alt="Email icon" />
+                <span class="contact-link-text">mikawendt@gmail.com</span>
+              </a>
+
+              <a class="contact-link" href="tel:+4540964274">
+                <img class="contact-icon" src="assets/images/contact-phone.png" alt="Phone icon" />
+                <span class="contact-link-text">+45 4096 4274</span>
+              </a>
+
+              <div class="contact-link">
+                <img class="contact-icon" src="assets/images/contact-location.png" alt="Location icon" />
+                <span class="contact-link-text"><span data-lang="da">8260 Viby J</span><span data-lang="en">8260 Viby J, Denmark</span></span>
+              </div>
+
+              <a class="contact-link" href="https://www.linkedin.com/in/mikaelwendt" target="_blank" rel="noreferrer">
+                <img class="contact-icon" src="assets/images/contact-linkedin.png" alt="LinkedIn icon" />
+                <span class="contact-link-text">LinkedIn</span>
+              </a>
+
+              <a class="contact-link" href="https://github.com/wendten" target="_blank" rel="noreferrer">
+                <img class="contact-icon" src="assets/images/contact-github.png" alt="GitHub icon" />
+                <span class="contact-link-text">GitHub</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <div class="shell footer-inner">
+      <strong>© <span id="year"></span> Mikael Wendt</strong>
+    </div>
+  </footer>
+
+  <script>
+    const root = document.documentElement;
+    const langButtons = document.querySelectorAll('[data-set-lang]');
+    const tabs = document.querySelectorAll('[data-tab]');
+    const panels = document.querySelectorAll('[data-panel]');
+    const sectionLinks = document.querySelectorAll('[data-section-link]');
+    const tabJumpLinks = document.querySelectorAll('[data-tab-jump]');
+
+    const languageMeta = {
+      da: {
+        title: 'Mikael Wendt - Udviklerportfolio',
+        description: 'Mikael Wendt - softwareudvikler, bygningsingeniør, spiludvikler, AI-systemer, Unity og C# portfolio.'
+      },
+      en: {
+        title: 'Mikael Wendt - Developer Portfolio',
+        description: 'Mikael Wendt - software developer, structural engineer, game developer, AI systems, Unity and C# portfolio.'
+      }
+    };
+
+    class PixelAvatarBlinker {
+      constructor(options) {
+        this.element = options.element;
+        this.openSrc = options.openSrc;
+        this.blinkSrc = options.blinkSrc;
+        this.minDelay = options.minDelay || 2600;
+        this.maxDelay = options.maxDelay || 6200;
+        this.blinkDuration = options.blinkDuration || 115;
+        this.doubleBlinkChance = options.doubleBlinkChance || 0.22;
+        this.doubleBlinkGap = options.doubleBlinkGap || 130;
+        this.timeoutId = null;
+        this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      }
+
+      start() {
+        if (!this.element || !this.openSrc || !this.blinkSrc || this.prefersReducedMotion) return;
+
+        this.preloadBlinkImage();
+        this.stop();
+        this.element.src = this.openSrc;
+        this.scheduleNextBlink();
+      }
+
+      stop() {
+        if (this.timeoutId) {
+          window.clearTimeout(this.timeoutId);
+          this.timeoutId = null;
+        }
+      }
+
+      preloadBlinkImage() {
+        const image = new Image();
+        image.src = this.blinkSrc;
+      }
+
+      getNextDelay() {
+        return Math.floor(this.minDelay + Math.random() * (this.maxDelay - this.minDelay));
+      }
+
+      scheduleNextBlink() {
+        this.timeoutId = window.setTimeout(() => this.blink(), this.getNextDelay());
+      }
+
+      blink() {
+        this.element.src = this.blinkSrc;
+
+        this.timeoutId = window.setTimeout(() => {
+          this.element.src = this.openSrc;
+
+          if (Math.random() < this.doubleBlinkChance) {
+            this.timeoutId = window.setTimeout(() => this.blinkOnceAndContinue(), this.doubleBlinkGap);
+            return;
+          }
+
+          this.scheduleNextBlink();
+        }, this.blinkDuration);
+      }
+
+      blinkOnceAndContinue() {
+        this.element.src = this.blinkSrc;
+
+        this.timeoutId = window.setTimeout(() => {
+          this.element.src = this.openSrc;
+          this.scheduleNextBlink();
+        }, this.blinkDuration);
+      }
+    }
+
+    class TypewriterHero {
+      constructor(options) {
+        this.element = options.element;
+        this.phrases = options.phrases;
+        this.typeDelay = options.typeDelay || 68;
+        this.deleteDelay = options.deleteDelay || 32;
+        this.completePause = options.completePause || 2200;
+        this.emptyPause = options.emptyPause || 420;
+        this.typoPause = options.typoPause || 520;
+        this.correctionPause = options.correctionPause || 180;
+        this.correctionDeleteDelay = options.correctionDeleteDelay || 46;
+
+        this.language = options.language || 'en';
+        this.phraseIndex = 0;
+        this.characterIndex = 0;
+        this.timeoutId = null;
+        this.phase = 'typing';
+        this.hasFixedTypo = false;
+        this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      }
+
+      start() {
+        if (!this.element) return;
+
+        if (this.prefersReducedMotion) {
+          this.element.textContent = this.getCurrentEntry().finalText;
+          return;
+        }
+
+        this.stop();
+        this.resetAnimationState();
+        this.element.textContent = '';
+        this.tick();
+      }
+
+      stop() {
+        if (this.timeoutId) {
+          window.clearTimeout(this.timeoutId);
+          this.timeoutId = null;
+        }
+      }
+
+      resetAnimationState() {
+        this.phraseIndex = 0;
+        this.characterIndex = 0;
+        this.phase = 'typing';
+        this.hasFixedTypo = false;
+      }
+
+      setLanguage(language) {
+        if (!this.phrases[language]) return;
+
+        this.language = language;
+        this.stop();
+        this.resetAnimationState();
+        this.element.textContent = '';
+
+        if (this.prefersReducedMotion) {
+          this.element.textContent = this.getCurrentEntry().finalText;
+          return;
+        }
+
+        this.tick();
+      }
+
+      getCurrentEntry() {
+        const languagePhrases = this.phrases[this.language] || this.phrases.en;
+        const entry = languagePhrases[this.phraseIndex % languagePhrases.length];
+
+        if (typeof entry === 'string') {
+          return {
+            finalText: entry,
+            typoText: null
+          };
+        }
+
+        return {
+          finalText: entry.finalText,
+          typoText: entry.typoText || null
+        };
+      }
+
+      getCommonPrefixLength(a, b) {
+        const max = Math.min(a.length, b.length);
+        let i = 0;
+
+        while (i < max && a[i] === b[i]) {
+          i += 1;
+        }
+
+        return i;
+      }
+
+      tick() {
+        const currentEntry = this.getCurrentEntry();
+        const currentText = this.hasFixedTypo || !currentEntry.typoText ? currentEntry.finalText : currentEntry.typoText;
+        const typoFixPoint = currentEntry.typoText
+          ? this.getCommonPrefixLength(currentEntry.typoText, currentEntry.finalText)
+          : 0;
+
+        if (this.phase === 'holding') {
+          this.phase = 'deleting';
+          this.timeoutId = window.setTimeout(() => this.tick(), this.deleteDelay);
+          return;
+        }
+
+        if (this.phase === 'typing') {
+          this.characterIndex += 1;
+          this.element.textContent = currentText.slice(0, this.characterIndex);
+
+          if (this.characterIndex >= currentText.length) {
+            if (currentEntry.typoText && !this.hasFixedTypo) {
+              this.phase = 'correcting';
+              this.timeoutId = window.setTimeout(() => this.tick(), this.typoPause);
+              return;
+            }
+
+            this.phase = 'holding';
+            this.timeoutId = window.setTimeout(() => this.tick(), this.completePause);
+            return;
+          }
+
+          this.timeoutId = window.setTimeout(() => this.tick(), this.typeDelay);
+          return;
+        }
+
+        if (this.phase === 'correcting') {
+          this.characterIndex -= 1;
+          this.element.textContent = currentEntry.typoText.slice(0, this.characterIndex);
+
+          if (this.characterIndex <= typoFixPoint) {
+            this.hasFixedTypo = true;
+            this.phase = 'typing';
+            this.timeoutId = window.setTimeout(() => this.tick(), this.correctionPause);
+            return;
+          }
+
+          this.timeoutId = window.setTimeout(() => this.tick(), this.correctionDeleteDelay);
+          return;
+        }
+
+        if (this.phase === 'deleting') {
+          this.characterIndex -= 1;
+          this.element.textContent = currentEntry.finalText.slice(0, this.characterIndex);
+
+          if (this.characterIndex <= 0) {
+            const languagePhrases = this.phrases[this.language] || this.phrases.en;
+            this.phase = 'typing';
+            this.phraseIndex = (this.phraseIndex + 1) % languagePhrases.length;
+            this.characterIndex = 0;
+            this.hasFixedTypo = false;
+            this.element.textContent = '';
+            this.timeoutId = window.setTimeout(() => this.tick(), this.emptyPause);
+            return;
+          }
+
+          this.timeoutId = window.setTimeout(() => this.tick(), this.deleteDelay);
+        }
+      }
+    }
+
+    const typewriterHero = new TypewriterHero({
+      element: document.getElementById('typewriter-text'),
+      language: root.dataset.currentLang || 'en',
+      typeDelay: 68,
+      deleteDelay: 32,
+      completePause: 2200,
+      emptyPause: 420,
+      typoPause: 520,
+      correctionPause: 180,
+      correctionDeleteDelay: 46,
+      phrases: {
+        da: [
+          'Hej og velkommen',
+          'Mit navn er Mikael',
+          { finalText: 'Jeg bor i Aarhus', typoText: 'Jeg bor i Århus' },
+          { finalText: 'Jeg bygger software', typoText: 'Jeg bygger softwrae' },
+          'Jeg bygger spil',
+          'Og jeg bygger AI-systemer',
+          'Nyd dit ophold'
+        ],
+        en: [
+          'Welcome traveler',
+          'My name is Mikael',
+          { finalText: 'I live in Aarhus, Denmark', typoText: 'I live in Århus' },
+          { finalText: 'I build software', typoText: 'I build softwrae' },
+          'I build games',
+          'And I build AI systems',
+          'Enjoy your stay'
+        ]
+      }
+    });
+
+    const pixelAvatarBlinker = new PixelAvatarBlinker({
+      element: document.getElementById('pixel-writer-avatar'),
+      openSrc: 'assets/images/mikael-wendt-portrait.png',
+      blinkSrc: 'assets/images/mikael-wendt-portrait-blink.png',
+      minDelay: 2600,
+      maxDelay: 6200,
+      blinkDuration: 115,
+      doubleBlinkChance: 0.22,
+      doubleBlinkGap: 130
+    });
+
+    function setLanguage(lang) {
+      root.dataset.currentLang = lang;
+      root.lang = lang;
+      document.title = languageMeta[lang].title;
+
+      const meta = document.querySelector('meta[name="description"]');
+      if (meta) {
+        meta.setAttribute('content', languageMeta[lang].description);
+      }
+
+      langButtons.forEach(button => {
+        const active = button.dataset.setLang === lang;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+
+      document.querySelectorAll('img[data-alt-da][data-alt-en]').forEach(img => {
+        img.alt = img.dataset[lang === 'da' ? 'altDa' : 'altEn'];
+      });
+
+      typewriterHero.setLanguage(lang);
+      try {
+        localStorage.setItem('portfolio-lang', lang);
+      } catch (error) {
+        console.warn('Language preference could not be saved.', error);
+      }
+    }
+
+    function setTab(tabName) {
+      tabs.forEach(tab => {
+        const active = tab.dataset.tab === tabName;
+        tab.classList.toggle('active', active);
+        tab.setAttribute('aria-selected', String(active));
+      });
+
+      panels.forEach(panel => {
+        panel.classList.toggle('active', panel.dataset.panel === tabName);
+      });
+    }
+
+    langButtons.forEach(button => {
+      button.addEventListener('click', () => setLanguage(button.dataset.setLang));
+    });
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => setTab(tab.dataset.tab));
+    });
+
+    tabJumpLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        const tabName = link.dataset.tabJump;
+        window.setTimeout(() => setTab(tabName), 50);
+      });
+    });
+
+    const sections = ['top', 'projects', 'cv', 'about', 'contact']
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(entries => {
+      const visible = entries
+        .filter(entry => entry.isIntersecting)
+        .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+      if (!visible) return;
+
+      sectionLinks.forEach(link => {
+        link.classList.toggle('active', link.dataset.sectionLink === visible.target.id);
+      });
+    }, { threshold: [0.18, 0.35, 0.55], rootMargin: '-18% 0px -58% 0px' });
+
+    sections.forEach(section => observer.observe(section));
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    let savedLang = 'en';
+
+    try {
+      savedLang = localStorage.getItem('portfolio-lang') || 'en';
+    } catch (error) {
+      savedLang = 'en';
+    }
+
+    setLanguage(savedLang === 'da' ? 'da' : 'en');
+    pixelAvatarBlinker.start();
+  </script>
 </body>
 </html>
