@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mikael Wendt</title>
+  <meta name="description" content="Portfolio for Mikael Wendt">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #10151f;
+      --panel: #172131;
+      --text: #eef3fb;
+      --muted: #aab7c8;
+      --accent: #8fd0ff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at top left, #24374f, var(--bg) 55%);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    main {
+      width: min(860px, calc(100% - 32px));
+      padding: 48px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 28px;
+      background: rgba(23, 33, 49, 0.86);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(42px, 7vw, 76px);
+      letter-spacing: -0.06em;
+      line-height: 0.95;
+    }
+
+    p {
+      margin: 0;
+      max-width: 640px;
+      color: var(--muted);
+      font-size: clamp(18px, 2.5vw, 24px);
+      line-height: 1.45;
+    }
+
+    strong {
+      color: var(--accent);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Mikael Wendt</h1>
+    <p><strong>GitHub Pages er klar.</strong> Erstat denne fil med din rigtige portfolio, og læg billeder, CSS og JavaScript i samme repo.</p>
+  </main>
+</body>
+</html>
