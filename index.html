@@ -541,14 +541,37 @@
     }
 
     .card {
+      display: block;
       overflow: hidden;
       border-radius: 18px;
       border: 1px solid var(--line);
       background: rgba(13,24,42,.86);
       box-shadow: 0 16px 44px rgba(0,0,0,.22);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
     }
 
-    .card:hover { border-color: var(--line-strong); }
+    .card:hover,
+    .card:focus-visible {
+      transform: translateY(-3px);
+      border-color: var(--line-strong);
+      background: rgba(18,36,62,.92);
+    }
+
+    .card:focus-visible {
+      outline: 2px solid rgba(118, 179, 255, .72);
+      outline-offset: 4px;
+    }
+
+    .project-modal-trigger {
+      width: 100%;
+      padding: 0;
+      appearance: none;
+      border-color: var(--line);
+      color: inherit;
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+    }
 
     .project-art {
       position: relative;
@@ -562,6 +585,12 @@
       height: 100%;
       object-fit: cover;
       transform: scale(1.02);
+      transition: transform .35s ease;
+    }
+
+    .card:hover .project-art img,
+    .card:focus-visible .project-art img {
+      transform: scale(1.12);
     }
 
     .badge {
@@ -695,25 +724,30 @@
       font-size: 14px;
     }
 
-    .skill-group-grid {
+    .skill-explorer {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
+      grid-template-columns: minmax(260px, .85fr) minmax(0, 1.15fr);
+      gap: 18px;
+      align-items: stretch;
     }
 
-    .skill-group-card {
+    .skill-selector-card,
+    .skill-detail-card {
       border: 1px solid var(--line);
       border-radius: 18px;
       background: rgba(13, 24, 42, .76);
       padding: 18px;
     }
 
-    .skill-group-card h3 {
-      margin: 0 0 6px;
-      font-size: 17px;
+    .skill-selector-card h3,
+    .skill-detail-card h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+      letter-spacing: -0.02em;
     }
 
-    .skill-group-card p {
+    .skill-selector-intro,
+    .skill-detail-card p {
       margin: 0;
       color: var(--muted);
       font-size: 14px;
@@ -735,6 +769,69 @@
       color: #bddbff;
       font-size: 14px;
       font-weight: 800;
+    }
+
+    .skill {
+      cursor: pointer;
+      font: inherit;
+      line-height: 1.1;
+      text-align: left;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, color .16s ease;
+    }
+
+    .skill:hover,
+    .skill.active {
+      transform: translateY(-1px);
+      border-color: rgba(118, 179, 255, .72);
+      background: rgba(47, 125, 246, .28);
+      color: #fff;
+    }
+
+    .skill.active {
+      box-shadow: 0 0 0 4px rgba(47, 125, 246, .10);
+    }
+
+    .skill-details {
+      min-width: 0;
+    }
+
+    .skill-detail-card {
+      display: none;
+      min-height: 100%;
+    }
+
+    .skill-detail-card.active {
+      display: block;
+    }
+
+    .skill-detail-label {
+      margin: 0 0 8px !important;
+      color: var(--blue-2) !important;
+      font-size: 12px !important;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .skill-detail-card h3 {
+      color: #fff;
+    }
+
+    .skill-detail-card p + p {
+      margin-top: 10px;
+    }
+
+    .skill-detail-list {
+      display: grid;
+      gap: 7px;
+      margin: 14px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .skill-detail-list strong {
+      color: #dceaff;
     }
 
     .about-panel {
@@ -839,6 +936,19 @@
       border: 1px solid rgba(255,255,255,.11);
       color: #edf5ff;
       font-weight: 780;
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .contact-link:hover,
+    .contact-link:focus-visible {
+      transform: translateX(8px);
+      border-color: rgba(118, 179, 255, .34);
+      background: rgba(47, 125, 246, .12);
+    }
+
+    .contact-link:focus-visible {
+      outline: 2px solid rgba(118, 179, 255, .72);
+      outline-offset: 3px;
     }
 
     .contact-icon {
@@ -856,6 +966,99 @@
     .contact-link-text {
       min-width: 0;
       overflow-wrap: anywhere;
+    }
+
+
+
+    .project-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(2, 6, 12, .74);
+      backdrop-filter: blur(14px);
+    }
+
+    .project-modal[hidden] {
+      display: none;
+    }
+
+    .project-modal-panel {
+      position: relative;
+      width: min(760px, 100%);
+      max-height: min(760px, calc(100vh - 48px));
+      overflow: auto;
+      border: 1px solid rgba(118, 179, 255, .30);
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(47, 125, 246, .22), transparent 22rem),
+        linear-gradient(180deg, rgba(18, 36, 62, .98), rgba(5, 11, 20, .98));
+      box-shadow: 0 28px 90px rgba(0, 0, 0, .56);
+      padding: clamp(24px, 4vw, 40px);
+    }
+
+    .project-modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      color: #fff;
+      cursor: pointer;
+      font: inherit;
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .project-modal-close:hover,
+    .project-modal-close:focus-visible {
+      border-color: rgba(118, 179, 255, .42);
+      background: rgba(47, 125, 246, .18);
+      outline: none;
+    }
+
+    .project-modal-kicker {
+      margin: 0 0 10px;
+      color: var(--blue-2);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .project-modal-title {
+      margin: 0 54px 16px 0;
+      color: #fff;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .project-modal-body {
+      display: grid;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .project-modal-body p {
+      margin: 0;
+    }
+
+    .project-modal-list {
+      display: grid;
+      gap: 8px;
+      margin: 2px 0 0;
+      padding-left: 20px;
+    }
+
+    .project-modal-list strong {
+      color: #dceaff;
     }
 
     footer {
@@ -905,7 +1108,7 @@
       .pixel-typewriter .typewriter-heading { font-size: clamp(30px, 5.8vw, 54px); }
       .about-photo { min-height: 520px; }
       .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .skill-group-grid { grid-template-columns: 1fr; }
+      .skill-explorer { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
@@ -1020,44 +1223,44 @@
               </div>
             </a>
 
-            <a class="card" href="#contact">
+            <button class="card project-modal-trigger" type="button" data-project-modal="clown-wars">
               <div class="project-art">
                 <img src="assets/images/project-clown-wars.png" data-alt-da="Coverbillede til Clown Wars-projektet." data-alt-en="Cover image for the Clown Wars project." alt="Cover image for the Clown Wars project." />
-                <div class="badge">↗</div>
+                <div class="badge">+</div>
               </div>
               <div class="card-body">
                 <h3>Clown Wars</h3>
-                <p data-lang="da">VR-spilprojekt med turbaseret klovnekaos, halv cartoony / halv horror stil og stærk low-poly identitet.</p>
-                <p data-lang="en">VR game project with turn-based clown chaos, half cartoony / half horror style and a strong low-poly identity.</p>
+                <p data-lang="da">VR-prototype inspireret af Worms World Party, men omsat til klovne, våben, ragdolls og destruerbare miljøer.</p>
+                <p data-lang="en">VR prototype inspired by Worms World Party, reworked into clowns, weapons, ragdolls and destructible environments.</p>
                 <span class="read-more"><span data-lang="da">Læs mere</span><span data-lang="en">Read more</span> →</span>
               </div>
-            </a>
+            </button>
 
-            <a class="card" href="#contact">
+            <button class="card project-modal-trigger" type="button" data-project-modal="super-godnathistorie">
               <div class="project-art">
                 <img src="assets/images/project-super-godnathistorie.png" data-alt-da="Coverbillede til Super Godnathistorie-projektet." data-alt-en="Cover image for the Super Godnathistorie project." alt="Cover image for the Super Godnathistorie project." />
-                <div class="badge">↗</div>
+                <div class="badge">+</div>
               </div>
               <div class="card-body">
                 <h3>Super Godnathistorie</h3>
-                <p data-lang="da">Kreativt AI-projekt til personlige godnathistorier, fortællinger og billedbaseret børnebogsproduktion.</p>
-                <p data-lang="en">Creative AI project for personalized bedtime stories, storytelling and image-based children’s book production.</p>
+                <p data-lang="da">AI-baseret børnebogsprojekt med Stable Diffusion, ComfyUI og LoRA-træning på uploadede billeder.</p>
+                <p data-lang="en">AI-based children’s book project using Stable Diffusion, ComfyUI and LoRA training from uploaded images.</p>
                 <span class="read-more"><span data-lang="da">Læs mere</span><span data-lang="en">Read more</span> →</span>
               </div>
-            </a>
+            </button>
 
-            <a class="card" href="#contact">
+            <button class="card project-modal-trigger" type="button" data-project-modal="machine-learning">
               <div class="project-art">
                 <img src="assets/images/project-machine-learning.png" data-alt-da="Visualisering af CNN-baseret machine learning til stressforhold i 2D-strukturer." data-alt-en="Visualization of CNN-based machine learning for stress fields in 2D structures." alt="Visualization of CNN-based machine learning for stress fields in 2D structures." />
-                <div class="badge">↗</div>
+                <div class="badge">+</div>
               </div>
               <div class="card-body">
                 <h3><span data-lang="da">Maskinlæring</span><span data-lang="en">Machine Learning</span></h3>
-                <p data-lang="da">CNN-baseret topologioptimering, dataanalyse, Python, TensorFlow/Keras og tekniske ML-eksperimenter.</p>
-                <p data-lang="en">CNN-based topology optimization, data analysis, Python, TensorFlow/Keras and technical ML experiments.</p>
+                <p data-lang="da">Mit kandidatspeciale om CNN-baseret acceleration af tekniske beregninger og topologioptimering.</p>
+                <p data-lang="en">My master’s thesis on CNN-based acceleration of technical calculations and topology optimization.</p>
                 <span class="read-more"><span data-lang="da">Læs mere</span><span data-lang="en">Read more</span> →</span>
               </div>
-            </a>
+            </button>
             </div>
           </div>
         </div>
@@ -1163,17 +1366,269 @@
             </div>
 
             <div class="tab-panel" id="panel-skills" role="tabpanel" data-panel="skills">
-              <div class="skill-group-grid">
-                <div class="skill-group-card"><h3>C# / .NET</h3><p><span data-lang="da">C#, .NET, MVC, MS-SQL, backend-logik, datamodeller og vedligeholdelige systemer.</span><span data-lang="en">C#, .NET, MVC, MS-SQL, backend logic, data models and maintainable systems.</span></p></div>
-                <div class="skill-group-card"><h3>Unity</h3><p><span data-lang="da">Gameplay-systemer, editor tools, Netcode, object pooling, save/load og performance-optimering.</span><span data-lang="en">Gameplay systems, editor tools, Netcode, object pooling, save/load and performance optimization.</span></p></div>
-                <div class="skill-group-card"><h3>Python / ML</h3><p><span data-lang="da">Python, TensorFlow/Keras, CNN, dataanalyse, numeriske metoder og tekniske ML-eksperimenter.</span><span data-lang="en">Python, TensorFlow/Keras, CNN, data analysis, numerical methods and technical ML experiments.</span></p></div>
-                <div class="skill-group-card"><h3>AI / NPC / RAG</h3><p><span data-lang="da">AI-pipelines, NPC-adfærd, semantisk søgning, RAG, memory-systemer, dialog og LLM-integration.</span><span data-lang="en">AI pipelines, NPC behavior, semantic search, RAG, memory systems, dialogue and LLM integration.</span></p></div>
-                <div class="skill-group-card"><h3><span data-lang="da">Parametrisk programmering</span><span data-lang="en">Parametric Programming</span></h3><p><span data-lang="da">Visual scripting, Grasshopper, parametriske modeller og systemer hvor geometri, regler og data kobles sammen.</span><span data-lang="en">Visual scripting, Grasshopper, parametric models and systems where geometry, rules and data are connected.</span></p></div>
-                <div class="skill-group-card"><h3><span data-lang="da">Procedural Terrain</span><span data-lang="en">Procedural Terrain</span></h3><p><span data-lang="da">Terrain generation med lagdelte noise-funktioner, chunks, variation, biome-logik og systematisk verdenbygning.</span><span data-lang="en">Terrain generation with layered noise functions, chunks, variation, biome logic and systematic world building.</span></p></div>
-              </div>
+              <div class="skill-explorer" aria-label="Clickable skill details">
+                <div class="skill-selector-card">
+                  <h3><span data-lang="da">Færdigheder</span><span data-lang="en">Skills</span></h3>
+                  <p class="skill-selector-intro" data-lang="da">Klik på en færdighed for at se, hvor jeg har brugt den i projekter, arbejde eller uddannelse.</p>
+                  <p class="skill-selector-intro" data-lang="en">Click a skill to see where I have used it in projects, work or education.</p>
 
-              <div class="skills-grid" aria-label="Skill keywords">
-                <span class="skill">C#</span><span class="skill">.NET</span><span class="skill">Unity</span><span class="skill">Python</span><span class="skill">SQL</span><span class="skill">RAG</span><span class="skill">Object Pooling</span><span class="skill">Grasshopper</span><span class="skill">MATLAB</span><span class="skill">Revit</span><span class="skill">AutoCAD</span><span class="skill">Blender</span><span class="skill">Photoshop</span><span class="skill">Terrain Generation</span><span class="skill">Layered Noise</span><span class="skill">System Architecture</span>
+                  <div class="skills-grid" aria-label="Skill keywords">
+                    <button class="skill active" type="button" data-skill="csharp" aria-pressed="true">C#</button>
+                    <button class="skill" type="button" data-skill="dotnet" aria-pressed="false">.NET / MVC</button>
+                    <button class="skill" type="button" data-skill="unity" aria-pressed="false">Unity</button>
+                    <button class="skill" type="button" data-skill="python" aria-pressed="false">Python</button>
+                    <button class="skill" type="button" data-skill="tensorflow" aria-pressed="false">TensorFlow / Keras</button>
+                    <button class="skill" type="button" data-skill="sql" aria-pressed="false">SQL / MS-SQL</button>
+                    <button class="skill" type="button" data-skill="rag" aria-pressed="false">RAG</button>
+                    <button class="skill" type="button" data-skill="llm" aria-pressed="false">LLM Integration</button>
+                    <button class="skill" type="button" data-skill="npc" aria-pressed="false">NPC Behavior</button>
+                    <button class="skill" type="button" data-skill="object-pooling" aria-pressed="false">Object Pooling</button>
+                    <button class="skill" type="button" data-skill="save-load" aria-pressed="false">Save / Load</button>
+                    <button class="skill" type="button" data-skill="netcode" aria-pressed="false">Netcode</button>
+                    <button class="skill" type="button" data-skill="grasshopper" aria-pressed="false">Grasshopper</button>
+                    <button class="skill" type="button" data-skill="matlab" aria-pressed="false">MATLAB</button>
+                    <button class="skill" type="button" data-skill="revit" aria-pressed="false">Revit</button>
+                    <button class="skill" type="button" data-skill="autocad" aria-pressed="false">AutoCAD</button>
+                    <button class="skill" type="button" data-skill="blender" aria-pressed="false">Blender</button>
+                    <button class="skill" type="button" data-skill="photoshop" aria-pressed="false">Photoshop</button>
+                    <button class="skill" type="button" data-skill="terrain-generation" aria-pressed="false">Terrain Generation</button>
+                    <button class="skill" type="button" data-skill="layered-noise" aria-pressed="false">Layered Noise</button>
+                    <button class="skill" type="button" data-skill="system-architecture" aria-pressed="false">System Architecture</button>
+                  </div>
+                </div>
+
+                <div class="skill-details" aria-live="polite">
+                  <article class="skill-detail-card active" data-skill-detail="csharp">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>C#</h3>
+                    <p data-lang="da">C# er mit primære udviklingssprog. Jeg har brugt det i Unity-projekter, backend-udvikling, gameplay-systemer, AI-integration, save/load, editor tools og større objektorienterede systemer.</p>
+                    <p data-lang="en">C# is my main development language. I have used it in Unity projects, backend development, gameplay systems, AI integration, save/load, editor tools and larger object-oriented systems.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Spil:</strong> From Scratch, NPC-systemer, interaktioner, construction, inventory og quest-systemer.</span><span data-lang="en"><strong>Games:</strong> From Scratch, NPC systems, interactions, construction, inventory and quest systems.</span></li>
+                      <li><span data-lang="da"><strong>Backend:</strong> C# og MVC i professionelt backend-miljø hos iPaper.</span><span data-lang="en"><strong>Backend:</strong> C# and MVC in a professional backend environment at iPaper.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="dotnet">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>.NET / MVC</h3>
+                    <p data-lang="da">Jeg har brugt .NET og MVC til klassisk backend-udvikling med fokus på datamodeller, controllers, databaseintegration og vedligeholdelig serverlogik.</p>
+                    <p data-lang="en">I have used .NET and MVC for classical backend development with focus on data models, controllers, database integration and maintainable server-side logic.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>iPaper:</strong> Backend-udvikling med C#, MVC-arkitektur og MS-SQL.</span><span data-lang="en"><strong>iPaper:</strong> Backend development with C#, MVC architecture and MS-SQL.</span></li>
+                      <li><span data-lang="da"><strong>Portfolio:</strong> Webstruktur, routing-forståelse og klassisk separation mellem data, logik og præsentation.</span><span data-lang="en"><strong>Portfolio:</strong> Web structure, routing understanding and classical separation between data, logic and presentation.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="unity">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>Unity</h3>
+                    <p data-lang="da">Jeg har brugt Unity som hovedmotor til egne spilprojekter, prototyper, VR, gameplay-systemer, NPC-adfærd, værktøjer, animation, UI og større systemarkitektur.</p>
+                    <p data-lang="en">I have used Unity as the main engine for my own game projects, prototypes, VR, gameplay systems, NPC behavior, tools, animation, UI and larger system architecture.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>From Scratch:</strong> Gameplay, AI, inventory, construction, quests, interaktioner og systemintegration.</span><span data-lang="en"><strong>From Scratch:</strong> Gameplay, AI, inventory, construction, quests, interactions and system integration.</span></li>
+                      <li><span data-lang="da"><strong>VR:</strong> Clown Wars og andre Unity-baserede prototyper.</span><span data-lang="en"><strong>VR:</strong> Clown Wars and other Unity-based prototypes.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="python">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>Python</h3>
+                    <p data-lang="da">Jeg har brugt Python til machine learning, dataanalyse, tekniske eksperimenter, numeriske modeller og automatisering. Det blev især brugt i mit speciale og senere AI/ML-eksperimenter.</p>
+                    <p data-lang="en">I have used Python for machine learning, data analysis, technical experiments, numerical models and automation. It was especially used in my thesis and later AI/ML experiments.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Speciale:</strong> CNN-baseret topologioptimering og dataforarbejdning.</span><span data-lang="en"><strong>Thesis:</strong> CNN-based topology optimization and data preprocessing.</span></li>
+                      <li><span data-lang="da"><strong>ML:</strong> TensorFlow/Keras, datasæt, træning, evaluering og tekniske test.</span><span data-lang="en"><strong>ML:</strong> TensorFlow/Keras, datasets, training, evaluation and technical testing.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="tensorflow">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>TensorFlow / Keras</h3>
+                    <p data-lang="da">Jeg har brugt TensorFlow/Keras til at bygge og træne convolutional neural networks til tekniske beregningsproblemer, især stressfelter og strukturel optimering.</p>
+                    <p data-lang="en">I have used TensorFlow/Keras to build and train convolutional neural networks for technical computation problems, especially stress fields and structural optimization.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Speciale:</strong> CNN-model til hurtig approksimation af 2D-strukturelle beregninger.</span><span data-lang="en"><strong>Thesis:</strong> CNN model for fast approximation of 2D structural calculations.</span></li>
+                      <li><span data-lang="da"><strong>Eksperimenter:</strong> Modeltræning, evaluering, fejlanalyse og optimering.</span><span data-lang="en"><strong>Experiments:</strong> Model training, evaluation, error analysis and optimization.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="sql">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>SQL / MS-SQL</h3>
+                    <p data-lang="da">Jeg har brugt SQL og MS-SQL i backend-arbejde til datamodeller, relationelle strukturer og persistence. Det gav praktisk erfaring med databaser i professionelle systemer.</p>
+                    <p data-lang="en">I have used SQL and MS-SQL in backend work for data models, relational structures and persistence. It gave practical experience with databases in professional systems.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>iPaper:</strong> MS-SQL i forbindelse med backend-udvikling.</span><span data-lang="en"><strong>iPaper:</strong> MS-SQL as part of backend development.</span></li>
+                      <li><span data-lang="da"><strong>Systemdesign:</strong> Datatænkning, relationer, queries og kobling mellem applikation og database.</span><span data-lang="en"><strong>System design:</strong> Data thinking, relations, queries and application/database integration.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="rag">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>RAG</h3>
+                    <p data-lang="da">Jeg har arbejdet med RAG som koncept i AI-systemer, hvor NPC'er og dialogsystemer skal kunne hente relevant viden, kontekst og hukommelse frem, før de svarer.</p>
+                    <p data-lang="en">I have worked with RAG as a concept in AI systems where NPCs and dialogue systems need to retrieve relevant knowledge, context and memory before responding.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>AI-dialog:</strong> Brug af kontekst, memory og semantisk relevans i NPC-svar.</span><span data-lang="en"><strong>AI dialogue:</strong> Use of context, memory and semantic relevance in NPC responses.</span></li>
+                      <li><span data-lang="da"><strong>Systemarkitektur:</strong> Strukturering af information, retrieval og prompt-opbygning.</span><span data-lang="en"><strong>System architecture:</strong> Structuring information, retrieval and prompt construction.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="llm">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>LLM Integration</h3>
+                    <p data-lang="da">Jeg har brugt LLM-integration i AI/NPC-pipelines, hvor tale, persona, kontekst, relationer, memory og handlingstags kobles sammen til spilbar dialog og adfærd.</p>
+                    <p data-lang="en">I have used LLM integration in AI/NPC pipelines where speech, persona, context, relationships, memory and action tags are connected into playable dialogue and behavior.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>NPC-systemer:</strong> Persona prompts, svar, action tags, sentiment og relationer.</span><span data-lang="en"><strong>NPC systems:</strong> Persona prompts, responses, action tags, sentiment and relationships.</span></li>
+                      <li><span data-lang="da"><strong>Pipeline:</strong> STT, LLM-svar, evaluering, memory summary og TTS.</span><span data-lang="en"><strong>Pipeline:</strong> STT, LLM response, evaluation, memory summary and TTS.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="npc">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>NPC Behavior</h3>
+                    <p data-lang="da">Jeg har brugt NPC-adfærd i Unity til planlægning, behov, awareness, interaktioner, opgaver, quests og AI-dialog. Det handler både om spilmekanik og systemdesign.</p>
+                    <p data-lang="en">I have used NPC behavior in Unity for planning, needs, awareness, interactions, tasks, quests and AI dialogue. It combines gameplay mechanics and system design.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Planer:</strong> NPC plan controllers, needs, senses og jobvalg.</span><span data-lang="en"><strong>Plans:</strong> NPC plan controllers, needs, senses and job selection.</span></li>
+                      <li><span data-lang="da"><strong>Dialog:</strong> AI-baseret samtale og reaktioner på spillerens handlinger.</span><span data-lang="en"><strong>Dialogue:</strong> AI-based conversation and reactions to player actions.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="object-pooling">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>Object Pooling</h3>
+                    <p data-lang="da">Jeg har brugt object pooling i Unity til at undgå unødvendige instantiations, forbedre performance og håndtere gentagne objekter i gameplay og netværkssystemer.</p>
+                    <p data-lang="en">I have used object pooling in Unity to avoid unnecessary instantiation, improve performance and handle repeated objects in gameplay and network systems.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Unity:</strong> Pooled objects, genbrug af prefabs og runtime performance.</span><span data-lang="en"><strong>Unity:</strong> Pooled objects, prefab reuse and runtime performance.</span></li>
+                      <li><span data-lang="da"><strong>Netværk:</strong> Pooled network objects og serverstyret spawner-logik.</span><span data-lang="en"><strong>Networking:</strong> Pooled network objects and server-controlled spawner logic.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="save-load">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>Save / Load</h3>
+                    <p data-lang="da">Jeg har bygget save/load-systemer i Unity med serialisering af positioner, inventories, pawns, construction, ressourcer og game state.</p>
+                    <p data-lang="en">I have built save/load systems in Unity with serialization of positions, inventories, pawns, construction, resources and game state.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Game state:</strong> ISaveable, JSON-data, transforms, inventory og entities.</span><span data-lang="en"><strong>Game state:</strong> ISaveable, JSON data, transforms, inventory and entities.</span></li>
+                      <li><span data-lang="da"><strong>Robusthed:</strong> Debugging af load-flow, manglende referencer og datarekonstruktion.</span><span data-lang="en"><strong>Robustness:</strong> Debugging load flow, missing references and data reconstruction.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="netcode">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>Netcode</h3>
+                    <p data-lang="da">Jeg har brugt Unity Netcode og netværkslogik til multiplayer-relaterede systemer, serverautoritet, network variables, RPC'er og synkronisering.</p>
+                    <p data-lang="en">I have used Unity Netcode and networking logic for multiplayer-related systems, server authority, network variables, RPCs and synchronization.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>VR/prototyper:</strong> Multiplayer-struktur og synkronisering af objekter.</span><span data-lang="en"><strong>VR/prototypes:</strong> Multiplayer structure and object synchronization.</span></li>
+                      <li><span data-lang="da"><strong>Systems:</strong> NetworkVariables, ServerRpc, pooled network objects og serverstyret state.</span><span data-lang="en"><strong>Systems:</strong> NetworkVariables, ServerRpc, pooled network objects and server-controlled state.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="grasshopper">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>Grasshopper</h3>
+                    <p data-lang="da">Jeg har brugt Grasshopper til parametrisk programmering og visuel modellering, hvor geometri, regler og data kobles sammen i tekniske modeller.</p>
+                    <p data-lang="en">I have used Grasshopper for parametric programming and visual modelling where geometry, rules and data are connected in technical models.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Byggeri:</strong> Parametrisk tænkning, geometri og teknisk modellering.</span><span data-lang="en"><strong>Construction:</strong> Parametric thinking, geometry and technical modelling.</span></li>
+                      <li><span data-lang="da"><strong>Systemer:</strong> Regelbaseret opbygning af modeller og dataflow.</span><span data-lang="en"><strong>Systems:</strong> Rule-based model building and data flow.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="matlab">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>MATLAB</h3>
+                    <p data-lang="da">Jeg har brugt MATLAB i ingeniørarbejde, numeriske metoder, analyse, FEM-relaterede opgaver og tekniske beregninger.</p>
+                    <p data-lang="en">I have used MATLAB in engineering work, numerical methods, analysis, FEM-related tasks and technical calculations.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Uddannelse:</strong> Numerisk analyse, beregning og computational engineering.</span><span data-lang="en"><strong>Education:</strong> Numerical analysis, computation and computational engineering.</span></li>
+                      <li><span data-lang="da"><strong>Byggeri:</strong> Analyse og teknisk problemløsning i konstruktionsrelaterede opgaver.</span><span data-lang="en"><strong>Construction:</strong> Analysis and technical problem solving in structural tasks.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="revit">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>Revit</h3>
+                    <p data-lang="da">Jeg har brugt Revit i byggebranchen til modellering, koordinering, dokumentation og forståelse af konstruktionsprojekter.</p>
+                    <p data-lang="en">I have used Revit in the construction sector for modelling, coordination, documentation and understanding structural projects.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Rådgivning:</strong> Projektering og teknisk dokumentation.</span><span data-lang="en"><strong>Consulting:</strong> Project design and technical documentation.</span></li>
+                      <li><span data-lang="da"><strong>Modeller:</strong> Sammenhæng mellem geometri, konstruktion og projektinformation.</span><span data-lang="en"><strong>Models:</strong> Connection between geometry, structure and project information.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="autocad">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>AutoCAD</h3>
+                    <p data-lang="da">Jeg har brugt AutoCAD til teknisk tegning, dokumentation og klassisk ingeniørarbejde, særligt i forbindelse med projektering og konstruktioner.</p>
+                    <p data-lang="en">I have used AutoCAD for technical drawing, documentation and classical engineering work, especially in connection with design work and structures.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Byggeri:</strong> Tegningsforståelse, projektdokumentation og koordinering.</span><span data-lang="en"><strong>Construction:</strong> Drawing comprehension, project documentation and coordination.</span></li>
+                      <li><span data-lang="da"><strong>Konstruktion:</strong> Arbejde med tekniske detaljer og præcis geometri.</span><span data-lang="en"><strong>Structures:</strong> Work with technical details and precise geometry.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="blender">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>Blender</h3>
+                    <p data-lang="da">Jeg har brugt Blender til visuelle koncepter, 3D-arbejde, asset-tænkning og kreativ produktion i forbindelse med spil og portfolio.</p>
+                    <p data-lang="en">I have used Blender for visual concepts, 3D work, asset thinking and creative production in connection with games and portfolio work.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Spil:</strong> Low-poly stil, asset-forståelse og visuel retning.</span><span data-lang="en"><strong>Games:</strong> Low-poly style, asset understanding and visual direction.</span></li>
+                      <li><span data-lang="da"><strong>Kreativt arbejde:</strong> 3D-form, visualisering og prototyping.</span><span data-lang="en"><strong>Creative work:</strong> 3D form, visualization and prototyping.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="photoshop">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>Photoshop</h3>
+                    <p data-lang="da">Jeg har brugt Photoshop til billedredigering, visuelle koncepter, portfolio-materiale, spilpræsentationer og grafisk polish.</p>
+                    <p data-lang="en">I have used Photoshop for image editing, visual concepts, portfolio material, game presentations and graphical polish.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Portfolio:</strong> Billeder, projektcovers og visuel præsentation.</span><span data-lang="en"><strong>Portfolio:</strong> Images, project covers and visual presentation.</span></li>
+                      <li><span data-lang="da"><strong>Spil:</strong> UI, thumbnails, concepts og billedbaseret iteration.</span><span data-lang="en"><strong>Games:</strong> UI, thumbnails, concepts and image-based iteration.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="terrain-generation">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>Terrain Generation</h3>
+                    <p data-lang="da">Jeg har brugt procedural terrain generation i Unity til dynamiske verdener, chunks, variation, biome-logik og systematisk world building.</p>
+                    <p data-lang="en">I have used procedural terrain generation in Unity for dynamic worlds, chunks, variation, biome logic and systematic world building.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Spil:</strong> Dynamiske chunks, terrænvariation og runtime-generering.</span><span data-lang="en"><strong>Games:</strong> Dynamic chunks, terrain variation and runtime generation.</span></li>
+                      <li><span data-lang="da"><strong>World building:</strong> Kobling mellem teknisk generation og spillets visuelle identitet.</span><span data-lang="en"><strong>World building:</strong> Connection between technical generation and the game's visual identity.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="layered-noise">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>Layered Noise</h3>
+                    <p data-lang="da">Jeg har brugt lagdelte noise-funktioner til terræn, variation, naturlige former og procedural generation, hvor flere skalaer kombineres til mere organisk output.</p>
+                    <p data-lang="en">I have used layered noise functions for terrain, variation, natural forms and procedural generation, where multiple scales are combined into more organic output.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Terrain:</strong> Højdevariation, formvariation, biome-overgange og detaljer.</span><span data-lang="en"><strong>Terrain:</strong> Height variation, shape variation, biome transitions and details.</span></li>
+                      <li><span data-lang="da"><strong>Procedural systems:</strong> Kontrolleret randomness med justerbare parametre.</span><span data-lang="en"><strong>Procedural systems:</strong> Controlled randomness with adjustable parameters.</span></li>
+                    </ul>
+                  </article>
+
+                  <article class="skill-detail-card" data-skill-detail="system-architecture">
+                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                    <h3>System Architecture</h3>
+                    <p data-lang="da">Jeg har brugt systemarkitektur i større Unity- og backend-systemer, hvor mange subsystemer skal spille sammen uden at blive ufleksible eller svære at debugge.</p>
+                    <p data-lang="en">I have used system architecture in larger Unity and backend systems where many subsystems need to work together without becoming inflexible or hard to debug.</p>
+                    <ul class="skill-detail-list">
+                      <li><span data-lang="da"><strong>Unity:</strong> NPC, quests, save/load, construction, inventory, interactions og AI-pipelines.</span><span data-lang="en"><strong>Unity:</strong> NPCs, quests, save/load, construction, inventory, interactions and AI pipelines.</span></li>
+                      <li><span data-lang="da"><strong>Engineering mindset:</strong> Struktur, interfaces, dataflow, debugging og langsigtet vedligeholdelse.</span><span data-lang="en"><strong>Engineering mindset:</strong> Structure, interfaces, data flow, debugging and long-term maintainability.</span></li>
+                    </ul>
+                  </article>
+                </div>
               </div>
             </div>
           </div>
@@ -1250,10 +1705,10 @@
                 <span class="contact-link-text">+45 4096 4274</span>
               </a>
 
-              <div class="contact-link">
+              <a class="contact-link" href="https://www.google.com/maps/search/?api=1&query=8260%20Viby%20J%2C%20Denmark" target="_blank" rel="noreferrer">
                 <img class="contact-icon" src="assets/images/contact-location.png" alt="Location icon" />
                 <span class="contact-link-text"><span data-lang="da">8260 Viby J</span><span data-lang="en">8260 Viby J, Denmark</span></span>
-              </div>
+              </a>
 
               <a class="contact-link" href="https://www.linkedin.com/in/mikaelwendt" target="_blank" rel="noreferrer">
                 <img class="contact-icon" src="assets/images/contact-linkedin.png" alt="LinkedIn icon" />
@@ -1271,6 +1726,16 @@
     </main>
   </div>
 
+
+  <div class="project-modal" id="project-modal" hidden aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="project-modal-title">
+    <div class="project-modal-panel" role="document">
+      <button class="project-modal-close" type="button" data-close-project-modal aria-label="Close project popup">×</button>
+      <p class="project-modal-kicker"><span data-lang="da">Projekt</span><span data-lang="en">Project</span></p>
+      <h2 class="project-modal-title" id="project-modal-title"></h2>
+      <div class="project-modal-body" id="project-modal-body"></div>
+    </div>
+  </div>
+
   <footer>
     <div class="shell footer-inner">
       <strong>© <span id="year"></span> Mikael Wendt</strong>
@@ -1284,6 +1749,58 @@
     const panels = document.querySelectorAll('[data-panel]');
     const sectionLinks = document.querySelectorAll('[data-section-link]');
     const tabJumpLinks = document.querySelectorAll('[data-tab-jump]');
+    const skillButtons = document.querySelectorAll('[data-skill]');
+    const skillDetails = document.querySelectorAll('[data-skill-detail]');
+    const projectModal = document.getElementById('project-modal');
+    const projectModalTitle = document.getElementById('project-modal-title');
+    const projectModalBody = document.getElementById('project-modal-body');
+    const projectModalTriggers = document.querySelectorAll('[data-project-modal]');
+    const projectModalCloseButtons = document.querySelectorAll('[data-close-project-modal]');
+    let activeProjectModalKey = null;
+
+
+
+    const projectModalContent = {
+      'clown-wars': {
+        title: 'Clown Wars',
+        body: `
+          <p data-lang="da">Clown Wars er en VR-prototype inspireret af Worms World Party, men bygget omkring klovne, slapstick-vold og en halv cartoony / halv horror low-poly stil.</p>
+          <p data-lang="en">Clown Wars is a VR prototype inspired by Worms World Party, but rebuilt around clowns, slapstick violence and a half cartoony / half horror low-poly style.</p>
+          <ul class="project-modal-list">
+            <li><span data-lang="da"><strong>Gameplay:</strong> Turbaseret kamp, hvor spilleren skal udslette modstanderens klovne.</span><span data-lang="en"><strong>Gameplay:</strong> Turn-based combat where the player has to wipe out the opposing clowns.</span></li>
+            <li><span data-lang="da"><strong>Våben:</strong> Maskinpistol, shotgun, handgun, molotov, baseballbat, bazooka, granat og en boxing-glove blaster.</span><span data-lang="en"><strong>Weapons:</strong> SMG, shotgun, handgun, molotov, baseball bat, bazooka, grenade and a boxing-glove blaster.</span></li>
+            <li><span data-lang="da"><strong>Teknik:</strong> Ragdoll-effekter, destruerbart environment og VR-interaktioner.</span><span data-lang="en"><strong>Tech:</strong> Ragdoll effects, destructible environments and VR interactions.</span></li>
+            <li><span data-lang="da"><strong>Performance:</strong> Optimeret med fokus på on-device kørsel på Oculus / Meta Quest 2.</span><span data-lang="en"><strong>Performance:</strong> Optimized with focus on on-device execution on Oculus / Meta Quest 2.</span></li>
+          </ul>
+        `
+      },
+      'super-godnathistorie': {
+        title: 'Super Godnathistorie',
+        body: `
+          <p data-lang="da">Super Godnathistorie er et kreativt AI-projekt til personlige børnebøger og godnathistorier.</p>
+          <p data-lang="en">Super Godnathistorie is a creative AI project for personalized children’s books and bedtime stories.</p>
+          <ul class="project-modal-list">
+            <li><span data-lang="da"><strong>Workflow:</strong> Brugeren uploadede billeder, som blev brugt som grundlag for en personlig visuel stil.</span><span data-lang="en"><strong>Workflow:</strong> The user uploaded images that were used as the basis for a personalized visual style.</span></li>
+            <li><span data-lang="da"><strong>AI-billeder:</strong> Stable Diffusion blev brugt til billedgenerering.</span><span data-lang="en"><strong>AI images:</strong> Stable Diffusion was used for image generation.</span></li>
+            <li><span data-lang="da"><strong>LoRA:</strong> En LoRA blev trænet på de uploadede billeder for at kunne generere mere konsistente figurer og illustrationer.</span><span data-lang="en"><strong>LoRA:</strong> A LoRA was trained on the uploaded images to generate more consistent characters and illustrations.</span></li>
+            <li><span data-lang="da"><strong>ComfyUI:</strong> Projektet brugte ComfyUI til at bygge og styre pipeline for billedgenerering.</span><span data-lang="en"><strong>ComfyUI:</strong> The project used ComfyUI to build and control the image-generation pipeline.</span></li>
+          </ul>
+        `
+      },
+      'machine-learning': {
+        title: 'Machine Learning / Thesis',
+        body: `
+          <p data-lang="da">Mit speciale lå i computational engineering og handlede om at bruge convolutional neural networks til tekniske beregninger i forbindelse med topologioptimering af 2D-strukturer.</p>
+          <p data-lang="en">My thesis was in computational engineering and focused on using convolutional neural networks for technical calculations related to topology optimization of 2D structures.</p>
+          <ul class="project-modal-list">
+            <li><span data-lang="da"><strong>Problem:</strong> Klassiske numeriske beregninger kan være tunge, især når mange geometrier eller designvariationer skal vurderes.</span><span data-lang="en"><strong>Problem:</strong> Classical numerical calculations can be heavy, especially when many geometries or design variations must be evaluated.</span></li>
+            <li><span data-lang="da"><strong>Løsning:</strong> CNN-model trænet til at estimere tekniske felter og resultater langt hurtigere end den klassiske beregningsvej.</span><span data-lang="en"><strong>Solution:</strong> A CNN model trained to estimate technical fields and results much faster than the classical calculation path.</span></li>
+            <li><span data-lang="da"><strong>Stack:</strong> Python, TensorFlow/Keras, dataanalyse, numeriske metoder og validering mod strukturelle beregninger.</span><span data-lang="en"><strong>Stack:</strong> Python, TensorFlow/Keras, data analysis, numerical methods and validation against structural calculations.</span></li>
+            <li><span data-lang="da"><strong>Resultat:</strong> Fokus på markant acceleration af beregningsprocessen uden at miste den tekniske forståelse af problemet.</span><span data-lang="en"><strong>Result:</strong> Focused on strongly accelerating the calculation process without losing the technical understanding of the problem.</span></li>
+          </ul>
+        `
+      }
+    };
 
     const languageMeta = {
       da: {
@@ -1590,6 +2107,10 @@ phrases: {
 
       typewriterHero.setLanguage(lang);
       localStorage.setItem('portfolio-lang', lang);
+
+      if (activeProjectModalKey) {
+        renderProjectModalContent(activeProjectModalKey);
+      }
     }
 
     function setTab(tabName) {
@@ -1604,12 +2125,82 @@ phrases: {
       });
     }
 
+    function setSkill(skillName) {
+      skillButtons.forEach(button => {
+        const active = button.dataset.skill === skillName;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
+      });
+
+      skillDetails.forEach(detail => {
+        detail.classList.toggle('active', detail.dataset.skillDetail === skillName);
+      });
+    }
+
+    function renderProjectModalContent(projectKey) {
+      const content = projectModalContent[projectKey];
+      if (!content || !projectModalTitle || !projectModalBody) return;
+
+      projectModalTitle.textContent = content.title;
+      projectModalBody.innerHTML = content.body;
+    }
+
+    function openProjectModal(projectKey) {
+      if (!projectModal || !projectModalContent[projectKey]) return;
+
+      activeProjectModalKey = projectKey;
+      renderProjectModalContent(projectKey);
+      projectModal.hidden = false;
+      projectModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+
+      const closeButton = projectModal.querySelector('[data-close-project-modal]');
+      if (closeButton) {
+        closeButton.focus();
+      }
+    }
+
+    function closeProjectModal() {
+      if (!projectModal) return;
+
+      projectModal.hidden = true;
+      projectModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      activeProjectModalKey = null;
+    }
+
     langButtons.forEach(button => {
       button.addEventListener('click', () => setLanguage(button.dataset.setLang));
     });
 
     tabs.forEach(tab => {
       tab.addEventListener('click', () => setTab(tab.dataset.tab));
+    });
+
+    skillButtons.forEach(button => {
+      button.addEventListener('click', () => setSkill(button.dataset.skill));
+    });
+
+    projectModalTriggers.forEach(trigger => {
+      trigger.addEventListener('click', () => openProjectModal(trigger.dataset.projectModal));
+    });
+
+    projectModalCloseButtons.forEach(button => {
+      button.addEventListener('click', closeProjectModal);
+    });
+
+    if (projectModal) {
+      projectModal.addEventListener('click', event => {
+        if (event.target === projectModal) {
+          closeProjectModal();
+        }
+      });
+    }
+
+    window.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && projectModal && !projectModal.hidden) {
+        closeProjectModal();
+      }
     });
 
     tabJumpLinks.forEach(link => {
@@ -1641,6 +2232,7 @@ phrases: {
 
     const savedLang = localStorage.getItem('portfolio-lang');
     setLanguage(savedLang === 'da' ? 'da' : 'en');
+    setSkill('csharp');
     pixelAvatarBlinker.start();
   </script>
 </body>
