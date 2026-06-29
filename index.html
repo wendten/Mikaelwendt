@@ -724,15 +724,33 @@
       font-size: 14px;
     }
 
+    .certificate-list {
+      display: grid;
+      gap: 8px;
+      margin: 10px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .certificate-list li {
+      padding-left: 2px;
+    }
+
     .skill-explorer {
       display: grid;
-      grid-template-columns: minmax(260px, .85fr) minmax(0, 1.15fr);
+      grid-template-columns: 1fr;
       gap: 18px;
       align-items: stretch;
+      width: 100%;
+      max-width: 100%;
     }
 
     .skill-selector-card,
     .skill-detail-card {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
       border: 1px solid var(--line);
       border-radius: 18px;
       background: rgba(13, 24, 42, .76);
@@ -753,10 +771,81 @@
       font-size: 14px;
     }
 
+    .skill-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      width: 100%;
+      max-width: 100%;
+      margin-top: 18px;
+      padding: 10px;
+      border: 1px solid rgba(118, 179, 255, .14);
+      border-radius: 16px;
+      background: rgba(5, 11, 20, .32);
+    }
+
+    .skill-filter {
+      --cat-rgb: 118, 179, 255;
+      max-width: 100%;
+      border: 1px solid rgba(var(--cat-rgb), .42);
+      cursor: pointer;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(var(--cat-rgb), .10);
+      color: #d9eaff;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.1;
+      overflow-wrap: anywhere;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, color .16s ease;
+    }
+
+    .skill-filter:hover,
+    .skill-filter.active {
+      transform: translateY(-1px);
+      border-color: rgba(var(--cat-rgb), .82);
+      background: rgba(var(--cat-rgb), .22);
+      color: #fff;
+    }
+
+    .skill-filter.active {
+      box-shadow: 0 0 0 4px rgba(var(--cat-rgb), .10);
+    }
+
+    .skill-category-note {
+      margin: 12px 0 0;
+      color: var(--muted-2);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .skill-control-section {
+      display: grid;
+      gap: 10px;
+    }
+
+    .skill-control-section + .skill-control-section {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(118, 179, 255, .14);
+    }
+
+    .skill-control-title {
+      margin: 0;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
     .skills-grid {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
+      width: 100%;
+      max-width: 100%;
       margin-top: 18px;
     }
 
@@ -772,44 +861,80 @@
     }
 
     .skill {
+      --cat-rgb: 118, 179, 255;
+      max-width: 100%;
       cursor: pointer;
       font: inherit;
       line-height: 1.1;
       text-align: left;
-      transition: transform .16s ease, border-color .16s ease, background .16s ease, color .16s ease;
+      overflow-wrap: anywhere;
+      border-color: rgba(var(--cat-rgb), .42);
+      background: rgba(var(--cat-rgb), .12);
+      color: #dbeaff;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease, color .16s ease, opacity .16s ease;
     }
 
     .skill:hover,
     .skill.active {
       transform: translateY(-1px);
-      border-color: rgba(118, 179, 255, .72);
-      background: rgba(47, 125, 246, .28);
+      border-color: rgba(var(--cat-rgb), .78);
+      background: rgba(var(--cat-rgb), .25);
       color: #fff;
     }
 
     .skill.active {
-      box-shadow: 0 0 0 4px rgba(47, 125, 246, .10);
+      box-shadow: 0 0 0 4px rgba(var(--cat-rgb), .10);
     }
+
+    .skill.hidden-by-filter {
+      display: none;
+    }
+
+    .category-all { --cat-rgb: 118, 179, 255; }
+    .category-programming { --cat-rgb: 118, 179, 255; }
+    .category-coding { --cat-rgb: 118, 179, 255; }
+    .category-game { --cat-rgb: 73, 216, 255; }
+    .category-ai { --cat-rgb: 177, 126, 255; }
+    .category-engineering { --cat-rgb: 255, 185, 96; }
+    .category-other { --cat-rgb: 196, 214, 255; }
 
     .skill-details {
       min-width: 0;
     }
 
     .skill-detail-card {
-      display: none;
-      min-height: 100%;
+      min-height: 0;
     }
 
-    .skill-detail-card.active {
-      display: block;
+    .skill-detail-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 10px;
     }
 
     .skill-detail-label {
-      margin: 0 0 8px !important;
+      margin: 0 !important;
       color: var(--blue-2) !important;
       font-size: 12px !important;
       font-weight: 900;
       letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .skill-detail-category {
+      --cat-rgb: 118, 179, 255;
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(var(--cat-rgb), .42);
+      background: rgba(var(--cat-rgb), .14);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
       text-transform: uppercase;
     }
 
@@ -1044,6 +1169,25 @@
       gap: 14px;
       color: var(--muted);
       font-size: 16px;
+    }
+
+    .project-modal-hero {
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid rgba(118, 179, 255, .22);
+      border-radius: 22px;
+      background: #07111f;
+      box-shadow: 0 18px 48px rgba(0,0,0,.28);
+      margin-bottom: 6px;      
+      transform: translateX(-40px);
+    }
+
+    .project-modal-hero img {
+      width: 100%;
+      height: min(340px, 38vh);
+      object-fit: cover;
+      transform: scale(1.02);
+
     }
 
     .project-modal-body p {
@@ -1313,12 +1457,14 @@
             <div class="tab-panel" id="panel-software" role="tabpanel" data-panel="software">
               <ol class="timeline">
                 <li class="timeline-item">
-                  <div class="time">2019 - <span data-lang="da">nu</span><span data-lang="en">now</span></div>
+                  <div class="time">
+		    <span data-lang="da">7 år</span>
+		    <span data-lang="en">7 years</span></div>
                   <div class="timeline-card">
                     <h3><span data-lang="da">Indie udvikler / game developer</span><span data-lang="en">Indie Developer / Game Developer</span></h3>
                     <div class="where"><span data-lang="da">Selvstændig · ca. 7 år</span><span data-lang="en">Independent · approx. 7 years</span></div>
-                    <p data-lang="da">C#, Unity, gameplay-arkitektur, NPC-adfærd, AI-dialog, save/load, netværk, procedural generation, editor tools, dataflow, debugging og større systemarkitektur.</p>
-                    <p data-lang="en">C#, Unity, gameplay architecture, NPC behavior, AI dialogue, save/load, networking, procedural generation, editor tools, data flow, debugging and larger system architecture.</p>
+                    <p data-lang="da">C#, Unity, gameplay-arkitektur, NPC-adfærd, AI-dialog, save/load, netværk, procedural generation, editor tools og dataflow.</p>
+                    <p data-lang="en">C#, Unity, gameplay architecture, NPC behavior, AI dialogue, save/load, networking, procedural generation, editor tools and data flow.</p>
                   </div>
                 </li>
                 <li class="timeline-item">
@@ -1336,21 +1482,30 @@
             <div class="tab-panel" id="panel-education" role="tabpanel" data-panel="education">
               <ol class="timeline">
                 <li class="timeline-item">
-                  <div class="time">2019</div>
+                  <div class="time">
+                    <span data-lang="da">Kandidat</span>
+                    <span data-lang="en">Master</span>
+		  </div>
                   <div class="timeline-card">
-                    <h3><span data-lang="da">Civilingeniør - Civil and Architectural Engineering</span><span data-lang="en">MSc - Civil and Architectural Engineering</span></h3>
+                    <h3>
+                      <span data-lang="da">Kandidatuddannelse - Civil and Architectural Engineering</span>
+                      <span data-lang="en">Master of Science - Civil and Architectural Engineering</span>
+                    </h3>
                     <div class="where"><span data-lang="da">Aarhus Universitet</span><span data-lang="en">Aarhus University</span></div>
-                    <p data-lang="da">Speciale i computational engineering med fokus på numeriske metoder, optimering, matematik og teknisk modellering. Thesis om convolutional neural networks til topologioptimering af strukturer.</p>
-                    <p data-lang="en">Specialized in computational engineering with focus on numerical methods, optimization, mathematics and technical modelling. Thesis on convolutional neural networks for topology optimization of structures.</p>
+                    <p data-lang="da">Specialisering i computational engineering med fokus på numeriske metoder, optimering, matematik og teknisk modellering. Kandidatspeciale om convolutional neural networks til topologioptimering af konstruktioner.</p>
+                    <p data-lang="en">Specialized in computational engineering with focus on numerical methods, optimization, mathematics and technical modelling. Master's thesis on convolutional neural networks for topology optimization of structures.</p>
                   </div>
                 </li>
                 <li class="timeline-item">
-                  <div class="time">Bachelor</div>
+                  <div class="time"><span data-lang="da">Bachelor</span><span data-lang="en">Bachelor</span></div>
                   <div class="timeline-card">
-                    <h3><span data-lang="da">Diplomingeniør Byggeteknik - Bærende konstruktioner</span><span data-lang="en">BEng Civil Engineering - Structural Design</span></h3>
+                    <h3>
+                      <span data-lang="da">Diplomingeniør i byggeteknik - Bærende konstruktioner</span>
+                      <span data-lang="en">Bachelor of Engineering - Civil Engineering, Structural Design</span>
+                    </h3>
                     <div class="where"><span data-lang="da">Aarhus Ingeniørhøjskole</span><span data-lang="en">Aarhus School of Engineering</span></div>
-                    <p data-lang="da">Uddannelse med fokus på konstruktioner, beregninger, statik, projektering og teknisk dokumentation.</p>
-                    <p data-lang="en">Education focused on structures, calculations, statics, design work and technical documentation.</p>
+                    <p data-lang="da">Uddannelse med fokus på bærende konstruktioner, beregninger, statik, projektering og teknisk dokumentation.</p>
+                    <p data-lang="en">Education focused on structural design, calculations, statics, design work and technical documentation.</p>
                   </div>
                 </li>
                 <li class="timeline-item">
@@ -1358,8 +1513,13 @@
                   <div class="timeline-card">
                     <h3><span data-lang="da">Efteruddannelse og certificeringer</span><span data-lang="en">Further training and certifications</span></h3>
                     <div class="where">AI / ML / Python / C#</div>
-                    <p data-lang="da">AI-900 Microsoft Azure AI Fundamentals · Coursera / Stanford University Machine Learning · Itucation Python Programming, Advanced · Erhvervsakademi Dania Videregående programmering i C# med karakteren 12 · Mensa Danmark IQ-testscore 135+.</p>
-                    <p data-lang="en">AI-900 Microsoft Azure AI Fundamentals · Coursera / Stanford University Machine Learning · Itucation Python Programming, Advanced · Erhvervsakademi Dania Advanced Programming in C# with grade 12 · Mensa Denmark IQ test score 135+.</p>
+                    <ul class="certificate-list">
+                      <li>AI-900 Microsoft Azure AI Fundamentals</li>
+                      <li><span data-lang="da">Coursera / Stanford University Machine Learning</span><span data-lang="en">Coursera / Stanford University Machine Learning</span></li>
+                      <li><span data-lang="da">Itucation Python Programming, Advanced</span><span data-lang="en">Itucation Python Programming, Advanced</span></li>
+                      <li><span data-lang="da">Erhvervsakademi Dania - Videregående programmering i C# med karakteren 12</span><span data-lang="en">Erhvervsakademi Dania - Advanced Programming in C# with grade 12</span></li>
+                      <li><span data-lang="da">Mensa Danmark IQ-testscore 135+</span><span data-lang="en">Mensa Denmark IQ test score 135+</span></li>
+                    </ul>
                   </div>
                 </li>
               </ol>
@@ -1367,267 +1527,103 @@
 
             <div class="tab-panel" id="panel-skills" role="tabpanel" data-panel="skills">
               <div class="skill-explorer" aria-label="Clickable skill details">
-                <div class="skill-selector-card">
-                  <h3><span data-lang="da">Færdigheder</span><span data-lang="en">Skills</span></h3>
-                  <p class="skill-selector-intro" data-lang="da">Klik på en færdighed for at se, hvor jeg har brugt den i projekter, arbejde eller uddannelse.</p>
-                  <p class="skill-selector-intro" data-lang="en">Click a skill to see where I have used it in projects, work or education.</p>
-
-                  <div class="skills-grid" aria-label="Skill keywords">
-                    <button class="skill active" type="button" data-skill="csharp" aria-pressed="true">C#</button>
-                    <button class="skill" type="button" data-skill="dotnet" aria-pressed="false">.NET / MVC</button>
-                    <button class="skill" type="button" data-skill="unity" aria-pressed="false">Unity</button>
-                    <button class="skill" type="button" data-skill="python" aria-pressed="false">Python</button>
-                    <button class="skill" type="button" data-skill="tensorflow" aria-pressed="false">TensorFlow / Keras</button>
-                    <button class="skill" type="button" data-skill="sql" aria-pressed="false">SQL / MS-SQL</button>
-                    <button class="skill" type="button" data-skill="rag" aria-pressed="false">RAG</button>
-                    <button class="skill" type="button" data-skill="llm" aria-pressed="false">LLM Integration</button>
-                    <button class="skill" type="button" data-skill="npc" aria-pressed="false">NPC Behavior</button>
-                    <button class="skill" type="button" data-skill="object-pooling" aria-pressed="false">Object Pooling</button>
-                    <button class="skill" type="button" data-skill="save-load" aria-pressed="false">Save / Load</button>
-                    <button class="skill" type="button" data-skill="netcode" aria-pressed="false">Netcode</button>
-                    <button class="skill" type="button" data-skill="grasshopper" aria-pressed="false">Grasshopper</button>
-                    <button class="skill" type="button" data-skill="matlab" aria-pressed="false">MATLAB</button>
-                    <button class="skill" type="button" data-skill="revit" aria-pressed="false">Revit</button>
-                    <button class="skill" type="button" data-skill="autocad" aria-pressed="false">AutoCAD</button>
-                    <button class="skill" type="button" data-skill="blender" aria-pressed="false">Blender</button>
-                    <button class="skill" type="button" data-skill="photoshop" aria-pressed="false">Photoshop</button>
-                    <button class="skill" type="button" data-skill="terrain-generation" aria-pressed="false">Terrain Generation</button>
-                    <button class="skill" type="button" data-skill="layered-noise" aria-pressed="false">Layered Noise</button>
-                    <button class="skill" type="button" data-skill="system-architecture" aria-pressed="false">System Architecture</button>
-                  </div>
+                <div class="skill-details" aria-live="polite">
+                  <article class="skill-detail-card" id="skill-detail-card">
+                    <div class="skill-detail-meta">
+                      <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
+                      <span class="skill-detail-category category-programming" id="skill-detail-category"><span data-lang="da">Programming & Web</span><span data-lang="en">Programming & Web</span></span>
+                    </div>
+                    <h3 id="skill-detail-title">C#</h3>
+                    <p id="skill-detail-text-da" data-lang="da">C# er mit primære programmeringssprog og er brugt i både Unity, backend, tooling og AI-integrationer.</p>
+                    <p id="skill-detail-text-en" data-lang="en">C# is my main programming language and has been used in Unity, backend work, tooling and AI integrations.</p>
+                    <ul class="skill-detail-list" id="skill-detail-list"></ul>
+                  </article>
                 </div>
 
-                <div class="skill-details" aria-live="polite">
-                  <article class="skill-detail-card active" data-skill-detail="csharp">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>C#</h3>
-                    <p data-lang="da">C# er mit primære udviklingssprog. Jeg har brugt det i Unity-projekter, backend-udvikling, gameplay-systemer, AI-integration, save/load, editor tools og større objektorienterede systemer.</p>
-                    <p data-lang="en">C# is my main development language. I have used it in Unity projects, backend development, gameplay systems, AI integration, save/load, editor tools and larger object-oriented systems.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Spil:</strong> From Scratch, NPC-systemer, interaktioner, construction, inventory og quest-systemer.</span><span data-lang="en"><strong>Games:</strong> From Scratch, NPC systems, interactions, construction, inventory and quest systems.</span></li>
-                      <li><span data-lang="da"><strong>Backend:</strong> C# og MVC i professionelt backend-miljø hos iPaper.</span><span data-lang="en"><strong>Backend:</strong> C# and MVC in a professional backend environment at iPaper.</span></li>
-                    </ul>
-                  </article>
+                <div class="skill-selector-card">
+                  <div class="skill-control-section">
+                    <h3 class="skill-control-title"><span data-lang="da">Kategorier</span><span data-lang="en">Categories</span></h3>
+                  <div class="skill-filter-bar" aria-label="Skill category filters">
+                    <button class="skill-filter category-all active" type="button" data-skill-filter="all" aria-pressed="true"><span data-lang="da">Alle</span><span data-lang="en">All</span></button>
+                    <button class="skill-filter category-programming" type="button" data-skill-filter="programming" aria-pressed="false"><span data-lang="da">Programming &amp; Web</span><span data-lang="en">Programming &amp; Web</span></button>
+                    <button class="skill-filter category-game" type="button" data-skill-filter="game" aria-pressed="false"><span data-lang="da">Spil &amp; Simulation</span><span data-lang="en">Games &amp; Simulation</span></button>
+                    <button class="skill-filter category-ai" type="button" data-skill-filter="ai" aria-pressed="false"><span data-lang="da">AI &amp; Kreative værktøjer</span><span data-lang="en">AI &amp; Creative Tools</span></button>
+                    <button class="skill-filter category-engineering" type="button" data-skill-filter="engineering" aria-pressed="false"><span data-lang="da">Engineering &amp; Byggeri</span><span data-lang="en">Engineering &amp; Construction</span></button>
+                    <button class="skill-filter category-other" type="button" data-skill-filter="other" aria-pressed="false"><span data-lang="da">Andet</span><span data-lang="en">Other</span></button>
+                  </div>
+                  <p class="skill-category-note" data-lang="da">Farverne viser kategori. Klik på en færdighed for at se, hvor den er brugt i projekter, CV, uddannelse eller ingeniørerfaring.</p>
+                  <p class="skill-category-note" data-lang="en">Colors show category. Click a skill to see where it has been used in projects, CV, education or engineering work.</p>
+                  </div>
 
-                  <article class="skill-detail-card" data-skill-detail="dotnet">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>.NET / MVC</h3>
-                    <p data-lang="da">Jeg har brugt .NET og MVC til klassisk backend-udvikling med fokus på datamodeller, controllers, databaseintegration og vedligeholdelig serverlogik.</p>
-                    <p data-lang="en">I have used .NET and MVC for classical backend development with focus on data models, controllers, database integration and maintainable server-side logic.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>iPaper:</strong> Backend-udvikling med C#, MVC-arkitektur og MS-SQL.</span><span data-lang="en"><strong>iPaper:</strong> Backend development with C#, MVC architecture and MS-SQL.</span></li>
-                      <li><span data-lang="da"><strong>Portfolio:</strong> Webstruktur, routing-forståelse og klassisk separation mellem data, logik og præsentation.</span><span data-lang="en"><strong>Portfolio:</strong> Web structure, routing understanding and classical separation between data, logic and presentation.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="unity">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>Unity</h3>
-                    <p data-lang="da">Jeg har brugt Unity som hovedmotor til egne spilprojekter, prototyper, VR, gameplay-systemer, NPC-adfærd, værktøjer, animation, UI og større systemarkitektur.</p>
-                    <p data-lang="en">I have used Unity as the main engine for my own game projects, prototypes, VR, gameplay systems, NPC behavior, tools, animation, UI and larger system architecture.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>From Scratch:</strong> Gameplay, AI, inventory, construction, quests, interaktioner og systemintegration.</span><span data-lang="en"><strong>From Scratch:</strong> Gameplay, AI, inventory, construction, quests, interactions and system integration.</span></li>
-                      <li><span data-lang="da"><strong>VR:</strong> Clown Wars og andre Unity-baserede prototyper.</span><span data-lang="en"><strong>VR:</strong> Clown Wars and other Unity-based prototypes.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="python">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>Python</h3>
-                    <p data-lang="da">Jeg har brugt Python til machine learning, dataanalyse, tekniske eksperimenter, numeriske modeller og automatisering. Det blev især brugt i mit speciale og senere AI/ML-eksperimenter.</p>
-                    <p data-lang="en">I have used Python for machine learning, data analysis, technical experiments, numerical models and automation. It was especially used in my thesis and later AI/ML experiments.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Speciale:</strong> CNN-baseret topologioptimering og dataforarbejdning.</span><span data-lang="en"><strong>Thesis:</strong> CNN-based topology optimization and data preprocessing.</span></li>
-                      <li><span data-lang="da"><strong>ML:</strong> TensorFlow/Keras, datasæt, træning, evaluering og tekniske test.</span><span data-lang="en"><strong>ML:</strong> TensorFlow/Keras, datasets, training, evaluation and technical testing.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="tensorflow">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>TensorFlow / Keras</h3>
-                    <p data-lang="da">Jeg har brugt TensorFlow/Keras til at bygge og træne convolutional neural networks til tekniske beregningsproblemer, især stressfelter og strukturel optimering.</p>
-                    <p data-lang="en">I have used TensorFlow/Keras to build and train convolutional neural networks for technical computation problems, especially stress fields and structural optimization.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Speciale:</strong> CNN-model til hurtig approksimation af 2D-strukturelle beregninger.</span><span data-lang="en"><strong>Thesis:</strong> CNN model for fast approximation of 2D structural calculations.</span></li>
-                      <li><span data-lang="da"><strong>Eksperimenter:</strong> Modeltræning, evaluering, fejlanalyse og optimering.</span><span data-lang="en"><strong>Experiments:</strong> Model training, evaluation, error analysis and optimization.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="sql">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>SQL / MS-SQL</h3>
-                    <p data-lang="da">Jeg har brugt SQL og MS-SQL i backend-arbejde til datamodeller, relationelle strukturer og persistence. Det gav praktisk erfaring med databaser i professionelle systemer.</p>
-                    <p data-lang="en">I have used SQL and MS-SQL in backend work for data models, relational structures and persistence. It gave practical experience with databases in professional systems.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>iPaper:</strong> MS-SQL i forbindelse med backend-udvikling.</span><span data-lang="en"><strong>iPaper:</strong> MS-SQL as part of backend development.</span></li>
-                      <li><span data-lang="da"><strong>Systemdesign:</strong> Datatænkning, relationer, queries og kobling mellem applikation og database.</span><span data-lang="en"><strong>System design:</strong> Data thinking, relations, queries and application/database integration.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="rag">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>RAG</h3>
-                    <p data-lang="da">Jeg har arbejdet med RAG som koncept i AI-systemer, hvor NPC'er og dialogsystemer skal kunne hente relevant viden, kontekst og hukommelse frem, før de svarer.</p>
-                    <p data-lang="en">I have worked with RAG as a concept in AI systems where NPCs and dialogue systems need to retrieve relevant knowledge, context and memory before responding.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>AI-dialog:</strong> Brug af kontekst, memory og semantisk relevans i NPC-svar.</span><span data-lang="en"><strong>AI dialogue:</strong> Use of context, memory and semantic relevance in NPC responses.</span></li>
-                      <li><span data-lang="da"><strong>Systemarkitektur:</strong> Strukturering af information, retrieval og prompt-opbygning.</span><span data-lang="en"><strong>System architecture:</strong> Structuring information, retrieval and prompt construction.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="llm">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>LLM Integration</h3>
-                    <p data-lang="da">Jeg har brugt LLM-integration i AI/NPC-pipelines, hvor tale, persona, kontekst, relationer, memory og handlingstags kobles sammen til spilbar dialog og adfærd.</p>
-                    <p data-lang="en">I have used LLM integration in AI/NPC pipelines where speech, persona, context, relationships, memory and action tags are connected into playable dialogue and behavior.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>NPC-systemer:</strong> Persona prompts, svar, action tags, sentiment og relationer.</span><span data-lang="en"><strong>NPC systems:</strong> Persona prompts, responses, action tags, sentiment and relationships.</span></li>
-                      <li><span data-lang="da"><strong>Pipeline:</strong> STT, LLM-svar, evaluering, memory summary og TTS.</span><span data-lang="en"><strong>Pipeline:</strong> STT, LLM response, evaluation, memory summary and TTS.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="npc">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>NPC Behavior</h3>
-                    <p data-lang="da">Jeg har brugt NPC-adfærd i Unity til planlægning, behov, awareness, interaktioner, opgaver, quests og AI-dialog. Det handler både om spilmekanik og systemdesign.</p>
-                    <p data-lang="en">I have used NPC behavior in Unity for planning, needs, awareness, interactions, tasks, quests and AI dialogue. It combines gameplay mechanics and system design.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Planer:</strong> NPC plan controllers, needs, senses og jobvalg.</span><span data-lang="en"><strong>Plans:</strong> NPC plan controllers, needs, senses and job selection.</span></li>
-                      <li><span data-lang="da"><strong>Dialog:</strong> AI-baseret samtale og reaktioner på spillerens handlinger.</span><span data-lang="en"><strong>Dialogue:</strong> AI-based conversation and reactions to player actions.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="object-pooling">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>Object Pooling</h3>
-                    <p data-lang="da">Jeg har brugt object pooling i Unity til at undgå unødvendige instantiations, forbedre performance og håndtere gentagne objekter i gameplay og netværkssystemer.</p>
-                    <p data-lang="en">I have used object pooling in Unity to avoid unnecessary instantiation, improve performance and handle repeated objects in gameplay and network systems.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Unity:</strong> Pooled objects, genbrug af prefabs og runtime performance.</span><span data-lang="en"><strong>Unity:</strong> Pooled objects, prefab reuse and runtime performance.</span></li>
-                      <li><span data-lang="da"><strong>Netværk:</strong> Pooled network objects og serverstyret spawner-logik.</span><span data-lang="en"><strong>Networking:</strong> Pooled network objects and server-controlled spawner logic.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="save-load">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>Save / Load</h3>
-                    <p data-lang="da">Jeg har bygget save/load-systemer i Unity med serialisering af positioner, inventories, pawns, construction, ressourcer og game state.</p>
-                    <p data-lang="en">I have built save/load systems in Unity with serialization of positions, inventories, pawns, construction, resources and game state.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Game state:</strong> ISaveable, JSON-data, transforms, inventory og entities.</span><span data-lang="en"><strong>Game state:</strong> ISaveable, JSON data, transforms, inventory and entities.</span></li>
-                      <li><span data-lang="da"><strong>Robusthed:</strong> Debugging af load-flow, manglende referencer og datarekonstruktion.</span><span data-lang="en"><strong>Robustness:</strong> Debugging load flow, missing references and data reconstruction.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="netcode">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>Netcode</h3>
-                    <p data-lang="da">Jeg har brugt Unity Netcode og netværkslogik til multiplayer-relaterede systemer, serverautoritet, network variables, RPC'er og synkronisering.</p>
-                    <p data-lang="en">I have used Unity Netcode and networking logic for multiplayer-related systems, server authority, network variables, RPCs and synchronization.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>VR/prototyper:</strong> Multiplayer-struktur og synkronisering af objekter.</span><span data-lang="en"><strong>VR/prototypes:</strong> Multiplayer structure and object synchronization.</span></li>
-                      <li><span data-lang="da"><strong>Systems:</strong> NetworkVariables, ServerRpc, pooled network objects og serverstyret state.</span><span data-lang="en"><strong>Systems:</strong> NetworkVariables, ServerRpc, pooled network objects and server-controlled state.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="grasshopper">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>Grasshopper</h3>
-                    <p data-lang="da">Jeg har brugt Grasshopper til parametrisk programmering og visuel modellering, hvor geometri, regler og data kobles sammen i tekniske modeller.</p>
-                    <p data-lang="en">I have used Grasshopper for parametric programming and visual modelling where geometry, rules and data are connected in technical models.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Byggeri:</strong> Parametrisk tænkning, geometri og teknisk modellering.</span><span data-lang="en"><strong>Construction:</strong> Parametric thinking, geometry and technical modelling.</span></li>
-                      <li><span data-lang="da"><strong>Systemer:</strong> Regelbaseret opbygning af modeller og dataflow.</span><span data-lang="en"><strong>Systems:</strong> Rule-based model building and data flow.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="matlab">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>MATLAB</h3>
-                    <p data-lang="da">Jeg har brugt MATLAB i ingeniørarbejde, numeriske metoder, analyse, FEM-relaterede opgaver og tekniske beregninger.</p>
-                    <p data-lang="en">I have used MATLAB in engineering work, numerical methods, analysis, FEM-related tasks and technical calculations.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Uddannelse:</strong> Numerisk analyse, beregning og computational engineering.</span><span data-lang="en"><strong>Education:</strong> Numerical analysis, computation and computational engineering.</span></li>
-                      <li><span data-lang="da"><strong>Byggeri:</strong> Analyse og teknisk problemløsning i konstruktionsrelaterede opgaver.</span><span data-lang="en"><strong>Construction:</strong> Analysis and technical problem solving in structural tasks.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="revit">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>Revit</h3>
-                    <p data-lang="da">Jeg har brugt Revit i byggebranchen til modellering, koordinering, dokumentation og forståelse af konstruktionsprojekter.</p>
-                    <p data-lang="en">I have used Revit in the construction sector for modelling, coordination, documentation and understanding structural projects.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Rådgivning:</strong> Projektering og teknisk dokumentation.</span><span data-lang="en"><strong>Consulting:</strong> Project design and technical documentation.</span></li>
-                      <li><span data-lang="da"><strong>Modeller:</strong> Sammenhæng mellem geometri, konstruktion og projektinformation.</span><span data-lang="en"><strong>Models:</strong> Connection between geometry, structure and project information.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="autocad">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>AutoCAD</h3>
-                    <p data-lang="da">Jeg har brugt AutoCAD til teknisk tegning, dokumentation og klassisk ingeniørarbejde, særligt i forbindelse med projektering og konstruktioner.</p>
-                    <p data-lang="en">I have used AutoCAD for technical drawing, documentation and classical engineering work, especially in connection with design work and structures.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Byggeri:</strong> Tegningsforståelse, projektdokumentation og koordinering.</span><span data-lang="en"><strong>Construction:</strong> Drawing comprehension, project documentation and coordination.</span></li>
-                      <li><span data-lang="da"><strong>Konstruktion:</strong> Arbejde med tekniske detaljer og præcis geometri.</span><span data-lang="en"><strong>Structures:</strong> Work with technical details and precise geometry.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="blender">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>Blender</h3>
-                    <p data-lang="da">Jeg har brugt Blender til visuelle koncepter, 3D-arbejde, asset-tænkning og kreativ produktion i forbindelse med spil og portfolio.</p>
-                    <p data-lang="en">I have used Blender for visual concepts, 3D work, asset thinking and creative production in connection with games and portfolio work.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Spil:</strong> Low-poly stil, asset-forståelse og visuel retning.</span><span data-lang="en"><strong>Games:</strong> Low-poly style, asset understanding and visual direction.</span></li>
-                      <li><span data-lang="da"><strong>Kreativt arbejde:</strong> 3D-form, visualisering og prototyping.</span><span data-lang="en"><strong>Creative work:</strong> 3D form, visualization and prototyping.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="photoshop">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>Photoshop</h3>
-                    <p data-lang="da">Jeg har brugt Photoshop til billedredigering, visuelle koncepter, portfolio-materiale, spilpræsentationer og grafisk polish.</p>
-                    <p data-lang="en">I have used Photoshop for image editing, visual concepts, portfolio material, game presentations and graphical polish.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Portfolio:</strong> Billeder, projektcovers og visuel præsentation.</span><span data-lang="en"><strong>Portfolio:</strong> Images, project covers and visual presentation.</span></li>
-                      <li><span data-lang="da"><strong>Spil:</strong> UI, thumbnails, concepts og billedbaseret iteration.</span><span data-lang="en"><strong>Games:</strong> UI, thumbnails, concepts and image-based iteration.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="terrain-generation">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>Terrain Generation</h3>
-                    <p data-lang="da">Jeg har brugt procedural terrain generation i Unity til dynamiske verdener, chunks, variation, biome-logik og systematisk world building.</p>
-                    <p data-lang="en">I have used procedural terrain generation in Unity for dynamic worlds, chunks, variation, biome logic and systematic world building.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Spil:</strong> Dynamiske chunks, terrænvariation og runtime-generering.</span><span data-lang="en"><strong>Games:</strong> Dynamic chunks, terrain variation and runtime generation.</span></li>
-                      <li><span data-lang="da"><strong>World building:</strong> Kobling mellem teknisk generation og spillets visuelle identitet.</span><span data-lang="en"><strong>World building:</strong> Connection between technical generation and the game's visual identity.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="layered-noise">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>Layered Noise</h3>
-                    <p data-lang="da">Jeg har brugt lagdelte noise-funktioner til terræn, variation, naturlige former og procedural generation, hvor flere skalaer kombineres til mere organisk output.</p>
-                    <p data-lang="en">I have used layered noise functions for terrain, variation, natural forms and procedural generation, where multiple scales are combined into more organic output.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Terrain:</strong> Højdevariation, formvariation, biome-overgange og detaljer.</span><span data-lang="en"><strong>Terrain:</strong> Height variation, shape variation, biome transitions and details.</span></li>
-                      <li><span data-lang="da"><strong>Procedural systems:</strong> Kontrolleret randomness med justerbare parametre.</span><span data-lang="en"><strong>Procedural systems:</strong> Controlled randomness with adjustable parameters.</span></li>
-                    </ul>
-                  </article>
-
-                  <article class="skill-detail-card" data-skill-detail="system-architecture">
-                    <p class="skill-detail-label"><span data-lang="da">Hvor jeg har brugt det</span><span data-lang="en">Where I have used it</span></p>
-                    <h3>System Architecture</h3>
-                    <p data-lang="da">Jeg har brugt systemarkitektur i større Unity- og backend-systemer, hvor mange subsystemer skal spille sammen uden at blive ufleksible eller svære at debugge.</p>
-                    <p data-lang="en">I have used system architecture in larger Unity and backend systems where many subsystems need to work together without becoming inflexible or hard to debug.</p>
-                    <ul class="skill-detail-list">
-                      <li><span data-lang="da"><strong>Unity:</strong> NPC, quests, save/load, construction, inventory, interactions og AI-pipelines.</span><span data-lang="en"><strong>Unity:</strong> NPCs, quests, save/load, construction, inventory, interactions and AI pipelines.</span></li>
-                      <li><span data-lang="da"><strong>Engineering mindset:</strong> Struktur, interfaces, dataflow, debugging og langsigtet vedligeholdelse.</span><span data-lang="en"><strong>Engineering mindset:</strong> Structure, interfaces, data flow, debugging and long-term maintainability.</span></li>
-                    </ul>
-                  </article>
+                  <div class="skill-control-section">
+                    <h3 class="skill-control-title"><span data-lang="da">Færdigheder</span><span data-lang="en">Skills</span></h3>
+                  <div class="skills-grid" aria-label="Skill keywords">
+                    <button class="skill category-programming active" type="button" data-skill="csharp" data-skill-category="programming" aria-pressed="true">C#</button>
+                    <button class="skill category-programming" type="button" data-skill="object-oriented-programming" data-skill-category="programming" aria-pressed="false">Object Oriented Programming</button>
+                    <button class="skill category-programming" type="button" data-skill="solid" data-skill-category="programming" aria-pressed="false">SOLID</button>
+                    <button class="skill category-programming" type="button" data-skill="design-patterns" data-skill-category="programming" aria-pressed="false">Design Patterns</button>
+                    <button class="skill category-programming" type="button" data-skill="dotnet-mvc" data-skill-category="programming" aria-pressed="false">.NET / MVC</button>
+                    <button class="skill category-programming" type="button" data-skill="rest-api-json" data-skill-category="programming" aria-pressed="false">REST API / JSON</button>
+                    <button class="skill category-programming" type="button" data-skill="postman" data-skill-category="programming" aria-pressed="false">Postman</button>
+                    <button class="skill category-programming" type="button" data-skill="openai-api" data-skill-category="programming" aria-pressed="false">OpenAI API</button>
+                    <button class="skill category-programming" type="button" data-skill="elevenlabs-api" data-skill-category="programming" aria-pressed="false">ElevenLabs API</button>
+                    <button class="skill category-programming" type="button" data-skill="javascript" data-skill-category="programming" aria-pressed="false">JavaScript</button>
+                    <button class="skill category-programming" type="button" data-skill="html-css" data-skill-category="programming" aria-pressed="false">HTML / CSS</button>
+                    <button class="skill category-programming" type="button" data-skill="frontend-libraries" data-skill-category="programming" aria-pressed="false">Frontend & UI Libraries</button>
+                    <button class="skill category-programming" type="button" data-skill="sql" data-skill-category="programming" aria-pressed="false">SQL / MS-SQL</button>
+                    <button class="skill category-programming" type="button" data-skill="python" data-skill-category="programming" aria-pressed="false">Python</button>
+                    <button class="skill category-programming" type="button" data-skill="matlab" data-skill-category="programming" aria-pressed="false">MATLAB</button>
+                    <button class="skill category-programming" type="button" data-skill="visual-programming" data-skill-category="programming" aria-pressed="false">Visual Programming</button>
+                    <button class="skill category-programming" type="button" data-skill="scrum" data-skill-category="programming" aria-pressed="false">Scrum</button>
+                    <button class="skill category-programming" type="button" data-skill="ci-cd" data-skill-category="programming" aria-pressed="false">CI/CD</button>
+                    <button class="skill category-programming" type="button" data-skill="git-github" data-skill-category="programming" aria-pressed="false">Git / GitHub</button>
+                    <button class="skill category-game" type="button" data-skill="unity" data-skill-category="game" aria-pressed="false">Unity</button>
+                    <button class="skill category-game" type="button" data-skill="netcode" data-skill-category="game" aria-pressed="false">Netcode</button>
+                    <button class="skill category-game" type="button" data-skill="npc-behavior" data-skill-category="game" aria-pressed="false">NPC Behavior</button>
+                    <button class="skill category-game" type="button" data-skill="object-pooling" data-skill-category="game" aria-pressed="false">Object Pooling</button>
+                    <button class="skill category-game" type="button" data-skill="save-load" data-skill-category="game" aria-pressed="false">Save / Load</button>
+                    <button class="skill category-game" type="button" data-skill="procedural-terrain" data-skill-category="game" aria-pressed="false">Procedural Terrain</button>
+                    <button class="skill category-game" type="button" data-skill="layered-noise" data-skill-category="game" aria-pressed="false">Layered Noise</button>
+                    <button class="skill category-game" type="button" data-skill="mapmagic" data-skill-category="game" aria-pressed="false">MapMagic</button>
+                    <button class="skill category-game" type="button" data-skill="shader-graph" data-skill-category="game" aria-pressed="false">Shader Graph</button>
+                    <button class="skill category-game" type="button" data-skill="vr-quest" data-skill-category="game" aria-pressed="false">VR / Meta Quest 2</button>
+                    <button class="skill category-game" type="button" data-skill="ragdoll-physics" data-skill-category="game" aria-pressed="false">Ragdoll Physics</button>
+                    <button class="skill category-game" type="button" data-skill="destructible-environments" data-skill-category="game" aria-pressed="false">Destructible Environments</button>
+                    <button class="skill category-game" type="button" data-skill="game-architecture" data-skill-category="game" aria-pressed="false">Game Architecture</button>
+                    <button class="skill category-game" type="button" data-skill="blender" data-skill-category="game" aria-pressed="false">Blender</button>
+                    <button class="skill category-ai" type="button" data-skill="ai-pipelines" data-skill-category="ai" aria-pressed="false">AI Pipelines</button>
+                    <button class="skill category-ai" type="button" data-skill="rag" data-skill-category="ai" aria-pressed="false">RAG</button>
+                    <button class="skill category-ai" type="button" data-skill="llm-integration" data-skill-category="ai" aria-pressed="false">LLM Integration</button>
+                    <button class="skill category-ai" type="button" data-skill="machine-learning" data-skill-category="ai" aria-pressed="false">Machine Learning</button>
+                    <button class="skill category-ai" type="button" data-skill="tensorflow-keras" data-skill-category="ai" aria-pressed="false">TensorFlow / Keras</button>
+                    <button class="skill category-ai" type="button" data-skill="cnn" data-skill-category="ai" aria-pressed="false">Convolutional Neural Networks</button>
+                    <button class="skill category-ai" type="button" data-skill="stable-diffusion" data-skill-category="ai" aria-pressed="false">Stable Diffusion</button>
+                    <button class="skill category-ai" type="button" data-skill="comfyui" data-skill-category="ai" aria-pressed="false">ComfyUI</button>
+                    <button class="skill category-ai" type="button" data-skill="lora-training" data-skill-category="ai" aria-pressed="false">LoRA Training</button>
+                    <button class="skill category-ai" type="button" data-skill="suno" data-skill-category="ai" aria-pressed="false">Suno</button>
+                    <button class="skill category-ai" type="button" data-skill="ai900" data-skill-category="ai" aria-pressed="false">AI-900</button>
+                    <button class="skill category-engineering" type="button" data-skill="structural-engineering" data-skill-category="engineering" aria-pressed="false">Structural Engineering</button>
+                    <button class="skill category-engineering" type="button" data-skill="statics" data-skill-category="engineering" aria-pressed="false">Statik</button>
+                    <button class="skill category-engineering" type="button" data-skill="fem" data-skill-category="engineering" aria-pressed="false">FEM / Numeriske metoder</button>
+                    <button class="skill category-engineering" type="button" data-skill="revit" data-skill-category="engineering" aria-pressed="false">Revit</button>
+                    <button class="skill category-engineering" type="button" data-skill="autocad" data-skill-category="engineering" aria-pressed="false">AutoCAD</button>
+                    <button class="skill category-engineering" type="button" data-skill="tekla" data-skill-category="engineering" aria-pressed="false">Tekla</button>
+                    <button class="skill category-engineering" type="button" data-skill="rhino" data-skill-category="engineering" aria-pressed="false">Rhino</button>
+                    <button class="skill category-engineering" type="button" data-skill="sketchup" data-skill-category="engineering" aria-pressed="false">SketchUp</button>
+                    <button class="skill category-engineering" type="button" data-skill="gis" data-skill-category="engineering" aria-pressed="false">GIS</button>
+                    <button class="skill category-engineering" type="button" data-skill="grasshopper" data-skill-category="engineering" aria-pressed="false">Grasshopper</button>
+                    <button class="skill category-engineering" type="button" data-skill="renovation" data-skill-category="engineering" aria-pressed="false">Renovering</button>
+                    <button class="skill category-engineering" type="button" data-skill="timber-structures" data-skill-category="engineering" aria-pressed="false">Trækonstruktioner</button>
+                    <button class="skill category-engineering" type="button" data-skill="masonry" data-skill-category="engineering" aria-pressed="false">Murværk</button>
+                    <button class="skill category-engineering" type="button" data-skill="concrete" data-skill-category="engineering" aria-pressed="false">Beton</button>
+                    <button class="skill category-engineering" type="button" data-skill="steel" data-skill-category="engineering" aria-pressed="false">Stål</button>
+                    <button class="skill category-engineering" type="button" data-skill="technical-documentation" data-skill-category="engineering" aria-pressed="false">Teknisk dokumentation</button>
+                    <button class="skill category-engineering" type="button" data-skill="construction-coordination" data-skill-category="engineering" aria-pressed="false">Byggeprocesser</button>
+                    <button class="skill category-engineering" type="button" data-skill="optimization" data-skill-category="engineering" aria-pressed="false">Optimization</button>
+                    <button class="skill category-other" type="button" data-skill="photoshop" data-skill-category="other" aria-pressed="false">Photoshop</button>
+                    <button class="skill category-other" type="button" data-skill="arduino" data-skill-category="other" aria-pressed="false">Arduino</button>
+                  </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1750,7 +1746,13 @@
     const sectionLinks = document.querySelectorAll('[data-section-link]');
     const tabJumpLinks = document.querySelectorAll('[data-tab-jump]');
     const skillButtons = document.querySelectorAll('[data-skill]');
-    const skillDetails = document.querySelectorAll('[data-skill-detail]');
+    const skillFilterButtons = document.querySelectorAll('[data-skill-filter]');
+    const skillDetailCard = document.getElementById('skill-detail-card');
+    const skillDetailCategory = document.getElementById('skill-detail-category');
+    const skillDetailTitle = document.getElementById('skill-detail-title');
+    const skillDetailTextDa = document.getElementById('skill-detail-text-da');
+    const skillDetailTextEn = document.getElementById('skill-detail-text-en');
+    const skillDetailList = document.getElementById('skill-detail-list');
     const projectModal = document.getElementById('project-modal');
     const projectModalTitle = document.getElementById('project-modal-title');
     const projectModalBody = document.getElementById('project-modal-body');
@@ -1759,48 +1761,1395 @@
     let activeProjectModalKey = null;
 
 
+    const skillCategories = {
+      "programming": {
+            "da": "Programming & Web",
+            "en": "Programming & Web",
+            "className": "category-programming"
+      },
+      "game": {
+            "da": "Spil & Simulation",
+            "en": "Games & Simulation",
+            "className": "category-game"
+      },
+      "ai": {
+            "da": "AI & Kreative værktøjer",
+            "en": "AI & Creative Tools",
+            "className": "category-ai"
+      },
+      "engineering": {
+            "da": "Engineering & Byggeri",
+            "en": "Engineering & Construction",
+            "className": "category-engineering"
+      },
+      "other": {
+            "da": "Andet",
+            "en": "Other",
+            "className": "category-other"
+      }
+};
+
+    const skillCatalog = {
+      "csharp": {
+            "title": "C#",
+            "category": "programming",
+            "description": {
+                  "da": "C# er mit primære programmeringssprog. Jeg har brugt det til Unity, backend-udvikling, editor tools, save/load, AI-integrationer, REST API-kald og større objektorienterede systemer.",
+                  "en": "C# is my main programming language. I have used it for Unity, backend development, editor tools, save/load systems, AI integrations, REST API calls and larger object-oriented systems."
+            },
+            "bullets": {
+                  "da": [
+                        "From Scratch: NPC-systemer, interactions, construction, inventory, quests og save/load.",
+                        "iPaper: professionel backend-udvikling i C#.",
+                        "Dania: videregående programmering i C# med karakteren 12."
+                  ],
+                  "en": [
+                        "From Scratch: NPC systems, interactions, construction, inventory, quests and save/load.",
+                        "iPaper: professional backend development in C#.",
+                        "Dania: advanced C# programming with grade 12."
+                  ]
+            }
+      },
+      "object-oriented-programming": {
+            "title": "Object Oriented Programming",
+            "category": "programming",
+            "description": {
+                  "da": "Objektorienteret programmering er brugt som grundstruktur i mine C#- og Unity-systemer, hvor ansvar, interfaces, komponenter og data skal holdes adskilt.",
+                  "en": "Object-oriented programming is used as the core structure in my C# and Unity systems, where responsibilities, interfaces, components and data need to stay separated."
+            },
+            "bullets": {
+                  "da": [
+                        "Unity: komponentbaserede MonoBehaviours, interfaces og systemsamarbejde.",
+                        "Save/load, inventory, quests og NPC-adfærd: opdelt i klare objekter og kontrakter.",
+                        "Backend: datamodeller, services og controllerlogik."
+                  ],
+                  "en": [
+                        "Unity: component-based MonoBehaviours, interfaces and system collaboration.",
+                        "Save/load, inventory, quests and NPC behavior: split into clear objects and contracts.",
+                        "Backend: data models, services and controller logic."
+                  ]
+            }
+      },
+      "solid": {
+            "title": "SOLID",
+            "category": "programming",
+            "description": {
+                  "da": "SOLID-principper er brugt som rettesnor i systemer, hvor kode skal kunne ændres og udvides uden at alt kobles sammen.",
+                  "en": "SOLID principles have been used as guidelines in systems where code needs to change and expand without everything becoming tightly coupled."
+            },
+            "bullets": {
+                  "da": [
+                        "Interfaces til saveable objects, interactions, quest conditions og inventory.",
+                        "Single responsibility i controllers, managers og dataobjekter.",
+                        "Dependency separation mellem gameplay, UI, data og AI-kald."
+                  ],
+                  "en": [
+                        "Interfaces for saveable objects, interactions, quest conditions and inventory.",
+                        "Single responsibility in controllers, managers and data objects.",
+                        "Dependency separation between gameplay, UI, data and AI calls."
+                  ]
+            }
+      },
+      "design-patterns": {
+            "title": "Design Patterns",
+            "category": "programming",
+            "description": {
+                  "da": "Design patterns er brugt praktisk i spil- og backendkode for at holde store systemer organiserede og lettere at udvide.",
+                  "en": "Design patterns are used practically in game and backend code to keep large systems organized and easier to extend."
+            },
+            "bullets": {
+                  "da": [
+                        "Observer/event patterns til UI, inventory og quest updates.",
+                        "Strategy/state-lignende opbygning til NPC-adfærd og interactions.",
+                        "Factory/pooling-tænkning til objekter, spawning og performance."
+                  ],
+                  "en": [
+                        "Observer/event patterns for UI, inventory and quest updates.",
+                        "Strategy/state-like structure for NPC behavior and interactions.",
+                        "Factory/pooling thinking for objects, spawning and performance."
+                  ]
+            }
+      },
+      "dotnet-mvc": {
+            "title": ".NET / MVC",
+            "category": "programming",
+            "description": {
+                  "da": ".NET og MVC er brugt til klassisk backend-udvikling med datamodeller, controllers, databaseintegration og serverlogik.",
+                  "en": ".NET and MVC have been used for classical backend development with data models, controllers, database integration and server-side logic."
+            },
+            "bullets": {
+                  "da": [
+                        "iPaper: backend-miljø med C#, MVC og MS-SQL.",
+                        "Portfolio- og webprojekter: strukturering af frontend/backend-tænkning.",
+                        "Forståelse for request/response, routing, datalagring og vedligeholdelige modeller."
+                  ],
+                  "en": [
+                        "iPaper: backend environment with C#, MVC and MS-SQL.",
+                        "Portfolio and web projects: structuring frontend/backend thinking.",
+                        "Understanding of request/response, routing, data storage and maintainable models."
+                  ]
+            }
+      },
+      "rest-api-json": {
+            "title": "REST API / JSON",
+            "category": "programming",
+            "description": {
+                  "da": "REST API og JSON er brugt i integrationer mellem Unity, backend-services og eksterne AI-tjenester.",
+                  "en": "REST APIs and JSON have been used in integrations between Unity, backend services and external AI services."
+            },
+            "bullets": {
+                  "da": [
+                        "OpenAI: request/response-kald til LLM-baserede systemer.",
+                        "ElevenLabs: API-integration til tekst-til-tale workflow.",
+                        "Postman: test af endpoints, payloads, headers og JSON-strukturer."
+                  ],
+                  "en": [
+                        "OpenAI: request/response calls for LLM-based systems.",
+                        "ElevenLabs: API integration for text-to-speech workflows.",
+                        "Postman: testing endpoints, payloads, headers and JSON structures."
+                  ]
+            }
+      },
+      "postman": {
+            "title": "Postman",
+            "category": "programming",
+            "description": {
+                  "da": "Postman er brugt til at teste API-kald, headers, JSON payloads og svar fra eksterne services.",
+                  "en": "Postman has been used to test API calls, headers, JSON payloads and responses from external services."
+            },
+            "bullets": {
+                  "da": [
+                        "Fejlsøgning af REST API-kald.",
+                        "Test af JSON body, authorization headers og response formats.",
+                        "Brugt sammen med OpenAI- og ElevenLabs-relaterede integrationer."
+                  ],
+                  "en": [
+                        " REST API calls.",
+                        "Testing JSON bodies, authorization headers and response formats.",
+                        "Used with OpenAI and ElevenLabs-related integrations."
+                  ]
+            }
+      },
+      "openai-api": {
+            "title": "OpenAI API",
+            "category": "programming",
+            "description": {
+                  "da": "OpenAI API er brugt som del af AI-pipelines til dialog, persona prompts, semantisk vurdering og systemer der kobler tekst til handling.",
+                  "en": "The OpenAI API has been used as part of AI pipelines for dialogue, persona prompts, semantic evaluation and systems that connect text to action."
+            },
+            "bullets": {
+                  "da": [
+                        "NPC-pipeline: persona, prompt, svar, action tags og memory summary.",
+                        "Web og tooling: idéer, tekstflow og AI-understøttede processer.",
+                        "REST/JSON-integrationer med strukturerede payloads."
+                  ],
+                  "en": [
+                        "NPC pipeline: persona, prompt, response, action tags and memory summary.",
+                        "Web and tooling: ideas, text flow and AI-assisted processes.",
+                        "REST/JSON integrations with structured payloads."
+                  ]
+            }
+      },
+      "elevenlabs-api": {
+            "title": "ElevenLabs API",
+            "category": "programming",
+            "description": {
+                  "da": "ElevenLabs er brugt til tekst-til-tale integration i AI-dialogsystemer, hvor LLM-svar skal omsættes til stemme.",
+                  "en": "ElevenLabs has been used for text-to-speech integration in AI dialogue systems where LLM responses need to become voice."
+            },
+            "bullets": {
+                  "da": [
+                        "Unity/AI pipeline: LLM-svar koblet til TTS.",
+                        "Arbejde med modelvalg, outputformat, stemmeindstillinger og request-struktur.",
+                        "Kobling mellem STT, LLM og TTS i NPC-dialog."
+                  ],
+                  "en": [
+                        "Unity/AI pipeline: LLM responses connected to TTS.",
+                        "Work with model choice, output format, voice settings and request structure.",
+                        "Linking STT, LLM and TTS in NPC dialogue."
+                  ]
+            }
+      },
+      "javascript": {
+            "title": "JavaScript",
+            "category": "programming",
+            "description": {
+                  "da": "JavaScript er brugt til interaktive portfolio-elementer som sprogskift, tabs, typewriter-effekt, popups, filtre og dynamiske UI-komponenter.",
+                  "en": "JavaScript is used for interactive portfolio elements such as language switching, tabs, typewriter effects, popups, filters and dynamic UI components."
+            },
+            "bullets": {
+                  "da": [
+                        "Portfolio: tabs, projektmodals, skill-filtre og typewriter.",
+                        "Client-side UI uden tung framework-afhængighed.",
+                        "Små stateful komponenter og DOM-styring."
+                  ],
+                  "en": [
+                        "Portfolio: tabs, project modals, skill filters and typewriter behavior.",
+                        "Client-side UI without heavy framework dependency.",
+                        "Small stateful components and DOM control."
+                  ]
+            }
+      },
+      "html-css": {
+            "title": "HTML / CSS",
+            "category": "programming",
+            "description": {
+                  "da": "HTML og CSS er brugt til responsivt portfolio-design, layout, animationer, kort, kontaktfelter, hover states og GitHub Pages-ready struktur.",
+                  "en": "HTML and CSS are used for responsive portfolio design, layout, animations, cards, contact fields, hover states and GitHub Pages-ready structure."
+            },
+            "bullets": {
+                  "da": [
+                        "Portfolio: hele siden er statisk HTML/CSS/JS.",
+                        "GitHub Pages: relative paths, statisk deploy og enkel hosting.",
+                        "Responsive layout, modals, cards og visuel struktur."
+                  ],
+                  "en": [
+                        "Portfolio: the full site is static HTML/CSS/JS.",
+                        "GitHub Pages: relative paths, static deploy and simple hosting.",
+                        "Responsive layout, modals, cards and visual structure."
+                  ]
+            }
+      },
+      "frontend-libraries": {
+            "title": "Frontend & UI Libraries",
+            "category": "programming",
+            "description": {
+                  "da": "Frontend og UI libraries dækker arbejdet med moderne web-UI, komponenttænkning, CSS patterns, ikoner, layout og client-side interaktion.",
+                  "en": "Frontend and UI libraries covers work with modern web UI, component thinking, CSS patterns, icons, layout and client-side interaction."
+            },
+            "bullets": {
+                  "da": [
+                        "Portfolio: genbrugelige kort, tabeller, chips, filtre og modals.",
+                        "ASP.NET/MVC-forståelse fra backend- og webarbejde.",
+                        "UI-opbygning med fokus på struktur, hover states og læsbarhed."
+                  ],
+                  "en": [
+                        "Portfolio: reusable cards, tables, chips, filters and modals.",
+                        "ASP.NET/MVC understanding from backend and web work.",
+                        "UI construction with focus on structure, hover states and readability."
+                  ]
+            }
+      },
+      "sql": {
+            "title": "SQL / MS-SQL",
+            "category": "programming",
+            "description": {
+                  "da": "SQL og MS-SQL er brugt i backend-sammenhæng til datamodeller, lagring, forespørgsler og relationel struktur.",
+                  "en": "SQL and MS-SQL have been used in backend contexts for data models, storage, queries and relational structure."
+            },
+            "bullets": {
+                  "da": [
+                        "iPaper: MS-SQL i et professionelt backend-miljø.",
+                        "Datamodeller, relationer og klassisk databaseforståelse.",
+                        "Forbindelse mellem serverlogik og persistent data."
+                  ],
+                  "en": [
+                        "iPaper: MS-SQL in a professional backend environment.",
+                        "Data models, relations and classical database understanding.",
+                        "Connection between server logic and persistent data."
+                  ]
+            }
+      },
+      "python": {
+            "title": "Python",
+            "category": "programming",
+            "description": {
+                  "da": "Python er brugt til machine learning, dataanalyse, TensorFlow/Keras, tekniske eksperimenter og numerisk arbejde.",
+                  "en": "Python has been used for machine learning, data analysis, TensorFlow/Keras, technical experiments and numerical work."
+            },
+            "bullets": {
+                  "da": [
+                        "Kandidatspeciale: CNN-baseret topologioptimering.",
+                        "Itucation Python Programming, Advanced.",
+                        "Dataflow, træning, evaluering og teknisk analyse."
+                  ],
+                  "en": [
+                        "Master's thesis: CNN-based topology optimization.",
+                        "Itucation Python Programming, Advanced.",
+                        "Data flow, training, evaluation and technical analysis."
+                  ]
+            }
+      },
+      "matlab": {
+            "title": "MATLAB",
+            "category": "programming",
+            "description": {
+                  "da": "MATLAB er brugt som programmerings- og beregningsværktøj i ingeniørarbejde, numeriske metoder og teknisk modellering.",
+                  "en": "MATLAB has been used as a programming and calculation tool in engineering work, numerical methods and technical modelling."
+            },
+            "bullets": {
+                  "da": [
+                        "Tækker: teknisk analyse og beregninger.",
+                        "Uddannelse: numeriske metoder, modellering og computational engineering.",
+                        "Kobling mellem matematik, kode og ingeniørmæssig validering."
+                  ],
+                  "en": [
+                        "Tækker: technical analysis and calculations.",
+                        "Education: numerical methods, modelling and computational engineering.",
+                        "Connection between mathematics, code and engineering validation."
+                  ]
+            }
+      },
+      "visual-programming": {
+            "title": "Visual Programming",
+            "category": "programming",
+            "description": {
+                  "da": "Visual programming er brugt i værktøjer hvor logik, geometri, generering eller grafiske pipelines bygges som noder eller visuelle grafer.",
+                  "en": "Visual programming has been used in tools where logic, geometry, generation or graphical pipelines are built as nodes or visual graphs."
+            },
+            "bullets": {
+                  "da": [
+                        "Shader Graph: visuel opbygning af materialer og shaders i Unity.",
+                        "Grasshopper: parametrisk geometri og regelbaserede modeller.",
+                        "ComfyUI: nodebaserede Stable Diffusion pipelines.",
+                        "MapMagic: nodebaseret terrain generation og world building."
+                  ],
+                  "en": [
+                        "Shader Graph: visual construction of materials and shaders in Unity.",
+                        "Grasshopper: parametric geometry and rule-based models.",
+                        "ComfyUI: node-based Stable Diffusion pipelines.",
+                        "MapMagic: node-based terrain generation and world building."
+                  ]
+            }
+      },
+      "scrum": {
+            "title": "Scrum",
+            "category": "programming",
+            "description": {
+                  "da": "Scrum er relevant for mit arbejde med opdeling af større systemer i konkrete opgaver, iterationer, testbare leverancer og løbende prioritering.",
+                  "en": "Scrum is relevant to my work with breaking larger systems into concrete tasks, iterations, testable deliveries and ongoing prioritization."
+            },
+            "bullets": {
+                  "da": [
+                        "Softwareprojekter: opdeling i features, fixes og delsystemer.",
+                        "Backend og spiludvikling: løbende prioritering af tekniske afhængigheder.",
+                        "Velegnet til samarbejde i klassiske udviklingsteams."
+                  ],
+                  "en": [
+                        "Software projects: splitting work into features, fixes and subsystems.",
+                        "Backend and game development: ongoing prioritization of technical dependencies.",
+                        "Fits collaboration in classical development teams."
+                  ]
+            }
+      },
+      "ci-cd": {
+            "title": "CI/CD",
+            "category": "programming",
+            "description": {
+                  "da": "CI/CD dækker forståelsen for at bygge, teste og deploye software mere systematisk, især i GitHub- og webbaserede workflows.",
+                  "en": "CI/CD covers understanding how to build, test and deploy software more systematically, especially in GitHub and web-based workflows."
+            },
+            "bullets": {
+                  "da": [
+                        "GitHub Pages: statisk deploy fra repository.",
+                        "Forståelse for branches, commits, releases og automatiseret build/deploy.",
+                        "Relevant i .NET, web og team-baseret udvikling."
+                  ],
+                  "en": [
+                        "GitHub Pages: static deployment from repository.",
+                        "Understanding of branches, commits, releases and automated build/deploy.",
+                        "Relevant in .NET, web and team-based development."
+                  ]
+            }
+      },
+      "git-github": {
+            "title": "Git / GitHub",
+            "category": "programming",
+            "description": {
+                  "da": "Git og GitHub er brugt til versionsstyring, repository-struktur, hosting, historik, branches og publicering af webprojekter.",
+                  "en": "Git and GitHub have been used for version control, repository structure, hosting, history, branches and publishing web projects."
+            },
+            "bullets": {
+                  "da": [
+                        "Portfolio: GitHub Pages-hosting.",
+                        "Spil- og softwareprojekter: versionsstyring og filstruktur.",
+                        "Arbejde med commits, repoer og static deploy."
+                  ],
+                  "en": [
+                        "Portfolio: GitHub Pages hosting.",
+                        "Game and software projects: version control and file structure.",
+                        "Work with commits, repositories and static deploy."
+                  ]
+            }
+      },
+      "unity": {
+            "title": "Unity",
+            "category": "game",
+            "description": {
+                  "da": "Unity er mit primære game development-miljø og er brugt til gameplay, VR, editor tools, AI-systemer, save/load, procedural generation og prototyper.",
+                  "en": "Unity is my main game development environment and has been used for gameplay, VR, editor tools, AI systems, save/load, procedural generation and prototypes."
+            },
+            "bullets": {
+                  "da": [
+                        "From Scratch: større gameplay- og simulationssystemer.",
+                        "Clown Wars: VR-prototype med våben, ragdolls og destruerbart miljø.",
+                        "Unity C#: gameplay architecture, dataflow og tooling."
+                  ],
+                  "en": [
+                        "From Scratch: larger gameplay and simulation systems.",
+                        "Clown Wars: VR prototype with weapons, ragdolls and destructible environments.",
+                        "Unity C#: gameplay architecture, data flow and tooling."
+                  ]
+            }
+      },
+      "netcode": {
+            "title": "Netcode",
+            "category": "game",
+            "description": {
+                  "da": "Netcode er brugt i Unity til multiplayer-relaterede systemer, network variables, server/client-opdeling og synkronisering.",
+                  "en": "Netcode has been used in Unity for multiplayer-related systems, network variables, server/client separation and synchronization."
+            },
+            "bullets": {
+                  "da": [
+                        "Unity Netcode: network variables, RPCs og objektstyring.",
+                        "Spilprojekter: forståelse for state, authority og synkronisering.",
+                        "Arbejdet med pooled network objects og serverstyring."
+                  ],
+                  "en": [
+                        "Unity Netcode: network variables, RPCs and object management.",
+                        "Game projects: understanding of state, authority and synchronization.",
+                        "Work with pooled network objects and server control."
+                  ]
+            }
+      },
+      "npc-behavior": {
+            "title": "NPC Behavior",
+            "category": "game",
+            "description": {
+                  "da": "NPC-adfærd er brugt i mine spilprojekter til jobs, planer, interactions, quest triggers og AI-dialog.",
+                  "en": "NPC behavior has been used in my game projects for jobs, plans, interactions, quest triggers and AI dialogue."
+            },
+            "bullets": {
+                  "da": [
+                        "From Scratch: NPC job systems, gathering, assignments og conditions.",
+                        "AI pipeline: dialog, memory og action tags.",
+                        "Gameplay: kobling mellem world state, behov og handling."
+                  ],
+                  "en": [
+                        "From Scratch: NPC job systems, gathering, assignments and conditions.",
+                        "AI pipeline: dialogue, memory and action tags.",
+                        "Gameplay: connecting world state, needs and action."
+                  ]
+            }
+      },
+      "object-pooling": {
+            "title": "Object Pooling",
+            "category": "game",
+            "description": {
+                  "da": "Object pooling er brugt til performance og stabilitet i Unity, især hvor objekter skabes og fjernes ofte.",
+                  "en": "Object pooling has been used for performance and stability in Unity, especially when objects are created and removed frequently."
+            },
+            "bullets": {
+                  "da": [
+                        "Networked object pooling i Unity.",
+                        "Reduceret instantiation/destruction overhead.",
+                        "Relevant i våben, effects, resources og spawned gameplay objects."
+                  ],
+                  "en": [
+                        "Networked object pooling in Unity.",
+                        "Reduced instantiation/destruction overhead.",
+                        "Relevant for weapons, effects, resources and spawned gameplay objects."
+                  ]
+            }
+      },
+      "save-load": {
+            "title": "Save / Load",
+            "category": "game",
+            "description": {
+                  "da": "Save/load-systemer er brugt til at gemme og genskabe game state, inventory, transformdata og entity data.",
+                  "en": "Save/load systems have been used to store and restore game state, inventory, transform data and entity data."
+            },
+            "bullets": {
+                  "da": [
+                        "ISaveable-baseret struktur.",
+                        "JSON-serialisering og data restore.",
+                        "Transform, inventory, construction og world state."
+                  ],
+                  "en": [
+                        "ISaveable-based structure.",
+                        "JSON serialization and data restore.",
+                        "Transform, inventory, construction and world state."
+                  ]
+            }
+      },
+      "procedural-terrain": {
+            "title": "Procedural Terrain",
+            "category": "game",
+            "description": {
+                  "da": "Procedural terrain er brugt til verdenbygning med chunks, variation, biome-logik og systematisk generering.",
+                  "en": "Procedural terrain has been used for world building with chunks, variation, biome logic and systematic generation."
+            },
+            "bullets": {
+                  "da": [
+                        "Unity: terrain generation og dynamisk verden.",
+                        "Layered noise og chunk-baseret opbygning.",
+                        "MapMagic som visuelt/nodebaseret terrain-værktøj."
+                  ],
+                  "en": [
+                        "Unity: terrain generation and dynamic world.",
+                        "Layered noise and chunk-based construction.",
+                        "MapMagic as a visual/node-based terrain tool."
+                  ]
+            }
+      },
+      "layered-noise": {
+            "title": "Layered Noise",
+            "category": "game",
+            "description": {
+                  "da": "Layered noise er brugt til at skabe naturlig variation i terræn, biomer og procedural world generation.",
+                  "en": "Layered noise has been used to create natural variation in terrain, biomes and procedural world generation."
+            },
+            "bullets": {
+                  "da": [
+                        "Terræn: flere noise-lag for højde, variation og struktur.",
+                        "World building: kontrolleret tilfældighed og lokale variationer.",
+                        "Koblet til chunks, LOD-tænkning og biome-regler."
+                  ],
+                  "en": [
+                        "Terrain: multiple noise layers for height, variation and structure.",
+                        "World building: controlled randomness and local variation.",
+                        "Connected to chunks, LOD thinking and biome rules."
+                  ]
+            }
+      },
+      "mapmagic": {
+            "title": "MapMagic",
+            "category": "game",
+            "description": {
+                  "da": "MapMagic er brugt som nodebaseret terrain- og world generation-værktøj i Unity.",
+                  "en": "MapMagic has been used as a node-based terrain and world generation tool in Unity."
+            },
+            "bullets": {
+                  "da": [
+                        "Visual programming til terrænregler.",
+                        "Nodebaseret pipeline for terrain generation.",
+                        "Brugt sammen med procedural world building og layered noise."
+                  ],
+                  "en": [
+                        "Visual programming for terrain rules.",
+                        "Node-based pipeline for terrain generation.",
+                        "Used with procedural world building and layered noise."
+                  ]
+            }
+      },
+      "shader-graph": {
+            "title": "Shader Graph",
+            "category": "game",
+            "description": {
+                  "da": "Shader Graph er brugt til visuel opbygning af materialer og shaders i Unity uden at skrive hele shaderen manuelt.",
+                  "en": "Shader Graph has been used to visually build materials and shaders in Unity without manually writing the full shader."
+            },
+            "bullets": {
+                  "da": [
+                        "Materialer og visuelle effekter.",
+                        "Visual programming med noder.",
+                        "Relevant for spil, prototyper og stiludvikling."
+                  ],
+                  "en": [
+                        "Materials and visual effects.",
+                        "Visual programming with nodes.",
+                        "Relevant for games, prototypes and style development."
+                  ]
+            }
+      },
+      "vr-quest": {
+            "title": "VR / Meta Quest 2",
+            "category": "game",
+            "description": {
+                  "da": "VR og Quest 2-optimering er brugt i Clown Wars, hvor spillet skulle kunne fungere on-device med begrænsede ressourcer.",
+                  "en": "VR and Quest 2 optimization were used in Clown Wars, where the game needed to run on-device with limited resources."
+            },
+            "bullets": {
+                  "da": [
+                        "Clown Wars: VR-interaktioner og våben.",
+                        "Fokus på performance, low-poly stil og on-device begrænsninger.",
+                        "Unity VR-prototype med fysisk interaktion."
+                  ],
+                  "en": [
+                        "Clown Wars: VR interactions and weapons.",
+                        "Focus on performance, low-poly style and on-device constraints.",
+                        "Unity VR prototype with physical interaction."
+                  ]
+            }
+      },
+      "ragdoll-physics": {
+            "title": "Ragdoll Physics",
+            "category": "game",
+            "description": {
+                  "da": "Ragdoll physics er brugt i Clown Wars til slapstick-effekter, fysisk respons og mere levende VR-kamp.",
+                  "en": "Ragdoll physics has been used in Clown Wars for slapstick effects, physical response and more lively VR combat."
+            },
+            "bullets": {
+                  "da": [
+                        "Clown Wars: klovne med ragdoll-effekter.",
+                        "Kobling mellem våbenimpact og fysisk reaktion.",
+                        "Bidrager til den cartoony/horror komik i spillet."
+                  ],
+                  "en": [
+                        "Clown Wars: clowns with ragdoll effects.",
+                        "Connection between weapon impact and physical response.",
+                        "Contributes to the cartoony/horror comedy of the game."
+                  ]
+            }
+      },
+      "destructible-environments": {
+            "title": "Destructible Environments",
+            "category": "game",
+            "description": {
+                  "da": "Destruerbare miljøer er brugt i Clown Wars som del af idéen om et Worms-lignende taktisk ødelæggelsesrum i VR.",
+                  "en": "Destructible environments have been used in Clown Wars as part of the idea of a Worms-like tactical destruction space in VR."
+            },
+            "bullets": {
+                  "da": [
+                        "Clown Wars: våben påvirker omgivelser.",
+                        "Bazooka, granater og molotov understøtter ødelæggelse.",
+                        "Gameplay bygget omkring kaos, cover og fysisk reaktion."
+                  ],
+                  "en": [
+                        "Clown Wars: weapons affect the environment.",
+                        "Bazooka, grenades and molotov support destruction.",
+                        "Gameplay built around chaos, cover and physical response."
+                  ]
+            }
+      },
+      "game-architecture": {
+            "title": "Game Architecture",
+            "category": "game",
+            "description": {
+                  "da": "Game architecture dækker opbygningen af større systemer i Unity med gameplay, data, UI, AI, networking og persistence.",
+                  "en": "Game architecture covers building larger systems in Unity with gameplay, data, UI, AI, networking and persistence."
+            },
+            "bullets": {
+                  "da": [
+                        "From Scratch: mange sammenhængende systemer.",
+                        "Interfaces, managers, events og data objects.",
+                        "Fokus på udvidelighed og debugbar struktur."
+                  ],
+                  "en": [
+                        "From Scratch: many connected systems.",
+                        "Interfaces, managers, events and data objects.",
+                        "Focus on extensibility and debuggable structure."
+                  ]
+            }
+      },
+      "blender": {
+            "title": "Blender",
+            "category": "game",
+            "description": {
+                  "da": "Blender er placeret under games, fordi det er brugt til asset-, prototype- og visuel spilproduktion.",
+                  "en": "Blender is placed under games because it has been used for asset, prototype and visual game production."
+            },
+            "bullets": {
+                  "da": [
+                        "3D assets og visuelle prototyper.",
+                        "Low-poly og stilafprøvning.",
+                        "Brugt i forbindelse med spil- og projektmateriale."
+                  ],
+                  "en": [
+                        "3D assets and visual prototypes.",
+                        "Low-poly and style testing.",
+                        "Used in connection with game and project material."
+                  ]
+            }
+      },
+      "ai-pipelines": {
+            "title": "AI Pipelines",
+            "category": "ai",
+            "description": {
+                  "da": "AI-pipelines er brugt til at koble input, prompt, LLM-svar, handling, memory, stemme og evaluering sammen.",
+                  "en": "AI pipelines have been used to connect input, prompt, LLM response, action, memory, voice and evaluation."
+            },
+            "bullets": {
+                  "da": [
+                        "NPC-system: STT til LLM til action tags og TTS.",
+                        "Super Godnathistorie: billedgenerering med ComfyUI og LoRA.",
+                        "AI-værktøjer: strukturerede flows frem for enkeltstående prompts."
+                  ],
+                  "en": [
+                        "NPC system: STT to LLM to action tags and TTS.",
+                        "Super Godnathistorie: image generation with ComfyUI and LoRA.",
+                        "AI tools: structured flows instead of isolated prompts."
+                  ]
+            }
+      },
+      "rag": {
+            "title": "RAG",
+            "category": "ai",
+            "description": {
+                  "da": "RAG er relevant i mine AI-systemer som metode til at koble generativ AI til kontekst, memory og dokument-/dataopslag.",
+                  "en": "RAG is relevant in my AI systems as a method for connecting generative AI to context, memory and document/data retrieval."
+            },
+            "bullets": {
+                  "da": [
+                        "AI/NPC: kontekst og memory som input til svar.",
+                        "Semantisk søgning og retrieval-baseret kontekst.",
+                        "Brugt som systemtænkning i AI-pipelines."
+                  ],
+                  "en": [
+                        "AI/NPC: context and memory as input to responses.",
+                        "Semantic search and retrieval-based context.",
+                        "Used as system thinking in AI pipelines."
+                  ]
+            }
+      },
+      "llm-integration": {
+            "title": "LLM Integration",
+            "category": "ai",
+            "description": {
+                  "da": "LLM-integration er brugt til AI-dialog, persona prompts, handlingsudtræk, sentiment og semantisk vurdering.",
+                  "en": "LLM integration has been used for AI dialogue, persona prompts, action extraction, sentiment and semantic evaluation."
+            },
+            "bullets": {
+                  "da": [
+                        "NPC pipeline: persona prompt, LLM reply og action tags.",
+                        "REST API og JSON-kald til OpenAI.",
+                        "Kobling mellem tekst, game state og handling."
+                  ],
+                  "en": [
+                        "NPC pipeline: persona prompt, LLM reply and action tags.",
+                        "REST API and JSON calls to OpenAI.",
+                        "Linking text, game state and action."
+                  ]
+            }
+      },
+      "machine-learning": {
+            "title": "Machine Learning",
+            "category": "ai",
+            "description": {
+                  "da": "Machine learning er brugt i mit kandidatspeciale og mine certifikater med fokus på modeller, optimering, numeriske metoder og teknisk anvendelse.",
+                  "en": "Machine learning has been used in my master's thesis and certificates with focus on models, optimization, numerical methods and technical application."
+            },
+            "bullets": {
+                  "da": [
+                        "Coursera / Stanford University Machine Learning.",
+                        "Kandidatspeciale: ML til topologioptimering.",
+                        "Python, TensorFlow/Keras, dataanalyse og validering."
+                  ],
+                  "en": [
+                        "Coursera / Stanford University Machine Learning.",
+                        "Master's thesis: ML for topology optimization.",
+                        "Python, TensorFlow/Keras, data analysis and validation."
+                  ]
+            }
+      },
+      "tensorflow-keras": {
+            "title": "TensorFlow / Keras",
+            "category": "ai",
+            "description": {
+                  "da": "TensorFlow/Keras er brugt i ML-arbejde til CNN-modeller og tekniske eksperimenter med billed- og strukturdata.",
+                  "en": "TensorFlow/Keras has been used in ML work for CNN models and technical experiments with image and structural data."
+            },
+            "bullets": {
+                  "da": [
+                        "Kandidatspeciale: CNN-baseret topologioptimering.",
+                        "Modeltræning, evaluering og dataflow.",
+                        "Teknisk ML med fokus på ingeniørmæssig anvendelse."
+                  ],
+                  "en": [
+                        "Master's thesis: CNN-based topology optimization.",
+                        "Model training, evaluation and data flow.",
+                        "Technical ML with focus on engineering application."
+                  ]
+            }
+      },
+      "cnn": {
+            "title": "Convolutional Neural Networks",
+            "category": "ai",
+            "description": {
+                  "da": "CNN blev brugt i mit kandidatspeciale til at estimere tekniske felter/resultater i forbindelse med topologioptimering.",
+                  "en": "CNNs were used in my master's thesis to estimate technical fields/results in connection with topology optimization."
+            },
+            "bullets": {
+                  "da": [
+                        "Kandidatspeciale: convolutional neural networks til strukturoptimering.",
+                        "Datarepræsentation af tekniske/geometriske felter.",
+                        "Validering mod klassiske beregningsmetoder."
+                  ],
+                  "en": [
+                        "Master's thesis: convolutional neural networks for structural optimization.",
+                        "Data representation of technical/geometric fields.",
+                        "Validation against classical calculation methods."
+                  ]
+            }
+      },
+      "stable-diffusion": {
+            "title": "Stable Diffusion",
+            "category": "ai",
+            "description": {
+                  "da": "Stable Diffusion er brugt til billedgenerering i kreative projekter, især Super Godnathistorie med personlige illustrationer.",
+                  "en": "Stable Diffusion has been used for image generation in creative projects, especially Super Godnathistorie with personalized illustrations."
+            },
+            "bullets": {
+                  "da": [
+                        "Super Godnathistorie: AI-genererede børnebogsbilleder.",
+                        "Stil, prompt, billedkonsistens og iteration.",
+                        "Brugt sammen med ComfyUI og LoRA-træning."
+                  ],
+                  "en": [
+                        "Super Godnathistorie: AI-generated children's book images.",
+                        "Style, prompt, image consistency and iteration.",
+                        "Used with ComfyUI and LoRA training."
+                  ]
+            }
+      },
+      "comfyui": {
+            "title": "ComfyUI",
+            "category": "ai",
+            "description": {
+                  "da": "ComfyUI er brugt som nodebaseret workflow til Stable Diffusion, hvor billedgenerering kan styres mere præcist end med simple prompts.",
+                  "en": "ComfyUI has been used as a node-based workflow for Stable Diffusion, where image generation can be controlled more precisely than with simple prompts."
+            },
+            "bullets": {
+                  "da": [
+                        "Super Godnathistorie: pipeline for billeder og stil.",
+                        "Visual programming til diffusion workflows.",
+                        "Koblet til LoRA, prompts, image inputs og outputkontrol."
+                  ],
+                  "en": [
+                        "Super Godnathistorie: pipeline for images and style.",
+                        "Visual programming for diffusion workflows.",
+                        "Connected to LoRA, prompts, image inputs and output control."
+                  ]
+            }
+      },
+      "lora-training": {
+            "title": "LoRA Training",
+            "category": "ai",
+            "description": {
+                  "da": "LoRA-træning er brugt til at skabe mere konsistente figurer og personlige illustrationer baseret på uploadede billeder.",
+                  "en": "LoRA training has been used to create more consistent characters and personalized illustrations based on uploaded images."
+            },
+            "bullets": {
+                  "da": [
+                        "Super Godnathistorie: brugeren uploadede billeder som grundlag.",
+                        "Træning af personlig visuel model/stil.",
+                        "Mål: genkendelige figurer gennem flere illustrationer."
+                  ],
+                  "en": [
+                        "Super Godnathistorie: the user uploaded images as the basis.",
+                        "Training of a personal visual model/style.",
+                        "Goal: recognizable characters across multiple illustrations."
+                  ]
+            }
+      },
+      "suno": {
+            "title": "Suno",
+            "category": "ai",
+            "description": {
+                  "da": "Suno er brugt som AI-værktøj til musikidéer, generering og kreativ prototyping.",
+                  "en": "Suno has been used as an AI tool for music ideas, generation and creative prototyping."
+            },
+            "bullets": {
+                  "da": [
+                        "Musik og kreative koncepter.",
+                        "Hurtig afprøvning af stemninger, tekster og lydretninger.",
+                        "Del af bredere AI-værktøjskasse."
+                  ],
+                  "en": [
+                        "Music and creative concepts.",
+                        "Fast testing of moods, lyrics and sound directions.",
+                        "Part of a broader AI toolset."
+                  ]
+            }
+      },
+      "ai900": {
+            "title": "AI-900",
+            "category": "ai",
+            "description": {
+                  "da": "AI-900 Microsoft Azure AI Fundamentals dokumenterer grundlæggende forståelse for AI-begreber, Azure AI-services og moderne AI-anvendelse.",
+                  "en": "AI-900 Microsoft Azure AI Fundamentals documents basic understanding of AI concepts, Azure AI services and modern AI usage."
+            },
+            "bullets": {
+                  "da": [
+                        "Microsoft Azure AI Fundamentals.",
+                        "Supplerer praktisk erfaring med AI-pipelines.",
+                        "Relevant for AI-services, ML-begreber og cloud-orienteret AI."
+                  ],
+                  "en": [
+                        "Microsoft Azure AI Fundamentals.",
+                        "Supplements practical experience with AI pipelines.",
+                        "Relevant for AI services, ML concepts and cloud-oriented AI."
+                  ]
+            }
+      },
+      "structural-engineering": {
+            "title": "Structural Engineering",
+            "category": "engineering",
+            "description": {
+                  "da": "Structural engineering kommer fra min diplom- og kandidatbaggrund samt praktisk erfaring som rådgivende ingeniør.",
+                  "en": "Structural engineering comes from my bachelor and master's background as well as practical experience as a consulting engineer."
+            },
+            "bullets": {
+                  "da": [
+                        "MOE / Artelia og Tækker: konstruktion, analyse og dokumentation.",
+                        "Uddannelse: bærende konstruktioner og computational engineering.",
+                        "Bro mellem ingeniørfaglig systemtænkning og software."
+                  ],
+                  "en": [
+                        "MOE / Artelia and Tækker: structures, analysis and documentation.",
+                        "Education: structural design and computational engineering.",
+                        "Bridge between engineering systems thinking and software."
+                  ]
+            }
+      },
+      "statics": {
+            "title": "Statik",
+            "category": "engineering",
+            "description": {
+                  "da": "Statik er en kernefærdighed fra bygningsingeniøruddannelsen og arbejdet med bærende konstruktioner.",
+                  "en": "Statics is a core skill from civil engineering education and work with load-bearing structures."
+            },
+            "bullets": {
+                  "da": [
+                        "Bærende konstruktioner.",
+                        "Beregning, lastveje og strukturel forståelse.",
+                        "Grundlag for FEM, stål, beton, træ og murværk."
+                  ],
+                  "en": [
+                        "Load-bearing structures.",
+                        "Calculations, load paths and structural understanding.",
+                        "Foundation for FEM, steel, concrete, timber and masonry."
+                  ]
+            }
+      },
+      "fem": {
+            "title": "FEM / Numeriske metoder",
+            "category": "engineering",
+            "description": {
+                  "da": "FEM og numeriske metoder er brugt i uddannelse, beregningsarbejde og kandidatspeciale med computational engineering.",
+                  "en": "FEM and numerical methods have been used in education, calculation work and the master's thesis in computational engineering."
+            },
+            "bullets": {
+                  "da": [
+                        "Kandidatuddannelse: numeriske metoder og optimering.",
+                        "Thesis: ML koblet til tekniske beregninger.",
+                        "Engineering: analyse, modellering og validering."
+                  ],
+                  "en": [
+                        "Master's education: numerical methods and optimization.",
+                        "Thesis: ML connected to technical calculations.",
+                        "Engineering: analysis, modelling and validation."
+                  ]
+            }
+      },
+      "revit": {
+            "title": "Revit",
+            "category": "engineering",
+            "description": {
+                  "da": "Revit er brugt i ingeniørarbejde til BIM, modeller, dokumentation og koordinering i byggeprojekter.",
+                  "en": "Revit has been used in engineering work for BIM, models, documentation and coordination in construction projects."
+            },
+            "bullets": {
+                  "da": [
+                        "Rådgivende ingeniørarbejde.",
+                        "Modelbaseret projektering og dokumentation.",
+                        "Koordinering mellem konstruktion, geometri og tegninger."
+                  ],
+                  "en": [
+                        "Consulting engineering work.",
+                        "Model-based design and documentation.",
+                        "Coordination between structure, geometry and drawings."
+                  ]
+            }
+      },
+      "autocad": {
+            "title": "AutoCAD",
+            "category": "engineering",
+            "description": {
+                  "da": "AutoCAD er brugt til tekniske tegninger, dokumentation og klassisk projekteringsarbejde.",
+                  "en": "AutoCAD has been used for technical drawings, documentation and classical design work."
+            },
+            "bullets": {
+                  "da": [
+                        "Ingeniørprojektering og teknisk dokumentation.",
+                        "2D-tegning og detaljering.",
+                        "Byggeri, konstruktion og koordinering."
+                  ],
+                  "en": [
+                        "Engineering design and technical documentation.",
+                        "2D drafting and detailing.",
+                        "Construction, structure and coordination."
+                  ]
+            }
+      },
+      "tekla": {
+            "title": "Tekla",
+            "category": "engineering",
+            "description": {
+                  "da": "Tekla hører til engineering-delen som værktøj til konstruktionsmodellering og især stål-/betonrelateret detaljering.",
+                  "en": "Tekla belongs in the engineering area as a tool for structural modelling and especially steel/concrete-related detailing."
+            },
+            "bullets": {
+                  "da": [
+                        "Konstruktion og modellering.",
+                        "Stål- og betondetaljer.",
+                        "Relevant for BIM og teknisk koordinering."
+                  ],
+                  "en": [
+                        "Structure and modelling.",
+                        "Steel and concrete details.",
+                        "Relevant for BIM and technical coordination."
+                  ]
+            }
+      },
+      "rhino": {
+            "title": "Rhino",
+            "category": "engineering",
+            "description": {
+                  "da": "Rhino er placeret under engineering på grund af forbindelsen til geometri, parametrisk modellering og teknisk formarbejde.",
+                  "en": "Rhino is placed under engineering because of its connection to geometry, parametric modelling and technical form work."
+            },
+            "bullets": {
+                  "da": [
+                        "Geometri og modellering.",
+                        "Kobling til Grasshopper og parametrisk workflow.",
+                        "Relevant for engineering, design og computational modelling."
+                  ],
+                  "en": [
+                        "Geometry and modelling.",
+                        "Connection to Grasshopper and parametric workflow.",
+                        "Relevant for engineering, design and computational modelling."
+                  ]
+            }
+      },
+      "sketchup": {
+            "title": "SketchUp",
+            "category": "engineering",
+            "description": {
+                  "da": "SketchUp er placeret under engineering som hurtigt modelværktøj til byggeri, rum, former og tidlige visualiseringer.",
+                  "en": "SketchUp is placed under engineering as a fast modelling tool for construction, spaces, forms and early visualizations."
+            },
+            "bullets": {
+                  "da": [
+                        "Hurtige volumen- og rumlige modeller.",
+                        "Bygningsrelateret visualisering.",
+                        "Tidlige design- og projektstudier."
+                  ],
+                  "en": [
+                        "Fast volume and spatial models.",
+                        "Building-related visualization.",
+                        "Early design and project studies."
+                  ]
+            }
+      },
+      "gis": {
+            "title": "GIS",
+            "category": "engineering",
+            "description": {
+                  "da": "GIS er placeret under engineering på grund af brugen i geografiske data, planlægning, kort og rumlig analyse.",
+                  "en": "GIS is placed under engineering because of its use in geographic data, planning, maps and spatial analysis."
+            },
+            "bullets": {
+                  "da": [
+                        "Rumlig dataforståelse.",
+                        "Kort, placering og analyse.",
+                        "Relevant for byggeri, planlægning og teknisk kontekst."
+                  ],
+                  "en": [
+                        "Spatial data understanding.",
+                        "Maps, location and analysis.",
+                        "Relevant for construction, planning and technical context."
+                  ]
+            }
+      },
+      "grasshopper": {
+            "title": "Grasshopper",
+            "category": "engineering",
+            "description": {
+                  "da": "Grasshopper er brugt til parametrisk og visuel programmering af geometri, regler og tekniske modeller.",
+                  "en": "Grasshopper has been used for parametric and visual programming of geometry, rules and technical models."
+            },
+            "bullets": {
+                  "da": [
+                        "Parametrisk modellering.",
+                        "Visual programming med noder.",
+                        "Kobler geometri, regler og data i engineering workflows."
+                  ],
+                  "en": [
+                        "Parametric modelling.",
+                        "Visual programming with nodes.",
+                        "Connects geometry, rules and data in engineering workflows."
+                  ]
+            }
+      },
+      "renovation": {
+            "title": "Renovering",
+            "category": "engineering",
+            "description": {
+                  "da": "Renovering er relevant fra bygge- og ingeniørarbejde, hvor eksisterende konstruktioner, materialer og dokumentation skal forstås.",
+                  "en": "Renovation is relevant from construction and engineering work where existing structures, materials and documentation need to be understood."
+            },
+            "bullets": {
+                  "da": [
+                        "Eksisterende byggeri og tekniske begrænsninger.",
+                        "Forståelse for materialer, konstruktion og udførelse.",
+                        "Kobling mellem projektering, bygbarhed og dokumentation."
+                  ],
+                  "en": [
+                        "Existing buildings and technical constraints.",
+                        "Understanding of materials, structure and execution.",
+                        "Connection between design, buildability and documentation."
+                  ]
+            }
+      },
+      "timber-structures": {
+            "title": "Trækonstruktioner",
+            "category": "engineering",
+            "description": {
+                  "da": "Trækonstruktioner er en del af min bygningsingeniørfaglige baggrund inden for bærende konstruktioner og materialeforståelse.",
+                  "en": "Timber structures are part of my civil engineering background in structural design and material understanding."
+            },
+            "bullets": {
+                  "da": [
+                        "Bærende konstruktioner.",
+                        "Materialeforståelse, lastveje og detaljering.",
+                        "Del af bred ingeniørfaglig konstruktionsforståelse."
+                  ],
+                  "en": [
+                        "Load-bearing structures.",
+                        "Material understanding, load paths and detailing.",
+                        "Part of broad structural engineering understanding."
+                  ]
+            }
+      },
+      "masonry": {
+            "title": "Murværk",
+            "category": "engineering",
+            "description": {
+                  "da": "Murværk er en del af bygge- og konstruktionsforståelsen fra uddannelse og praktisk ingeniørarbejde.",
+                  "en": "Masonry is part of the construction and structural understanding from education and practical engineering work."
+            },
+            "bullets": {
+                  "da": [
+                        "Materiale- og konstruktionsforståelse.",
+                        "Eksisterende byggeri og renovering.",
+                        "Detaljer, stabilitet og dokumentation."
+                  ],
+                  "en": [
+                        "Material and structural understanding.",
+                        "Existing buildings and renovation.",
+                        "Details, stability and documentation."
+                  ]
+            }
+      },
+      "concrete": {
+            "title": "Beton",
+            "category": "engineering",
+            "description": {
+                  "da": "Beton er en central del af bygningsingeniørfaglig projektering og konstruktionsteknik.",
+                  "en": "Concrete is a central part of civil engineering design and structural technology."
+            },
+            "bullets": {
+                  "da": [
+                        "Bærende konstruktioner.",
+                        "Beregning, armeringstænkning og materialeforståelse.",
+                        "Uddannelse og rådgivende ingeniørarbejde."
+                  ],
+                  "en": [
+                        "Load-bearing structures.",
+                        "Calculations, reinforcement thinking and material understanding.",
+                        "Education and consulting engineering work."
+                  ]
+            }
+      },
+      "steel": {
+            "title": "Stål",
+            "category": "engineering",
+            "description": {
+                  "da": "Stål er en central konstruktionsdisciplin i byggeri og teknisk projektering.",
+                  "en": "Steel is a central structural discipline in construction and technical design."
+            },
+            "bullets": {
+                  "da": [
+                        "Statiske systemer, samlinger og bæreevne.",
+                        "Kobling til Tekla, beregning og dokumentation.",
+                        "Del af konstruktionsspecialisering."
+                  ],
+                  "en": [
+                        "Static systems, connections and capacity.",
+                        "Connection to Tekla, calculation and documentation.",
+                        "Part of structural specialization."
+                  ]
+            }
+      },
+      "technical-documentation": {
+            "title": "Teknisk dokumentation",
+            "category": "engineering",
+            "description": {
+                  "da": "Teknisk dokumentation er brugt både som ingeniør og udvikler, hvor løsninger skal forklares, kvalitetssikres og kunne overdrages.",
+                  "en": "Technical documentation has been used both as engineer and developer where solutions need to be explained, quality assured and handed over."
+            },
+            "bullets": {
+                  "da": [
+                        "Byggeri: tegninger, beregninger og kvalitetssikring.",
+                        "Software: README, struktur, kodeforståelse og systemnoter.",
+                        "Bro mellem teknisk løsning og praktisk anvendelse."
+                  ],
+                  "en": [
+                        "Construction: drawings, calculations and quality assurance.",
+                        "Software: README, structure, code understanding and system notes.",
+                        "Bridge between technical solution and practical use."
+                  ]
+            }
+      },
+      "construction-coordination": {
+            "title": "Byggeprocesser",
+            "category": "engineering",
+            "description": {
+                  "da": "Byggeprocesser dækker forståelsen for projektering, udførelse, koordinering og virkelige constraints i byggeprojekter.",
+                  "en": "Construction processes cover understanding of design, execution, coordination and real-world constraints in construction projects."
+            },
+            "bullets": {
+                  "da": [
+                        "Per Aarsleff: praktik og byggeprocesforståelse.",
+                        "Rådgivning: koordinering mellem beregning, dokumentation og udførelse.",
+                        "Praktisk forståelse for bygbarhed."
+                  ],
+                  "en": [
+                        "Per Aarsleff: internship and construction process understanding.",
+                        "Consulting: coordination between calculations, documentation and execution.",
+                        "Practical understanding of buildability."
+                  ]
+            }
+      },
+      "optimization": {
+            "title": "Optimization",
+            "category": "engineering",
+            "description": {
+                  "da": "Optimering er brugt i computational engineering og kandidatspeciale med fokus på topologioptimering og effektive beregningsmetoder.",
+                  "en": "Optimization has been used in computational engineering and the master's thesis with focus on topology optimization and efficient calculation methods."
+            },
+            "bullets": {
+                  "da": [
+                        "Kandidatspeciale: topologioptimering.",
+                        "Numeriske metoder og teknisk modellering.",
+                        "Sammenkobling af engineering, matematik og machine learning."
+                  ],
+                  "en": [
+                        "Master's thesis: topology optimization.",
+                        "Numerical methods and technical modelling.",
+                        "Connecting engineering, mathematics and machine learning."
+                  ]
+            }
+      },
+      "photoshop": {
+            "title": "Photoshop",
+            "category": "other",
+            "description": {
+                  "da": "Photoshop er brugt til billedarbejde, portfolio-visuals, kreative koncepter og redigering af grafisk materiale.",
+                  "en": "Photoshop has been used for image work, portfolio visuals, creative concepts and editing graphical material."
+            },
+            "bullets": {
+                  "da": [
+                        "Billeder og visuelle koncepter.",
+                        "Portfolio- og projektgrafik.",
+                        "Kombineret med AI-genererede billeder og billedredigering."
+                  ],
+                  "en": [
+                        "Images and visual concepts.",
+                        "Portfolio and project graphics.",
+                        "Combined with AI-generated images and image editing."
+                  ]
+            }
+      },
+      "arduino": {
+            "title": "Arduino",
+            "category": "other",
+            "description": {
+                  "da": "Arduino er placeret under andet som praktisk prototyping og hardware-nær eksperimentering.",
+                  "en": "Arduino is placed under other as practical prototyping and hardware-near experimentation."
+            },
+            "bullets": {
+                  "da": [
+                        "Mikrocontroller-forståelse.",
+                        "Sensorer, input/output og små prototyper.",
+                        "Supplerer softwareforståelse med fysisk interaktion."
+                  ],
+                  "en": [
+                        "Microcontroller understanding.",
+                        "Sensors, input/output and small prototypes.",
+                        "Supplements software understanding with physical interaction."
+                  ]
+            }
+      }
+};
 
     const projectModalContent = {
       'clown-wars': {
         title: 'Clown Wars',
         body: `
-          <p data-lang="da">Clown Wars er en VR-prototype inspireret af Worms World Party, men bygget omkring klovne, slapstick-vold og en halv cartoony / halv horror low-poly stil.</p>
-          <p data-lang="en">Clown Wars is a VR prototype inspired by Worms World Party, but rebuilt around clowns, slapstick violence and a half cartoony / half horror low-poly style.</p>
+          <figure class="project-modal-hero">
+            <img src="assets/images/project-clown-wars.png" alt="Clown Wars VR prototype" />
+          </figure>
+
+          <p data-lang="da">Clown Wars er en VR-prototype inspireret af Worms World Party, men omsat til et mere fysisk, kaotisk og absurd VR-format med klovne som soldater. Ideen var at tage den turbaserede artillery-formel, hvor spilleren vælger våben, sigter, bruger terrænet og prøver at udslette modstanderen, og gøre den mere kropslig og direkte i VR.</p>
+          <p data-lang="en">Clown Wars is a VR prototype inspired by Worms World Party, but reworked into a more physical, chaotic and absurd VR format with clowns as the combatants. The idea was to take the turn-based artillery formula where the player chooses weapons, aims, uses terrain and tries to wipe out the opponent, and make it more bodily and direct in VR.</p>
+
+          <p data-lang="da">Projektet blev bygget omkring en halv cartoony og halv horror low-poly stil, så det både kunne være komisk, ubehageligt og performancevenligt. Det var vigtigt, at spillet ikke bare lignede en flad kopi af Worms, men føltes som sin egen ting: klovne, cirkusvold, fjollede våben, ragdolls og et miljø der kunne smadres.</p>
+          <p data-lang="en">The project was built around a half cartoony and half horror low-poly style, so it could feel funny, uncomfortable and performance-friendly at the same time. It was important that the game did not just look like a flat Worms copy, but had its own identity: clowns, circus violence, silly weapons, ragdolls and an environment that could be destroyed.</p>
+
           <ul class="project-modal-list">
-            <li><span data-lang="da"><strong>Gameplay:</strong> Turbaseret kamp, hvor spilleren skal udslette modstanderens klovne.</span><span data-lang="en"><strong>Gameplay:</strong> Turn-based combat where the player has to wipe out the opposing clowns.</span></li>
-            <li><span data-lang="da"><strong>Våben:</strong> Maskinpistol, shotgun, handgun, molotov, baseballbat, bazooka, granat og en boxing-glove blaster.</span><span data-lang="en"><strong>Weapons:</strong> SMG, shotgun, handgun, molotov, baseball bat, bazooka, grenade and a boxing-glove blaster.</span></li>
-            <li><span data-lang="da"><strong>Teknik:</strong> Ragdoll-effekter, destruerbart environment og VR-interaktioner.</span><span data-lang="en"><strong>Tech:</strong> Ragdoll effects, destructible environments and VR interactions.</span></li>
-            <li><span data-lang="da"><strong>Performance:</strong> Optimeret med fokus på on-device kørsel på Oculus / Meta Quest 2.</span><span data-lang="en"><strong>Performance:</strong> Optimized with focus on on-device execution on Oculus / Meta Quest 2.</span></li>
+            <li><span data-lang="da"><strong>Gameplay:</strong> Turbaseret VR-kamp, hvor spilleren skal udslette modstanderens klovne med positionering, våbenvalg og timing.</span><span data-lang="en"><strong>Gameplay:</strong> Turn-based VR combat where the player has to wipe out the opposing clowns through positioning, weapon choice and timing.</span></li>
+            <li><span data-lang="da"><strong>Våben:</strong> Maskinpistoler, shotguns, handgun, molotov, baseballbat, bazooka, granat og en boksehandske-kanon, på engelsk bedre kaldt en Punch-Glove Launcher.</span><span data-lang="en"><strong>Weapons:</strong> SMGs, shotguns, handgun, molotov, baseball bat, bazooka, grenade and a boxing-glove cannon, better named a Punch-Glove Launcher.</span></li>
+            <li><span data-lang="da"><strong>Fysik:</strong> Ragdoll-effekter blev brugt til at få klovnene til at reagere fysisk, komisk og voldsomt på skud, eksplosioner og slag.</span><span data-lang="en"><strong>Physics:</strong> Ragdoll effects were used to make the clowns react physically, comically and violently to shots, explosions and hits.</span></li>
+            <li><span data-lang="da"><strong>Miljø:</strong> Destruerbart environment var en central del af prototypen, fordi Worms-inspirationen kræver at spillerens handlinger kan ændre banen.</span><span data-lang="en"><strong>Environment:</strong> Destructible environments were a central part of the prototype because the Worms inspiration requires the player's actions to change the arena.</span></li>
+            <li><span data-lang="da"><strong>VR:</strong> Våben, aiming og interaktioner blev tænkt til VR, hvor spilleren ikke bare klikker, men bruger kroppen, hovedretning og hænder som del af kontrollen.</span><span data-lang="en"><strong>VR:</strong> Weapons, aiming and interactions were designed for VR, where the player does not just click, but uses body, head direction and hands as part of control.</span></li>
+            <li><span data-lang="da"><strong>Performance:</strong> Prototypen blev optimeret med fokus på on-device kørsel på Oculus / Meta Quest 2, hvilket gjorde low-poly assets, enkel geometri og kontrollerede effekter vigtige.</span><span data-lang="en"><strong>Performance:</strong> The prototype was optimized with focus on on-device execution on Oculus / Meta Quest 2, making low-poly assets, simple geometry and controlled effects important.</span></li>
           </ul>
         `
       },
       'super-godnathistorie': {
         title: 'Super Godnathistorie',
         body: `
-          <p data-lang="da">Super Godnathistorie er et kreativt AI-projekt til personlige børnebøger og godnathistorier.</p>
-          <p data-lang="en">Super Godnathistorie is a creative AI project for personalized children’s books and bedtime stories.</p>
+          <figure class="project-modal-hero">
+            <img src="assets/images/project-super-godnathistorie.png" alt="Super Godnathistorie AI children's book project" />
+          </figure>
+
+          <p data-lang="da">Super Godnathistorie er et kreativt AI-projekt til personlige børnebøger og godnathistorier. Grundideen var, at en bruger kunne uploade billeder af et barn, en familie, et kæledyr eller en bestemt figur, hvorefter systemet kunne skabe en mere personlig billedstil og bruge den til illustrationer i en fortælling.</p>
+          <p data-lang="en">Super Godnathistorie is a creative AI project for personalized children's books and bedtime stories. The core idea was that a user could upload images of a child, a family, a pet or a specific character, after which the system could create a more personal visual style and use it for illustrations in a story.</p>
+
+          <p data-lang="da">Projektet var baseret på Stable Diffusion og ComfyUI. I stedet for kun at skrive en prompt og håbe på et godt resultat blev billedgenereringen bygget som en pipeline, hvor inputbilleder, prompts, stilvalg, LoRA og output kunne styres mere systematisk.</p>
+          <p data-lang="en">The project was based on Stable Diffusion and ComfyUI. Instead of only writing a prompt and hoping for a good result, the image generation was built as a pipeline where input images, prompts, style choices, LoRA and output could be controlled more systematically.</p>
+
+          <p data-lang="da">Et centralt element var LoRA-træning. Når brugeren uploadede billeder, kunne en LoRA trænes på materialet, så figurerne blev mere konsistente på tværs af flere illustrationer. Det gjorde projektet mere egnet til børnebøger, hvor samme barn eller karakter skal kunne genkendes fra side til side.</p>
+          <p data-lang="en">A central element was LoRA training. When the user uploaded images, a LoRA could be trained on the material so the characters became more consistent across multiple illustrations. That made the project more suitable for children's books, where the same child or character needs to be recognizable from page to page.</p>
+
           <ul class="project-modal-list">
-            <li><span data-lang="da"><strong>Workflow:</strong> Brugeren uploadede billeder, som blev brugt som grundlag for en personlig visuel stil.</span><span data-lang="en"><strong>Workflow:</strong> The user uploaded images that were used as the basis for a personalized visual style.</span></li>
-            <li><span data-lang="da"><strong>AI-billeder:</strong> Stable Diffusion blev brugt til billedgenerering.</span><span data-lang="en"><strong>AI images:</strong> Stable Diffusion was used for image generation.</span></li>
-            <li><span data-lang="da"><strong>LoRA:</strong> En LoRA blev trænet på de uploadede billeder for at kunne generere mere konsistente figurer og illustrationer.</span><span data-lang="en"><strong>LoRA:</strong> A LoRA was trained on the uploaded images to generate more consistent characters and illustrations.</span></li>
-            <li><span data-lang="da"><strong>ComfyUI:</strong> Projektet brugte ComfyUI til at bygge og styre pipeline for billedgenerering.</span><span data-lang="en"><strong>ComfyUI:</strong> The project used ComfyUI to build and control the image-generation pipeline.</span></li>
+            <li><span data-lang="da"><strong>Workflow:</strong> Uploadede billeder blev brugt som grundlag for en personlig visuel stil og mere genkendelige figurer.</span><span data-lang="en"><strong>Workflow:</strong> Uploaded images were used as the basis for a personalized visual style and more recognizable characters.</span></li>
+            <li><span data-lang="da"><strong>Stable Diffusion:</strong> Brugt til selve billedgenereringen, stiludforskning og iteration på illustrationer.</span><span data-lang="en"><strong>Stable Diffusion:</strong> Used for the image generation itself, style exploration and iteration on illustrations.</span></li>
+            <li><span data-lang="da"><strong>ComfyUI:</strong> Brugt til at bygge en nodebaseret pipeline, hvor billedinput, prompts, modelvalg og outputs kunne styres.</span><span data-lang="en"><strong>ComfyUI:</strong> Used to build a node-based pipeline where image input, prompts, model choices and outputs could be controlled.</span></li>
+            <li><span data-lang="da"><strong>LoRA:</strong> Brugt til at træne en personlig model/stil på uploadede billeder, så karaktererne blev mere stabile.</span><span data-lang="en"><strong>LoRA:</strong> Used to train a personal model/style on uploaded images so the characters became more stable.</span></li>
+            <li><span data-lang="da"><strong>Produktidé:</strong> Målet var ikke bare enkeltstående AI-billeder, men et workflow der kunne producere en sammenhængende personlig bog.</span><span data-lang="en"><strong>Product idea:</strong> The goal was not just isolated AI images, but a workflow that could produce a coherent personalized book.</span></li>
           </ul>
         `
       },
       'machine-learning': {
         title: 'Machine Learning / Thesis',
         body: `
-          <p data-lang="da">Mit speciale lå i computational engineering og handlede om at bruge convolutional neural networks til tekniske beregninger i forbindelse med topologioptimering af 2D-strukturer.</p>
-          <p data-lang="en">My thesis was in computational engineering and focused on using convolutional neural networks for technical calculations related to topology optimization of 2D structures.</p>
+          <figure class="project-modal-hero">
+            <img src="assets/images/project-machine-learning.png" alt="Machine learning thesis visualization" />
+          </figure>
+
+          <p data-lang="da">Mit kandidatspeciale lå i computational engineering og handlede om at bruge convolutional neural networks til tekniske beregninger i forbindelse med topologioptimering af konstruktioner. Det kombinerede bygningsingeniørfaglig analyse, numeriske metoder, optimering, Python og machine learning.</p>
+          <p data-lang="en">My master's thesis was in computational engineering and focused on using convolutional neural networks for technical calculations in connection with topology optimization of structures. It combined civil engineering analysis, numerical methods, optimization, Python and machine learning.</p>
+
+          <p data-lang="da">Problemet med klassisk topologioptimering er, at beregninger kan være tunge, især når mange iterationer eller mange designvariationer skal evalueres. Ideen var derfor at undersøge, om et CNN kunne lære mønstre i de tekniske felter og give et hurtigt estimat, som kunne accelerere arbejdsgangen.</p>
+          <p data-lang="en">The problem with classical topology optimization is that calculations can be heavy, especially when many iterations or many design variations need to be evaluated. The idea was therefore to investigate whether a CNN could learn patterns in the technical fields and provide a fast estimate that could accelerate the workflow.</p>
+
+          <p data-lang="da">Specialet var et eksempel på den type arbejde, jeg godt kan lide: matematik, engineering, software og AI samlet i et konkret problem. Det handlede ikke bare om at træne en model, men om at forstå data, beregningsmetode, validering og hvor en ML-model faktisk kan give teknisk mening.</p>
+          <p data-lang="en">The thesis is an example of the kind of work I like: mathematics, engineering, software and AI combined in a concrete problem. It was not just about training a model, but about understanding data, calculation method, validation and where an ML model actually makes technical sense.</p>
+
           <ul class="project-modal-list">
-            <li><span data-lang="da"><strong>Problem:</strong> Klassiske numeriske beregninger kan være tunge, især når mange geometrier eller designvariationer skal vurderes.</span><span data-lang="en"><strong>Problem:</strong> Classical numerical calculations can be heavy, especially when many geometries or design variations must be evaluated.</span></li>
-            <li><span data-lang="da"><strong>Løsning:</strong> CNN-model trænet til at estimere tekniske felter og resultater langt hurtigere end den klassiske beregningsvej.</span><span data-lang="en"><strong>Solution:</strong> A CNN model trained to estimate technical fields and results much faster than the classical calculation path.</span></li>
-            <li><span data-lang="da"><strong>Stack:</strong> Python, TensorFlow/Keras, dataanalyse, numeriske metoder og validering mod strukturelle beregninger.</span><span data-lang="en"><strong>Stack:</strong> Python, TensorFlow/Keras, data analysis, numerical methods and validation against structural calculations.</span></li>
-            <li><span data-lang="da"><strong>Resultat:</strong> Fokus på markant acceleration af beregningsprocessen uden at miste den tekniske forståelse af problemet.</span><span data-lang="en"><strong>Result:</strong> Focused on strongly accelerating the calculation process without losing the technical understanding of the problem.</span></li>
+            <li><span data-lang="da"><strong>Fagområde:</strong> Computational engineering, strukturel analyse, numeriske metoder og topologioptimering.</span><span data-lang="en"><strong>Field:</strong> Computational engineering, structural analysis, numerical methods and topology optimization.</span></li>
+            <li><span data-lang="da"><strong>Machine learning:</strong> Convolutional neural networks blev brugt til at estimere tekniske resultater ud fra strukturelle/geometriske data.</span><span data-lang="en"><strong>Machine learning:</strong> Convolutional neural networks were used to estimate technical results from structural/geometric data.</span></li>
+            <li><span data-lang="da"><strong>Stack:</strong> Python, TensorFlow/Keras, dataanalyse, numeriske metoder og validering mod klassiske beregninger.</span><span data-lang="en"><strong>Stack:</strong> Python, TensorFlow/Keras, data analysis, numerical methods and validation against classical calculations.</span></li>
+            <li><span data-lang="da"><strong>Formål:</strong> At accelerere en beregningstung proces uden at miste forbindelsen til den ingeniørmæssige forståelse af problemet.</span><span data-lang="en"><strong>Purpose:</strong> To accelerate a calculation-heavy process without losing the connection to the engineering understanding of the problem.</span></li>
+            <li><span data-lang="da"><strong>Resultat:</strong> Et teknisk ML-projekt der viste, hvordan AI kan bruges som et beregningsværktøj, ikke kun som et generativt tekst- eller billedværktøj.</span><span data-lang="en"><strong>Result:</strong> A technical ML project showing how AI can be used as a calculation tool, not only as a generative text or image tool.</span></li>
           </ul>
         `
       }
     };
+
 
     const languageMeta = {
       da: {
@@ -2126,15 +3475,62 @@ phrases: {
     }
 
     function setSkill(skillName) {
+      const selectedSkill = skillCatalog[skillName];
+      if (!selectedSkill) return;
+
       skillButtons.forEach(button => {
         const active = button.dataset.skill === skillName;
         button.classList.toggle('active', active);
         button.setAttribute('aria-pressed', String(active));
       });
 
-      skillDetails.forEach(detail => {
-        detail.classList.toggle('active', detail.dataset.skillDetail === skillName);
+      const selectedCategory = skillCategories[selectedSkill.category];
+
+      if (skillDetailCategory && selectedCategory) {
+        skillDetailCategory.className = `skill-detail-category ${selectedCategory.className}`;
+        skillDetailCategory.innerHTML = `<span data-lang="da">${selectedCategory.da}</span><span data-lang="en">${selectedCategory.en}</span>`;
+      }
+
+      if (skillDetailTitle) {
+        skillDetailTitle.textContent = selectedSkill.title;
+      }
+
+      if (skillDetailTextDa) {
+        skillDetailTextDa.textContent = selectedSkill.description.da;
+      }
+
+      if (skillDetailTextEn) {
+        skillDetailTextEn.textContent = selectedSkill.description.en;
+      }
+
+      if (skillDetailList) {
+        skillDetailList.innerHTML = selectedSkill.bullets.da.map((item, index) => {
+          const englishItem = selectedSkill.bullets.en[index] || item;
+          return `<li><span data-lang="da">${item}</span><span data-lang="en">${englishItem}</span></li>`;
+        }).join('');
+      }
+    }
+
+    function setSkillFilter(filterName) {
+      skillFilterButtons.forEach(button => {
+        const active = button.dataset.skillFilter === filterName;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-pressed', String(active));
       });
+
+      skillButtons.forEach(button => {
+        const visible = filterName === 'all' || button.dataset.skillCategory === filterName;
+        button.classList.toggle('hidden-by-filter', !visible);
+      });
+
+      const activeSkillButton = Array.from(skillButtons).find(button => button.classList.contains('active') && !button.classList.contains('hidden-by-filter'));
+
+      if (!activeSkillButton) {
+        const firstVisibleSkillButton = Array.from(skillButtons).find(button => !button.classList.contains('hidden-by-filter'));
+        if (firstVisibleSkillButton) {
+          setSkill(firstVisibleSkillButton.dataset.skill);
+        }
+      }
     }
 
     function renderProjectModalContent(projectKey) {
@@ -2179,6 +3575,10 @@ phrases: {
 
     skillButtons.forEach(button => {
       button.addEventListener('click', () => setSkill(button.dataset.skill));
+    });
+
+    skillFilterButtons.forEach(button => {
+      button.addEventListener('click', () => setSkillFilter(button.dataset.skillFilter));
     });
 
     projectModalTriggers.forEach(trigger => {
@@ -2232,6 +3632,7 @@ phrases: {
 
     const savedLang = localStorage.getItem('portfolio-lang');
     setLanguage(savedLang === 'da' ? 'da' : 'en');
+    setSkillFilter('all');
     setSkill('csharp');
     pixelAvatarBlinker.start();
   </script>
